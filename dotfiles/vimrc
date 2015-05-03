@@ -1,0 +1,18 @@
+" Activate syntax highlighting.
+syntax on
+filetype plugin on
+
+" Don't add unsolicited final newline.
+set binary
+
+" Indentation rules (tabs to 4 spaces).
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+
+" Backups.
+set backup
+set backupdir=~/.vimbackups
+let myvar = strftime("%Y-%m-%d_%H-%M-%S")
+let myvar = "set backupext=_". myvar
+execute myvar
