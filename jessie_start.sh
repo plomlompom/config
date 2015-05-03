@@ -36,5 +36,8 @@ dpkg-reconfigure console-setup
 echo 'export LC_ALL="en_US.UTF-8"' >> /etc/profile
 apt-get -y install xserver-xorg xinit i3
 
+# Install certificates.
+apt-get -y install ca-certificates
+
 # Add user.
 #useradd -m -s /bin/bash plom
