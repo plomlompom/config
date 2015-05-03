@@ -39,5 +39,8 @@ apt-get -y install xserver-xorg xinit i3
 # Install certificates.
 apt-get -y install ca-certificates
 
+# Set up window system.
+apt-get -y install xserver-xorg xinit i3 i3status
+
 # Add user.
 #useradd -m -s /bin/bash plom
