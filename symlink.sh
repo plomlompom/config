@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 dir=~/config/dotfiles
 dir_root=~/config/dotfiles_root
 for file in `ls $dir`; do
