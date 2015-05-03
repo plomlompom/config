@@ -2,6 +2,6 @@
 
 dir=~/config/dotfiles
 cd ~
-for file in $dir; do
+for file in `ls $dir`; do
     ln -s $dir/$file ~/.$file
 done
