@@ -1,5 +1,6 @@
 #!/bin/sh
 set -x
+set -e
 
 # Post-installation reduction. (Answer "no" to GRUB question.)
 dpkg-query -Wf '${Package} ${Priority}\n' | grep ' required' | sed 's/ required//' > list_white_unsorted 
@@ -40,13 +41,23 @@ echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
 locale-gen
 echo 'export LC_ALL="en_US.UTF-8"' >> /etc/profile
 
-#apt-get -y install xserver-xorg xinit i3
-
-# Install certificates.
-#apt-get -y install ca-certificates
-
-# Set up window system.
-#apt-get -y install xserver-xorg xinit i3 i3status
+# Clone git repository.
+apt-get -y install ca-certificates
+apt-get -y install git
+git clone http://github.com/plomlompom/config
+config/symlink.sh
 
 # Add user.
-#useradd -m -s /bin/bash plom
+useradd -m -s /bin/bash plom
+cp -R config /home/plom/
+chown -R plom /home/plom/config
+su plom -c /home/plom/config/symlink.sh
+
+# Set up window system.
+apt-get -y install xserver-xorg xinit i3 i3status
+
+# Clean up.
+rm jessie_start.sh
+
+# Set password for user.
+passwd plom
