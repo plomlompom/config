@@ -54,10 +54,13 @@ su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
 su plom -c /home/plom/config/symlink.sh
 
 # Set up window system.
-apt-get -y install xserver-xorg xinit xterm i3 i3status
+apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu
 
 # Set up manuals.
 apt-get -y install man-db manpages less
+
+# Set up editor.
+apt-get -y install vim
 
 # Clean up.
 rm jessie_start.sh
