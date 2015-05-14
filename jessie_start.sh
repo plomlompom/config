@@ -13,7 +13,7 @@ comm -3 list_all_packages list_white > list_black
 apt-mark auto `cat list_black`
 echo 'APT::AutoRemove::RecommendsImportant "false";' > /etc/apt/apt.conf.d/99mindeps
 echo 'APT::AutoRemove::SuggestsImportant "false";' >> /etc/apt/apt.conf.d/99mindeps 
-apt-get -y --purge autoremove
+DEBIAN_FRONTEND=noninteractive apt-get -y --purge autoremove
 rm list_all_packages list_white_unsorted list_white list_black 
 echo 'APT::Install-Recommends "false";' >> /etc/apt/apt.conf.d/99mindeps
 echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf.d/99mindeps
@@ -29,18 +29,24 @@ apt-get -y dist-upgrade
 # Don't clear boot messages on start up.
 sed -i 's/^TTYVTDisallocate=yes$/TTYVTDisallocate=no/g' /etc/systemd/system/getty.target.wants/getty\@tty1.service
 
-# Console config. (locales: 146, 1; console-setup: 27, 11, 1, 4)
-apt-get -y install locales console-setup
-dpkg-reconfigure locales
-dpkg-reconfigure console-setup
+# Console config.
+DEBIAN_FRONTEND=nointeractive apt-get -y install locales console-setup
+echo 'ACTIVE_CONSOLES="/dev/tty[1-6]"' > /etc/default/console-setup
+echo 'CHARMAP="UTF-8"' >> /etc/default/console-setup
+echo 'CODESET="Lat15"' >> /etc/default/console-setup
+echo 'FONTFACE="TerminusBold"' >> /etc/default/console-setup
+echo 'FONTSIZE="8x16"' >> /etc/default/console-setup
+echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+locale-gen
 echo 'export LC_ALL="en_US.UTF-8"' >> /etc/profile
-apt-get -y install xserver-xorg xinit i3
+
+#apt-get -y install xserver-xorg xinit i3
 
 # Install certificates.
-apt-get -y install ca-certificates
+#apt-get -y install ca-certificates
 
 # Set up window system.
-apt-get -y install xserver-xorg xinit i3 i3status
+#apt-get -y install xserver-xorg xinit i3 i3status
 
 # Add user.
 #useradd -m -s /bin/bash plom
