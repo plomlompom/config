@@ -47,14 +47,17 @@ apt-get -y install git
 git clone http://github.com/plomlompom/config
 config/symlink.sh
 
-# Add user.
+# Add user. Remove old user's config/ if it exists.
 useradd -m -s /bin/bash plom
-cp -R config /home/plom/
-chown -R plom /home/plom/config
+rm -rf /home/plom/config
+su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
 su plom -c /home/plom/config/symlink.sh
 
 # Set up window system.
-apt-get -y install xserver-xorg xinit i3 i3status
+apt-get -y install xserver-xorg xinit xterm i3 i3status
+
+# Set up manuals.
+apt-get -y install man-db manpages less
 
 # Clean up.
 rm jessie_start.sh
