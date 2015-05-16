@@ -27,6 +27,17 @@ dhclient eth0
 apt-get update
 apt-get -y dist-upgrade
 
+# Power management as per <http://thinkwiki.de/TLP_-_Linux_Stromsparen>.
+echo '' >> /etc/apt/sources.list
+echo 'deb http://repo.linrunner.de/debian jessie main' >> /etc/apt/sources.list
+apt-key adv --keyserver pool.sks-keyservers.net --recv-keys CD4E8809
+apt-get update
+apt-get -y install linux-headers-amd64 tlp tp-smapi-dkms
+sed -i 's/^#START_CHARGE_THRESH_BAT0/START_CHARGE_THRESH_BAT0=10 #START_CHARGE_THRESH_BAT0/' /etc/default/tlp
+sed -i 's/^#STOP_CHARGE_THRESH_BAT0/START_CHARGE_THRESH_BAT0=10 #STOP_CHARGE_THRESH_BAT0/' /etc/default/tlp
+sed -i 's/^#DEVICES_TO_DISABLE_ON_STARTUP/DEVICES_TO_DISABLE_ON_STARTUP="bluetooth wifi wwan" #DEVICES_TO_DISABLE_ON_STARTUP/' /etc/default/tlp
+tlp start
+
 # Don't clear boot messages on start up.
 sed -i 's/^TTYVTDisallocate=yes$/TTYVTDisallocate=no/g' /etc/systemd/system/getty.target.wants/getty\@tty1.service
 
@@ -61,6 +72,11 @@ apt-get -y install man-db manpages less
 
 # Set up editor.
 apt-get -y install vim
+mkdir -p .vimbackups
+su plom -c 'mkdir -p /home/plom/.vimbackups/'
+
+# Set up pentadactyl. 
+apt-get -y install xul-ext-pentadactyl
 
 # Clean up.
 rm jessie_start.sh
