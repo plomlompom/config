@@ -44,6 +44,10 @@ tlp start
 # Don't clear boot messages on start up.
 sed -i 's/^TTYVTDisallocate=yes$/TTYVTDisallocate=no/g' /etc/systemd/system/getty.target.wants/getty\@tty1.service
 
+# Set up timezone.
+echo 'Europe/Berlin' > /etc/timezone
+cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
 # Console config.
 DEBIAN_FRONTEND=nointeractive apt-get -y install locales console-setup
 echo 'ACTIVE_CONSOLES="/dev/tty[1-6]"' > /etc/default/console-setup
@@ -72,13 +76,20 @@ apt-get -y install vim
 mkdir -p .vimbackups
 su plom -c 'mkdir -p /home/plom/.vimbackups/'
 
+# Set up networking (wifi!).
+apt-get -y install firmware-iwlwifi
+DEBIAN_FRONTEND=noninteractive apt-get -y install wicd-curses
+sed -i 's/^wired_interface = .*$/wired_interface = eth0/g' /etc/wicd/manager-settings.conf
+sed -i 's/^wireless_interface = .*$/wireless_interface = wlan0/g' /etc/wicd/manager-settings.conf
+systemctl restart wicd
+
+# Set up hibernation on lid close.
+echo 'HandleLidSwitch=hibernate' >> /etc/systemd/logind.conf
+
 # Set up sound.
 usermod -G audio plom
 apt-get -y install alsa-utils
 amixer -c 0 sset Master playback 100% unmute
-
-# Set up networking (wifi!).
-apt-get -y install wicd-curses firmware-iwlwifi
 
 # Set up window system.
 apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu
