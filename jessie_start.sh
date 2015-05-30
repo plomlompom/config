@@ -30,11 +30,6 @@ apt-get -y dist-upgrade
 # Set up manuals.
 apt-get -y install man-db manpages less
 
-# Set up editor.
-apt-get -y install vim
-mkdir -p .vimbackups
-su plom -c 'mkdir -p /home/plom/.vimbackups/'
-
 # Power management as per <http://thinkwiki.de/TLP_-_Linux_Stromsparen>.
 echo '' >> /etc/apt/sources.list
 echo 'deb http://repo.linrunner.de/debian jessie main' >> /etc/apt/sources.list
@@ -71,6 +66,11 @@ useradd -m -s /bin/bash plom
 rm -rf /home/plom/config
 su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
 su plom -c /home/plom/config/symlink.sh
+
+# Set up editor.
+apt-get -y install vim
+mkdir -p .vimbackups
+su plom -c 'mkdir -p /home/plom/.vimbackups/'
 
 # Set up sound.
 usermod -G audio plom
