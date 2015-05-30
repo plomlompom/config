@@ -27,6 +27,14 @@ dhclient eth0
 apt-get update
 apt-get -y dist-upgrade
 
+# Set up manuals.
+apt-get -y install man-db manpages less
+
+# Set up editor.
+apt-get -y install vim
+mkdir -p .vimbackups
+su plom -c 'mkdir -p /home/plom/.vimbackups/'
+
 # Power management as per <http://thinkwiki.de/TLP_-_Linux_Stromsparen>.
 echo '' >> /etc/apt/sources.list
 echo 'deb http://repo.linrunner.de/debian jessie main' >> /etc/apt/sources.list
@@ -34,7 +42,7 @@ apt-key adv --keyserver pool.sks-keyservers.net --recv-keys CD4E8809
 apt-get update
 apt-get -y install linux-headers-amd64 tlp tp-smapi-dkms
 sed -i 's/^#START_CHARGE_THRESH_BAT0/START_CHARGE_THRESH_BAT0=10 #START_CHARGE_THRESH_BAT0/' /etc/default/tlp
-sed -i 's/^#STOP_CHARGE_THRESH_BAT0/START_CHARGE_THRESH_BAT0=10 #STOP_CHARGE_THRESH_BAT0/' /etc/default/tlp
+sed -i 's/^#STOP_CHARGE_THRESH_BAT0/STOP_CHARGE_THRESH_BAT0=95 #STOP_CHARGE_THRESH_BAT0/' /etc/default/tlp
 sed -i 's/^#DEVICES_TO_DISABLE_ON_STARTUP/DEVICES_TO_DISABLE_ON_STARTUP="bluetooth wifi wwan" #DEVICES_TO_DISABLE_ON_STARTUP/' /etc/default/tlp
 tlp start
 
@@ -64,16 +72,16 @@ rm -rf /home/plom/config
 su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
 su plom -c /home/plom/config/symlink.sh
 
+# Set up sound.
+usermod -G audio plom
+apt-get -y install alsa-utils
+amixer -c 0 sset Master playback 100% unmute
+
+# Set up networking (wifi!).
+apt-get -y install wicd-curses firmware-iwlwifi
+
 # Set up window system.
 apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu
-
-# Set up manuals.
-apt-get -y install man-db manpages less
-
-# Set up editor.
-apt-get -y install vim
-mkdir -p .vimbackups
-su plom -c 'mkdir -p /home/plom/.vimbackups/'
 
 # Set up pentadactyl. 
 apt-get -y install xul-ext-pentadactyl
