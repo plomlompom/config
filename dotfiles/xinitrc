@@ -1,0 +1,7 @@
+# X init configuration
+
+# Set keymap.
+setxkbmap de
+
+# Launch window manager.
+i3
