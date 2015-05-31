@@ -58,6 +58,8 @@ echo 'FONTSIZE="8x16"' >> /etc/default/console-setup
 echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
 locale-gen
 echo 'export LC_ALL="en_US.UTF-8"' >> /etc/profile
+sed -i 's/^XKBLAYOUT/XKBLAYOUT="de" # XKBLAYOUT/g' /etc/default/keyboard
+service keyboard-setup restart
 
 # Clone git repository.
 apt-get -y install ca-certificates
