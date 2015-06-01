@@ -94,7 +94,7 @@ apt-get -y install alsa-utils
 amixer -c 0 sset Master playback 100% unmute
 
 # Set up window system.
-apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu
+apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu x11-xserver-utils
 
 # Set up pentadactyl. 
 apt-get -y install xul-ext-pentadactyl
