@@ -93,8 +93,15 @@ usermod -G audio plom
 apt-get -y install alsa-utils
 amixer -c 0 sset Master playback 100% unmute
 
-# Set up window system.
-apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu x11-xserver-utils
+# Set up window system and OpenGL.
+apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu
+
+# Set up OpenGL and hardware acceleration.
+apt-get -y libgl1-mesa-dri
+apt-get -y i965-va-driver
+
+# Install xrandr.
+apt-get -y install x11-xserver-utils
 
 # Set up pentadactyl. 
 apt-get -y install xul-ext-pentadactyl
