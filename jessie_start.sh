@@ -106,6 +106,8 @@ apt-get -y install x11-xserver-utils
 
 # Set up pentadactyl. 
 apt-get -y install xul-ext-pentadactyl
+apt-get -y install vim-gtk
+su plom -c 'mkdir -p /home/plom/downloads/'
 
 # Clean up.
 rm jessie_start.sh
