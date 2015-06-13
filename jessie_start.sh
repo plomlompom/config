@@ -89,7 +89,7 @@ systemctl restart wicd
 echo 'HandleLidSwitch=hibernate' >> /etc/systemd/logind.conf
 
 # Set up sound.
-usermod -G audio plom
+usermod -aG audio plom
 apt-get -y install alsa-utils
 amixer -c 0 sset Master playback 100% unmute
 
