@@ -99,7 +99,7 @@ apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu
 # Set up OpenGL and hardware acceleration.
 apt-get -y install libgl1-mesa-dri
 apt-get -y install i965-va-driver
-usermod -G video plom
+usermod -aG video plom
 
 # Install xrandr.
 apt-get -y install x11-xserver-utils
