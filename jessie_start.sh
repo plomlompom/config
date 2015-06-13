@@ -109,6 +109,9 @@ apt-get -y install xul-ext-pentadactyl
 apt-get -y install vim-gtk
 su plom -c 'mkdir -p /home/plom/downloads/'
 
+# Set up openssh-client.
+apt-get -y install openssh-client
+
 # Clean up.
 rm jessie_start.sh
 
