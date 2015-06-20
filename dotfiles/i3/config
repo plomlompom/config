@@ -35,6 +35,12 @@ bindsym $mod+Shift+Down       move down
 bindsym $mod+Shift+Up         move up
 bindsym $mod+Shift+Right      move right
 
+# Resize windows
+bindsym $mod+h                resize shrink width
+bindsym $mod+l                resize grow width
+bindsym $mod+j                resize shrink height
+bindsym $mod+k                resize grow height
+
 # Toggle fullscreen for focused window.
 bindsym $mod+f                fullscreen
 
