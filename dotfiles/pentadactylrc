@@ -7,6 +7,6 @@ set! browser.download.lastDir=~/downloads
 set! javascript.enabled=false
 "set! permissions.default.image=2
 set! general.useragent.override=foo
-set go=CMs
+set go=CMsbr
 set showtabline=never
 command plom open http://www.plomlompom.de/PlomWiki/plomwiki.php?title=Start
