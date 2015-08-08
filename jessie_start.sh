@@ -71,7 +71,7 @@ config/symlink.sh
 useradd -m -s /bin/bash plom
 rm -rf /home/plom/config
 su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
-su plom -c /home/plom/config/symlink.sh
+su plom -c '/home/plom/config/symlink.sh thinkpad'
 
 # Set up editor.
 apt-get -y install vim
