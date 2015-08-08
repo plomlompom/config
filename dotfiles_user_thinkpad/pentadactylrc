@@ -12,3 +12,5 @@ set go=CMsbr
 set showtabline=never
 highlight Hint -append font: "Droid Sans Mono"; margin: 0em; padding: 0.1em; padding-right: 0.2em; 
 command plom open http://www.plomlompom.de/PlomWiki/plomwiki.php?title=Start
+set fc=ignore
+set ds=duckduckgo
