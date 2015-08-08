@@ -113,7 +113,7 @@ su plom -c 'mkdir -p /home/plom/downloads/'
 apt-get -y install openssh-client
 
 # Clean up.
-rm jessie_start.sh
+rm jessie_start_thinkpad.sh
 
 # Set password for user.
 passwd plom
