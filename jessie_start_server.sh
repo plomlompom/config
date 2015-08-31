@@ -22,8 +22,36 @@ rm list_all_packages list_white_unsorted list_white list_black
 echo 'APT::Install-Recommends "false";' >> /etc/apt/apt.conf.d/99mindeps
 echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf.d/99mindeps
 
+# Call dhclient on startup.
+cat > /etc/systemd/system/dhclient.service << EOF
+[Unit]
+Description=Ethernet connection
+
+[Service]
+ExecStart=/sbin/dhclient eth0
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable /etc/systemd/system/dhclient.service
+
+# Package management config, system upgrade.
+echo 'deb http://ftp.debian.org/debian/ jessie main contrib non-free' > /etc/apt/sources.list
+echo 'deb http://security.debian.org/ jessie/updates main contrib non-free' >> /etc/apt/sources.list
+echo 'deb http://ftp.debian.org/debian/ jessie-updates main contrib non-free' >> /etc/apt/sources.list
+dhclient eth0
+apt-get update
+apt-get -y dist-upgrade
+
 # Set up manuals.
 apt-get -y install man-db manpages less
+
+# Don't clear boot messages on start up.
+sed -i 's/^TTYVTDisallocate=yes$/TTYVTDisallocate=no/g' /etc/systemd/system/getty.target.wants/getty\@tty1.service
+
+# Set up timezone.
+echo 'Europe/Berlin' > /etc/timezone
+cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 # Locale config.
 apt-get -y install locales
