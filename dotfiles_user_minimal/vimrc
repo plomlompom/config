@@ -16,3 +16,6 @@ set backupdir=~/.vimbackups
 let myvar = strftime("%Y-%m-%d_%H-%M-%S")
 let myvar = "set backupext=_". myvar
 execute myvar
+
+" Keep syntax highlighting healthy.
+autocmd BufEnter * :syntax sync fromstart
