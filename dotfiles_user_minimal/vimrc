@@ -19,3 +19,6 @@ execute myvar
 
 " Keep syntax highlighting healthy.
 autocmd BufEnter * :syntax sync fromstart
+
+" Mark the 80-th column.
+set colorcolumn=80
