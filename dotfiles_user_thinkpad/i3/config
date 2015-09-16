@@ -11,8 +11,8 @@ set                           $mod Mod4
 floating_modifier             $mod
 
 # Launch xterm small-font white-on-black or big-font black-on-white. 
-bindsym $mod+Return           exec xterm -ls -r
-bindsym $mod+Shift+Return     exec xterm -ls -fn 10x20
+bindsym $mod+Return           exec xterm -vb -ls -r
+bindsym $mod+Shift+Return     exec xterm -vb -ls -fn 10x20
 
 # Launch programs via dmenu.
 bindsym $mod+d                exec dmenu_run
@@ -36,8 +36,8 @@ bindsym $mod+Shift+Up         move up
 bindsym $mod+Shift+Right      move right
 
 # Resize windows
-bindsym $mod+h                resize shrink width
-bindsym $mod+l                resize grow width
+bindsym $mod+h                resize shrink width 1 px or 1 ppt
+bindsym $mod+l                resize grow width 1 px or 1 ppt
 bindsym $mod+j                resize shrink height
 bindsym $mod+k                resize grow height
 
