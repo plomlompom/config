@@ -1,7 +1,8 @@
 # plomlompom's i3-wm configuration
 
 # Font for i3 text
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Terminus 11px
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
 # Force "tabbed" as default layout for new windows.
 workspace_layout              tabbed
@@ -11,8 +12,8 @@ set                           $mod Mod4
 floating_modifier             $mod
 
 # Launch xterm small-font white-on-black or big-font black-on-white. 
-bindsym $mod+Return           exec xterm -vb -ls -r
-bindsym $mod+Shift+Return     exec xterm -vb -ls -fn 10x20
+bindsym $mod+Return           exec xterm -vb -ls -r -fa -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1 -fs 8
+bindsym $mod+Shift+Return     exec xterm -vb -ls -fa -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1 -fs 19
 
 # Launch programs via dmenu.
 bindsym $mod+d                exec dmenu_run
