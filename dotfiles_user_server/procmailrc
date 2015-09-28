@@ -1,6 +1,6 @@
 # plomlompom's procmail configuration
 
-MAILDIR=/home/plom/mail/current
+MAILDIR=/home/plom/mail
 DEFAULT=$MAILDIR/inbox/
 
 :0
