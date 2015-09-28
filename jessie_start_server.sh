@@ -84,6 +84,7 @@ apt-get -y install irssi
 # Set up mail client system.
 apt-get -y install getmail4 procmail mutt
 su plom -c 'mkdir -p /home/plom/mail'
+su plom -c 'mkdir -p /home/plom/mail/inbox/{cur,new,tmp}'
 
 # Clean up.
 rm jessie_start_server.sh
