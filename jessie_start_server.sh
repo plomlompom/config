@@ -78,8 +78,13 @@ su plom -c 'mkdir -p /home/plom/.vimbackups/'
 # Set up openssh-server.
 apt-get -y install openssh-server
 
+# Set up screen.
+apt-get -y install screen
+
 # Set up irssi.
 apt-get -y install irssi
+su plom -c 'screen -S irssi'
+su plom -c 'screen -S irssi -X stuff "irssi\n"'
 
 # Set up mail client system.
 apt-get -y install getmail4 procmail mutt
