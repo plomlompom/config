@@ -81,6 +81,9 @@ apt-get -y install openssh-server
 # Set up irssi.
 apt-get -y install irssi
 
+# Set up getmail und procmail.
+apt-get -y install getmail4 procmail
+
 # Clean up.
 rm jessie_start_server.sh
 
