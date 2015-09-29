@@ -86,11 +86,11 @@ su plom -c 'mkdir -p /home/plom/mail/inbox/{cur,new,tmp}'
 # Set up screen.
 apt-get -y install screen
 
+# Set up ping.
+apt-get -y install iputils-ping
+
 # Set up irssi.
 apt-get -y install irssi
-
-# Clean up.
-rm jessie_start_server.sh
 cat > /etc/systemd/system/irssi.service << EOF
 [Unit]
 Description=irssi screen
@@ -104,6 +104,9 @@ ExecStart=/bin/sh /home/plom/config/other/screen-irssi.sh
 WantedBy=multi-user.target
 EOF
 systemctl enable /etc/systemd/system/irssi.service
+
+# Clean up.
+rm jessie_start_server.sh
 
 # Set password for user.
 passwd plom
