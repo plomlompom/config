@@ -78,21 +78,32 @@ su plom -c 'mkdir -p /home/plom/.vimbackups/'
 # Set up openssh-server.
 apt-get -y install openssh-server
 
-# Set up screen.
-apt-get -y install screen
-
-# Set up irssi.
-apt-get -y install irssi
-su plom -c 'screen -S irssi'
-su plom -c 'screen -S irssi -X stuff "irssi\n"'
-
 # Set up mail client system.
 apt-get -y install getmail4 procmail mutt
 su plom -c 'mkdir -p /home/plom/mail'
 su plom -c 'mkdir -p /home/plom/mail/inbox/{cur,new,tmp}'
 
+# Set up screen.
+apt-get -y install screen
+
+# Set up irssi.
+apt-get -y install irssi
+
 # Clean up.
 rm jessie_start_server.sh
+cat > /etc/systemd/system/irssi.service << EOF
+[Unit]
+Description=irssi screen
+
+[Service]
+Type=forking
+User=plom
+ExecStart=/bin/sh /home/plom/config/other/screen-irssi.sh
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable /etc/systemd/system/irssi.service
 
 # Set password for user.
 passwd plom
