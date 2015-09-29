@@ -110,3 +110,6 @@ rm jessie_start_server.sh
 
 # Set password for user.
 passwd plom
+
+# Finalize everything with a reboot.
+reboot
