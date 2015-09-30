@@ -24,7 +24,7 @@ echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf.d/99mindeps
 
 # Set hostname and FQDN.
 echo 'plomlompom' > /etc/hostname
-echo '127.0.0.1' > /etc/hosts
+echo '127.0.0.1 localhost' > /etc/hosts
 ip=`hostname -I`
 echo "$ip plomlompom.com plomlompom" >> /etc/hosts
 
