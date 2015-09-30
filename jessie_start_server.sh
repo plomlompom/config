@@ -22,6 +22,12 @@ rm list_all_packages list_white_unsorted list_white list_black
 echo 'APT::Install-Recommends "false";' >> /etc/apt/apt.conf.d/99mindeps
 echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf.d/99mindeps
 
+# Set hostname and FQDN.
+echo 'plomlompom' > /etc/hostname
+echo '127.0.0.1' > /etc/hosts
+ip=`hostname -I`
+echo "$ip plomlompom.com plomlompom" >> /etc/hosts
+
 # Call dhclient on startup.
 cat > /etc/systemd/system/dhclient.service << EOF
 [Unit]
