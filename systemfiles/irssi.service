@@ -1,0 +1,12 @@
+# /etc/systemd/system/irssi.service
+
+[Unit]                                                                          
+Description=irssi screen                                                        
+                                                                                
+[Service]                                                                       
+Type=forking                                                                    
+User=plom                                                                       
+ExecStart=/bin/sh /home/plom/config/other/screen-irssi.sh                       
+                                                                                
+[Install]                                                                       
+WantedBy=multi-user.target
