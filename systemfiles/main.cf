@@ -1,0 +1,20 @@
+# /etc/postfix/main.cf
+
+# Use maildrop as MDA.
+mailbox_command = /usr/bin/maildrop
+
+# Restrictive relaying policy.
+smtpd_relay_restrictions = permit_mynetworks defer_unauth_destination
+
+# What domains to receive mail for: names of local server.
+mydestination = plomlompom.com, localhost
+
+# What clients to relay mail from: only local server.
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+
+# Paranoid maximum error notification.
+notify_classes=2bounce, bounce, data, delay, policy, protocol, resource, software
+
+# Use opendkim at given port as mail filter.
+#non_smtpd_milters = inet:localhost:12301
+#smtpd_milters = inet:localhost:12301

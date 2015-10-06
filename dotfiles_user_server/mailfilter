@@ -1,0 +1,2 @@
+DEFAULT="$HOME/mail/new_inbox/"
+logfile "$HOME/.mailfilter.log"

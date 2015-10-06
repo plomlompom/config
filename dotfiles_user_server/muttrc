@@ -21,8 +21,6 @@ unignore from: subject to cc date
 
 # Force some variables for From: and Message-ID: generation.
 set realname="Christian Heller"
-set from="c.heller@plomlompom.de"
-set hostname="plomlompom.de"
 
 # Allow me to reply myself.
 set reply_self = yes

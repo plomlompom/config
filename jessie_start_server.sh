@@ -84,10 +84,12 @@ su plom -c 'mkdir -p /home/plom/.vimbackups/'
 # Set up openssh-server.
 apt-get -y install openssh-server
 
-# Set up mail client system.
-apt-get -y install getmail4 procmail mutt
-su plom -c 'mkdir -p /home/plom/mail'
+# Set up mail system.
+apt-get -y install getmail4 procmail mutt postfix maildrop
+su plom -c 'mkdir -p /home/plom/mail/'
 su plom -c 'mkdir -p /home/plom/mail/inbox/{cur,new,tmp}'
+su plom -c 'mkdir -p /home/plom/mail/new_inbox/{cur,new,tmp}'
+cp config/systemfiles/mail.cf /etc/postfix/main.cf
 
 # Set up screen.
 apt-get -y install screen
