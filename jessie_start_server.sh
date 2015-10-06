@@ -97,18 +97,7 @@ apt-get -y install iputils-ping
 
 # Set up irssi.
 apt-get -y install irssi
-cat > /etc/systemd/system/irssi.service << EOF
-[Unit]
-Description=irssi screen
-
-[Service]
-Type=forking
-User=plom
-ExecStart=/bin/sh /home/plom/config/other/screen-irssi.sh
-
-[Install]
-WantedBy=multi-user.target
-EOF
+cp config/systemfiles/irssi.service /etc/systemd/system/irssi.service
 systemctl enable /etc/systemd/system/irssi.service
 
 # Clean up.
