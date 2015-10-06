@@ -85,13 +85,14 @@ su plom -c 'mkdir -p /home/plom/.vimbackups/'
 apt-get -y install openssh-server
 
 # Set up mail system.
+su plom -c 'mkdir -p /home/plom/mail/'
+su plom -c 'mkdir -p /home/plom/mail/inbox/{cur,new,tmp}'
+su plom -c 'mkdir -p /home/plom/mail/new_inbox/{cur,new,tmp}'
+echo 'plomlompom.com' > /etc/mailname
 DEBIAN_FRONTEND=noninteractive apt-get -y install getmail4 procmail mutt postfix maildrop
 cp config/systemfiles/main.cf /etc/postfix/main.cf
 cp config/systemfiles/aliases /etc/aliases
 service postfix restart
-su plom -c 'mkdir -p /home/plom/mail/'
-su plom -c 'mkdir -p /home/plom/mail/inbox/{cur,new,tmp}'
-su plom -c 'mkdir -p /home/plom/mail/new_inbox/{cur,new,tmp}'
 
 # Set up screen.
 apt-get -y install screen
