@@ -24,6 +24,7 @@ echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf.d/99mindeps
 
 # Set hostname and FQDN.
 echo 'plomlompom' > /etc/hostname
+hostname 'plomlompom'
 echo '127.0.0.1 localhost' > /etc/hosts
 ip=`hostname -I`
 echo "$ip plomlompom.com plomlompom" >> /etc/hosts
@@ -92,7 +93,6 @@ echo 'plomlompom.com' > /etc/mailname
 DEBIAN_FRONTEND=noninteractive apt-get -y install getmail4 procmail mutt postfix maildrop
 cp config/systemfiles/main.cf /etc/postfix/main.cf
 cp config/systemfiles/aliases /etc/aliases
-newaliases
 service postfix restart
 
 # Set up screen.
