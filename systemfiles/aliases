@@ -2,16 +2,16 @@
 
 # As per RFC 2142.
 
-mailer-daemon: postmaster@plomlompom
-postmaster: root@plomlompom
-nobody: root@plomlompom
-hostmaster: root@plomlompom
-usenet: root@plomlompom
-news: root@plomlompom
-webmaster: root@plomlompom
-www: root@plomlompom
-ftp: root@plomlompom
-abuse: root@plomlompom
-noc: root@plomlompom
-security: root@plomlompom
-root: plom@plomlompom
+mailer-daemon: postmaster@plomlompom.com
+postmaster: root@plomlompom.com
+nobody: root@plomlompom.com
+hostmaster: root@plomlompom.com
+usenet: root@plomlompom.com
+news: root@plomlompom.com
+webmaster: root@plomlompom.com
+www: root@plomlompom.com
+ftp: root@plomlompom.com
+abuse: root@plomlompom.com
+noc: root@plomlompom.com
+security: root@plomlompom.com
+root: plom@plomlompom.com
