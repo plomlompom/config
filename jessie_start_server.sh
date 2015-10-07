@@ -92,6 +92,7 @@ echo 'plomlompom.com' > /etc/mailname
 DEBIAN_FRONTEND=noninteractive apt-get -y install getmail4 procmail mutt postfix maildrop
 cp config/systemfiles/main.cf /etc/postfix/main.cf
 cp config/systemfiles/aliases /etc/aliases
+newaliases
 service postfix restart
 
 # Set up screen.
