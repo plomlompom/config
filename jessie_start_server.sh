@@ -109,6 +109,9 @@ systemctl enable /etc/systemd/system/irssi.service
 # Clean up.
 rm jessie_start_server.sh
 
+# Send instructions mail.
+config/bin/simplemail.sh config/mails/server_postinstall_finished
+
 # Set password for user.
 passwd plom
 
