@@ -6,7 +6,7 @@ Description=irssi screen
 [Service]                                                                       
 Type=forking                                                                    
 User=plom                                                                       
-ExecStart=/bin/sh /home/plom/config/bin/screen-irssi.sh
+ExecStart=/home/plom/config/bin/screen-irssi.sh
                                                                                 
 [Install]                                                                       
 WantedBy=multi-user.target
