@@ -31,7 +31,8 @@ if [ ! -n "$file" ]; then
     set +x
     echo
     echo 'Generated key file at '$selector'.private.'
-    echo 'APPLY the content of '$selector'.txt below to your DNS record.'
+    echo 'Also generated '$selector'.txt, APPLY its content below to your DNS' \
+         'record.'
     echo 'AFTER the waiting time for DNS propagation RERUN this script with' \
           'the key file as SECOND parameter (still use selector as first one).'
     echo
