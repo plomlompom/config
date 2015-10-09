@@ -4,7 +4,7 @@ set -e
 selector=$1
 file=$2
 
-if [ "$(id -u)" -eq "0" ]; then
+if [ ! "$(id -u)" -eq "0" ]; then
     echo "Must be run as root."
     exit
 fi
@@ -18,7 +18,8 @@ fi
 
 sed -r -i 's/^#Selector .*$/Selector '$selector'/' /etc/opendkim.conf
 
-if [ ! -f $file ]; then
+mkdir -p /etc/opendkim
+if [ -n $file ] || [ ! -f $file ]; then
     opendkim-genkey -d plomlompom.com -s $selector
     mv "$selector".private /etc/opendkim/dkim.key
 else
@@ -26,7 +27,7 @@ else
 fi
 
 cp ~/config/systemfiles/main.cf /etc/postfix/main.cf
-echo >> /etc/postfix/main.cf << EOF
+cat >> /etc/postfix/main.cf << EOF
 
 # Use opendkim at given port as mail filter.
 non_smtpd_milters = inet:localhost:12301
