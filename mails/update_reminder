@@ -1,0 +1,7 @@
+[SYSADMIN] System updating reminder
+
+This is your regular reminder to run:
+
+apt-get update
+apt-get upgrade
+apt-get dist-upgrade

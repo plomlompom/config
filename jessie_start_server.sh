@@ -98,6 +98,10 @@ cp config/systemfiles/aliases /etc/aliases
 newaliases
 service postfix restart
 
+# Set up regular system update reminder.
+apt-get -y install cron
+su plom -c "echo '0 0 * * 0 ~/config/bin/simplemail.sh ~/config/mails/update_reminder' | crontab -"
+
 # Set up screen.
 apt-get -y install screen
 
