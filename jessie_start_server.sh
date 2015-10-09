@@ -83,10 +83,7 @@ mkdir -p .vimbackups
 su plom -c 'mkdir -p /home/plom/.vimbackups/'
 
 # Set up ssh-guard.
-apt-get -y install sshguard rsyslog iptables-persistent
-iptables -N sshguard
-iptables -A INPUT -j sshguard
-iptables save > /etc/iptables/rules.v4
+apt-get -y install sshguard rsyslog
 
 # Set up openssh-server.
 apt-get -y install openssh-server
