@@ -11,10 +11,10 @@ fi
 
 apt-get -y install opendkim
 
-if [ -n $file ] || [ ! -f $file ]; then
+if [ ! -n "$file" ] || [ ! -f "$file" ]; then
     apt-get -y install opendkim-tools
     opendkim-genkey -d plomlompom.com -s $selector
-    apt-get --purge autoremove opendkim-tools
+    apt-get -y --purge autoremove opendkim-tools
     set +x
     echo
     echo 'Generated key file at '$selector'.private.'
