@@ -1,17 +1,30 @@
 #!/bin/sh
-set -x
 set -e
 selector=$1
 file=$2
 
-if [ ! "$(id -u)" -eq "0" ]; then
-    echo "Must be run as root."
+if [ ! -n "$selector" ]; then
+    cat << EOF
+Usage: $0 SELECTOR [KEYFILE] - set up DKIM system and configuration
+
+If existing KEYFILE is given, set up DKIM to use SELECTOR and apply key from
+KEYFILE.
+
+If existing KEYFILE is not given, generate KEYFILE and DNS TXT file for
+SELECTOR.
+EOF
     exit
 fi
 
+if [ ! "$(id -u)" -eq "0" ]; then
+    echo "Must be run as root."
+    exit 1
+fi
+
+set -x
 apt-get -y install opendkim
 
-if [ ! -n "$file" ] || [ ! -f "$file" ]; then
+if [ ! -n "$file" ]; then
     apt-get -y install opendkim-tools
     opendkim-genkey -d plomlompom.com -s $selector
     apt-get -y --purge autoremove opendkim-tools
@@ -24,6 +37,12 @@ if [ ! -n "$file" ] || [ ! -f "$file" ]; then
     echo
     cat $selector.txt
 else
+    if [ ! -f "$file" ]; then
+        set +x
+        echo
+        echo "Keyfile $file does not exist."
+        exit 1
+    fi
     cp ~/config/systemfiles/opendkim.conf /etc/opendkim.conf
     sed -r -i 's/^#Selector .*$/Selector '$selector'/' /etc/opendkim.conf
     mkdir -p /etc/opendkim
