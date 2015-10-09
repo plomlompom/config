@@ -7,3 +7,7 @@ perform the following tasks:
   config/dotfiles_user_server/getmail/getmailrc, set [options] delete = true
 
 - ensure the following DNS TXT record for @: v=spf1 mx -all
+
+- run (as root) config/setup_opendkim.sh $selector to set up system for DKIM key
+  signing, with a second parameter $keyfile if a key already exists; without
+  second parameter, this will generate a new key and print the DNS record to add
