@@ -5,3 +5,5 @@ perform the following tasks:
 
 - once when mail system set-up seems stable, in
   config/dotfiles_user_server/getmail/getmailrc, set [options] delete = true
+
+- ensure the following DNS TXT record for @: v=spf1 mx -all
