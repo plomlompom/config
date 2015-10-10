@@ -1,0 +1,10 @@
+# plomlompom's bashrc for non-login shells
+
+# Fancy colors for ls.
+alias ls="ls --color=auto"
+
+# Blue prompt with time.
+PS1="\[\e[1;32m\][\\t \\u@\\h \\w]$\[\e[m\] "
+PS2="\[\e[1;32m\]>\[\e[m\] "
+PS3="\[\e[1;32m\]>\[\e[m\] "
+PS4="\[\e[1;32m\]+\[\e[m\] "
