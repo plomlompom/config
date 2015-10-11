@@ -1,7 +1,6 @@
 # /etc/aliases
 
 # As per RFC 2142.
-
 mailer-daemon: postmaster
 postmaster: root
 nobody: root
@@ -15,6 +14,9 @@ abuse: root
 noc: root
 security: root
 root: plom
+
+# Personal aliases.
+plomlompom: plom
 christian.heller: plom
 christian_heller: plom
 christianheller: plom
