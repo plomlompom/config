@@ -4,7 +4,10 @@ settings = {
     user_name = "plom";
     nick = "plomlompom";
   };
-  "fe-common/core" = { autolog = "yes"; };
+  "fe-common/core" = {
+    autolog = "yes";
+    autolog_path = "~/irssilogs/$tag/$0.log";
+  };
   "fe-text" = { actlist_sort = "refnum"; };
 };
 servers = (
@@ -14,13 +17,19 @@ servers = (
     autoconnect = "yes";
   }
 );
-chatnets = {
-  freenode = { type = "IRC"; };
-};
+chatnets = { freenode = { type = "IRC"; }; };
 channels = (
   { name = "#nodrama.de"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#twitter.de"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#freie-gesellschaft"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#dumme-gesellschaft"; chatnet = "freenode"; autojoin = "yes"; },
+  {
+    name = "#freie-gesellschaft";
+    chatnet = "freenode";
+    autojoin = "yes";
+  },
+  {
+    name = "#dumme-gesellschaft";
+    chatnet = "freenode";
+    autojoin = "yes";
+  }
 );
 logs = { };
