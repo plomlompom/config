@@ -20,10 +20,7 @@ chatnets = {
 channels = (
   { name = "#nodrama.de"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#twitter.de"; chatnet = "freenode"; autojoin = "yes"; },
-  {
-    name = "#freie-gesellschaft";
-    chatnet = "freenode";
-    autojoin = "yes";
-  },
+  { name = "#freie-gesellschaft"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#dumme-gesellschaft"; chatnet = "freenode"; autojoin = "yes"; },
 );
 logs = { };
