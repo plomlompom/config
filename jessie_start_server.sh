@@ -5,7 +5,7 @@ set -e
 # Set root pw.
 passwd
 
-# Post-installation reduction. (Answer "no" to GRUB question.)
+# Post-installation reduction.
 dpkg-query -Wf '${Package} ${Priority}\n' | grep ' required' | sed 's/ required//' > list_white_unsorted 
 echo 'ifupdown' >> list_white_unsorted 
 echo 'isc-dhcp-client' >> list_white_unsorted
