@@ -7,6 +7,7 @@ settings = {
   "fe-common/core" = {
     autolog = "yes";
     autolog_path = "~/irssilogs/$tag/$0.log";
+    term_charset = "utf-8";
   };
   "fe-text" = { actlist_sort = "refnum"; };
 };

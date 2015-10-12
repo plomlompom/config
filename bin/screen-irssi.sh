@@ -8,7 +8,7 @@ while [ $online -eq 0 ]; do
 done
 
 # Start shell in screen, wait until it's created, then start irssi in it.
-screen -d -m -S irssi
+screen -d -U -m -S irssi
 screen_available=0
 while [ $screen_available -eq 0 ]; do
     screen_available=`screen -list | grep irssi | wc -l`
