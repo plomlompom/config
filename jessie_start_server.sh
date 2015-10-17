@@ -107,8 +107,8 @@ su plom -c "echo '0 18 * * 0 ~/config/bin/simplemail.sh ~/config/mails/update_re
 apt-get -y install tmux
 
 # Set up weechat, OTR, bitlbee.
-apt-get install weechat-plugins python-potr bitlbee
-cp config/systemfiles/weechat /etc/systemd/system/weechat.service
+apt-get -y install weechat-plugins python-potr bitlbee
+cp config/systemfiles/weechat.service  /etc/systemd/system/weechat.service
 systemctl enable /etc/systemd/system/weechat.service
 
 # Set up screen.
