@@ -3,6 +3,9 @@
 # Fancy colors for ls.
 alias ls="ls --color=auto"
 
+# Wrapper for weechat to force local config file on it anew on each run.
+alias weechat="~/config/bin/weechat-wrapper.sh"
+
 # Blue prompt with time.
 PS1="\[\e[1;34m\][\\t \\u@\\h \\w]$\[\e[m\] "
 PS2="\[\e[1;34m\]>\[\e[m\] "

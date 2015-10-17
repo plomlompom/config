@@ -1,0 +1,5 @@
+[SYSADMIN] weechat restarted, re-identify!
+
+Your weechat was restarted, so don't forget to re-identify on freenode to
+nickserv via "/msg nickserv identify [password]", and on bitlbee by joining
+&bitlbee, "identify", "/oper . [password]", and "account on".

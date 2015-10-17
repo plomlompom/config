@@ -103,16 +103,24 @@ service postfix restart
 apt-get -y install cron
 su plom -c "echo '0 18 * * 0 ~/config/bin/simplemail.sh ~/config/mails/update_reminder' | crontab -"
 
+# Set up tmux.
+apt-get -y install tmux
+
+# Set up weechat, OTR, bitlbee.
+apt-get install weechat-plugins python-potr bitlbee
+cp config/systemfiles/weechat /etc/systemd/system/weechat.service
+systemctl enable /etc/systemd/system/weechat.service
+
 # Set up screen.
-apt-get -y install screen
-
+#apt-get -y install screen
+#
 # Set up ping.
-apt-get -y install iputils-ping
-
+#apt-get -y install iputils-ping
+#
 # Set up irssi.
-apt-get -y install irssi
-cp config/systemfiles/irssi.service /etc/systemd/system/irssi.service
-systemctl enable /etc/systemd/system/irssi.service
+#apt-get -y install irssi
+#cp config/systemfiles/irssi.service /etc/systemd/system/irssi.service
+#systemctl enable /etc/systemd/system/irssi.service
 
 # Clean up.
 rm jessie_start_server.sh
