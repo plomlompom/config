@@ -12,7 +12,7 @@ perform the following tasks:
   signing, with a second parameter $keyfile if a key already exists; without
   second parameter, this will generate a new key and print the DNS record to add
 
-- in the tmux weechat/bitlbee session (run "tmux attach"), switch to the
+- in the screen weechat/bitlbee session (run "screen -dr"), switch to the
   &bitlbee channel, register with a password ("register", "/oper . [password]"),
   and set up Jabber account with password ("account add jabber
   plomlompom@jabber.ccc.de", "/oper . [password]"), then activate it ("account
