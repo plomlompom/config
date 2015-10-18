@@ -1,12 +1,12 @@
 # /etc/systemd/system/weechat.service
 
 [Unit]
-Description=tmux weechat
+Description=weechat screen
 
 [Service]
 Type=forking
 User=plom
-ExecStart=/usr/bin/tmux new-session -d '~/config/bin/weechat-wrapper.sh'
+ExecStart=/bin/sh -c 'LC_ALL=en_US.UTF8 screen -d -m ~/config/bin/weechat-wrapper.sh'
 
 [Install]
 WantedBy=multi-user.target
