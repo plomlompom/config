@@ -103,8 +103,13 @@ service postfix restart
 apt-get -y install cron
 su plom -c "echo '0 18 * * 0 ~/config/bin/simplemail.sh ~/config/mails/update_reminder' | crontab -"
 
-# Set up screen, weechat, OTR, bitlbee.
+# Set up screen/weechat/OTR/bitlbee. Make bitlbee listen only locally.
 apt-get -y install screen weechat-plugins python-potr bitlbee
+sed -i 's/^# DaemonInterface/DaemonInterface = 127.0.0.1 # DaemonInterface/' /etc/bitlbee/bitlbee.conf
+sedtest=`grep -E '^DaemonInterface = 127.0.0.1 #' /etc/bitlbee/bitlbee.conf | wc -l | cut -d ' ' -f 1`
+if [ 0 -eq $sedtest ]; then
+    false
+fi
 cp config/systemfiles/weechat.service  /etc/systemd/system/weechat.service
 systemctl enable /etc/systemd/system/weechat.service
 
