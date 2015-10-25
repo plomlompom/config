@@ -1,2 +1,9 @@
 DEFAULT="$HOME/mail/new_inbox/"
 logfile "$HOME/.mailfilter.log"
+
+if ( /^Subject: Postfix SMTP server: errors from /:D && \
+    /^From: Mail Delivery System <MAILER-DAEMON@plomlompom\.com>/:D && \
+    /^To: Postmaster <postmaster@plomlompom\.com>/:D )
+{
+    to $HOME/mail/new_postfix_smtp_server_errors_from
+}
