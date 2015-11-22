@@ -113,17 +113,6 @@ fi
 cp config/systemfiles/weechat.service  /etc/systemd/system/weechat.service
 systemctl enable /etc/systemd/system/weechat.service
 
-# Set up screen.
-#apt-get -y install screen
-#
-# Set up ping.
-#apt-get -y install iputils-ping
-#
-# Set up irssi.
-#apt-get -y install irssi
-#cp config/systemfiles/irssi.service /etc/systemd/system/irssi.service
-#systemctl enable /etc/systemd/system/irssi.service
-
 # Clean up.
 rm jessie_start_server.sh
 
