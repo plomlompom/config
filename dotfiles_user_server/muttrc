@@ -30,3 +30,13 @@ set pager_stop = yes
 
 # Sort message top-down new-old.
 set sort=reverse-date
+
+# Ensure visibility of attachments. The second line handles (in an ugly way) the
+# issue of mails that use the content-type of multipart/alternative wrongly, by
+# omitting from the text/plain alternative relevant multimedia files attached to
+# the multipart/related alternative that contains text/html and said files. This
+# will in certain cases make the pager default to displaying the HTML variant of
+# a mail when a plain text one is available, but this is preferable to hiding
+# potentially important attachments.
+set index_format="%4C %Z %?X?[%X]&   ? %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+alternative_order multipart/related text/plain text/html
