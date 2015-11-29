@@ -6,5 +6,5 @@
 /server add localhost localhost
 /connect localhost
 /server del freenode
-/server add freenode irc.freenode.net -nicks=plomlompom,plomlomp0m,ploml0mp0m,pl0ml0mp0m -realname="Christian Heller" -autojoin=#nodrama.de,#twitter.de,#freie-gesellschaft,#dumme-gesellschaft
+/server add freenode irc.freenode.net -nicks=plomlompom,plomlomp0m,ploml0mp0m,pl0ml0mp0m -realname="Christian Heller" -autojoin=#nodrama.de,#twitter.de,#freie-gesellschaft,#dumme-gesellschaft,#zerozero
 /connect freenode
