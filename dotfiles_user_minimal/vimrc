@@ -2,6 +2,9 @@
 syntax on
 filetype plugin on
 
+" Number lines.
+set nunber
+
 " Don't add unsolicited final newline.
 set binary
 
