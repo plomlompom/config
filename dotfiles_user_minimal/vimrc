@@ -3,7 +3,7 @@ syntax on
 filetype plugin on
 
 " Number lines.
-set nunber
+set number
 
 " Don't add unsolicited final newline.
 set binary
