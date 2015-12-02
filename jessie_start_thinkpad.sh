@@ -23,6 +23,10 @@ echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf.d/99mindeps
 echo 'deb http://ftp.debian.org/debian/ jessie main contrib non-free' > /etc/apt/sources.list
 echo 'deb http://security.debian.org/ jessie/updates main contrib non-free' >> /etc/apt/sources.list
 echo 'deb http://ftp.debian.org/debian/ jessie-updates main contrib non-free' >> /etc/apt/sources.list
+echo 'deb http://ftp.debian.org/debian/ testing main contrib non-free' > /etc/apt/sources.list
+echo 'deb http://security.debian.org/ testing/updates main contrib non-free' >> /etc/apt/sources.list
+echo 'deb http://ftp.debian.org/debian/ testing-updates main contrib non-free' >> /etc/apt/sources.list
+echo 'APT::Default-Release "stable"' >> /etc/apt/apt.conf.d/99defaultrelease
 dhclient eth0
 apt-get update
 apt-get -y dist-upgrade
@@ -105,7 +109,8 @@ usermod -aG video plom
 apt-get -y install x11-xserver-utils
 
 # Set up pentadactyl. 
-apt-get -y install xul-ext-pentadactyl
+apt-get -y install iceweasel
+apt-get -y -t testing install xul-ext-pentadactyl
 apt-get -y install vim-gtk
 su plom -c 'mkdir -p /home/plom/downloads/'
 
