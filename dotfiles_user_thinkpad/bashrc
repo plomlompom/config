@@ -3,6 +3,10 @@
 # Fancy colors for ls.
 alias ls="ls --color=auto"
 
+# Use vim as default editor for anything.
+export VISUAL=vim
+export EDITOR=$VISUAL
+
 # Blue prompt with time.
 PS1="\[\e[1;32m\][\\t \\u@\\h \\w]$\[\e[m\] "
 PS2="\[\e[1;32m\]>\[\e[m\] "
