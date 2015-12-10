@@ -23,7 +23,7 @@ echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf.d/99mindeps
 echo 'deb http://ftp.debian.org/debian/ jessie main contrib non-free' > /etc/apt/sources.list
 echo 'deb http://security.debian.org/ jessie/updates main contrib non-free' >> /etc/apt/sources.list
 echo 'deb http://ftp.debian.org/debian/ jessie-updates main contrib non-free' >> /etc/apt/sources.list
-echo 'deb http://ftp.debian.org/debian/ testing main contrib non-free' > /etc/apt/sources.list
+echo 'deb http://ftp.debian.org/debian/ testing main contrib non-free' >> /etc/apt/sources.list
 echo 'deb http://security.debian.org/ testing/updates main contrib non-free' >> /etc/apt/sources.list
 echo 'deb http://ftp.debian.org/debian/ testing-updates main contrib non-free' >> /etc/apt/sources.list
 echo 'APT::Default-Release "stable"' >> /etc/apt/apt.conf.d/99defaultrelease
