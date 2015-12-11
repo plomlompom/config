@@ -16,8 +16,7 @@ fi
 tput_color="$(tput setaf $colornumber)$(tput bold)"
 tput_reset="$(tput sgr0)"
 # Bash confuses the line length when not told to not count escape sequences.
-which_shell=`lsof -ap $$ -d txt | awk 'NR>1 {print $NF}'`
-if [ "${which_shell#*'bash'}" != "$which_shell" ]; then
+if [ ! "$BASH" = "" ]; then
     tput_color="\[$tput_color\]"
     tput_reset="\[$tput_reset\]"
 fi
