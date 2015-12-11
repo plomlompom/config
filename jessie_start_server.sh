@@ -5,6 +5,9 @@ set -e
 # Set root pw.
 passwd
 
+# Remove unused .bashrc.
+rm ~/.bashrc
+
 # Post-installation reduction.
 dpkg-query -Wf '${Package} ${Priority}\n' | grep ' required' | sed 's/ required//' > list_white_unsorted 
 echo 'ifupdown' >> list_white_unsorted 
@@ -73,6 +76,7 @@ config/symlink.sh
 
 # Add user. Remove old user's config/ if it exists.
 useradd -m -s /bin/bash plom
+rm /home/plom/.bashrc
 rm -rf /home/plom/config
 su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
 su plom -c '/home/plom/config/symlink.sh server'
