@@ -1,0 +1,4 @@
+# Server-specific .shinit additions. 
+
+# Wrapper for weechat to force local config file on it anew on each run.
+alias weechat="~/config/bin/weechat-wrapper.sh"

@@ -2,12 +2,16 @@
 
 set -x
 
+dir_minimal=~/config/dotfiles_minimal
 dir_user_minimal=~/config/dotfiles_user_minimal
 dir_user_thinkpad=~/config/dotfiles_user_thinkpad
 dir_user_server=~/config/dotfiles_user_server
 dir_root=~/config/dotfiles_root
 homedir=`echo ~`
 find ~ -lname $homedir'/config/*' -delete
+for file in `ls $dir_minimal`; do
+    ln -fs $dir_minimal/$file ~/.$file
+done
 for file in `ls $dir_user_minimal`; do
     ln -fs $dir_user_minimal/$file ~/.$file
 done
