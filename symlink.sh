@@ -2,8 +2,8 @@
 
 set -x
 
-dir_minimal=~/config/dotfiles
-dir_user_minimal=~/config/dotfiles/user
+dir_minimal=~/config/dotfiles/minimal
+dir_user_minimal=~/config/dotfiles/user/minimal
 dir_user_thinkpad=~/config/dotfiles/user/thinkpad
 dir_user_server=~/config/dotfiles/user/server
 dir_root=~/config/dotfiles/root
