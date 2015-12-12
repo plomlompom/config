@@ -199,8 +199,8 @@ elif [ "$1" = "thinkpad" ]; then
         amixer -c 1 sset Master playback 100% unmute
     fi
 
-    # Set up window system and OpenGL.
-    apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu
+    # Set up window system, i3, redshift.
+    apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu redshift
 
     # Set up OpenGL and hardware acceleration.
     apt-get -y install libgl1-mesa-dri
