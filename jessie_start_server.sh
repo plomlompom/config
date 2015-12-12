@@ -93,7 +93,7 @@ apt-get -y install openssh-server
 su plom -c 'mkdir -p /home/plom/mail/'
 su plom -c 'mkdir -p /home/plom/mail/inbox/{cur,new,tmp}'
 su plom -c 'mkdir -p /home/plom/mail/new_inbox/{cur,new,tmp}'
-sed -i 's/^delete = true$/delete = false/g' /home/plom/config/dotfiles_user_server/getmail/getmailrc
+sed -i 's/^delete = true$/delete = false/g' /home/plom/config/dotfiles/user/server/getmail/getmailrc
 DEBIAN_FRONTEND=noninteractive apt-get -y install getmail4 procmail mutt postfix maildrop
 cp config/systemfiles/main.cf /etc/postfix/main.cf
 cp config/systemfiles/aliases /etc/aliases
