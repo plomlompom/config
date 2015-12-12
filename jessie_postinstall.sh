@@ -65,10 +65,8 @@ echo 'deb http://security.debian.org/ jessie/updates main contrib non-free' \
 echo 'deb http://ftp.debian.org/debian/ jessie-updates main contrib non-free' \
     >> /etc/apt/sources.list
 if [ "$1" = "thinkpad" ]; then
-    if [ "$2" = "T450s" ]; then
-        echo 'deb http://ftp.debian.org/debian/ jessie-backports main contrib' \
+    echo 'deb http://ftp.debian.org/debian/ jessie-backports main contrib' \
 ' non-free' >> /etc/apt/sources.list
-    fi
     echo 'deb http://ftp.debian.org/debian/ testing main contrib non-free' \
         >> /etc/apt/sources.list
     echo 'deb http://security.debian.org/ testing/updates main contrib' \
@@ -205,13 +203,15 @@ elif [ "$1" = "thinkpad" ]; then
         amixer -c 0 sset Master playback 100% unmute
     elif [ "$2" = "T450s" ]; then
         amixer -c 1 sset Master playback 100% unmute
+        # Re-order souncards so the commonly used one is the first one.
+        echo 'options snd_hda_intel index=1,0' >> /etc/modprobe.d/sound.conf
     fi
 
     # Set up window system, i3, redshift.
     apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu redshift
 
     # Set up OpenGL and hardware acceleration.
-    if [ "$1" = "X220s" ]; then
+    if [ "$2" = "X200s" ]; then
         apt-get -y install libgl1-mesa-dri
         apt-get -y install i965-va-driver
         usermod -aG video plom
@@ -224,7 +224,7 @@ elif [ "$1" = "thinkpad" ]; then
 
     # Set up pentadactyl. 
     apt-get -y install iceweasel
-    apt-get -y -t testing install xul-ext-pentadactyl
+    apt-get -y -t jessie-backports install xul-ext-pentadactyl
     apt-get -y install vim-gtk
     su plom -c 'mkdir -p /home/plom/downloads/'
 
