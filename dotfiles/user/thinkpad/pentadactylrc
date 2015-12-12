@@ -8,6 +8,9 @@ set! javascript.enabled=false
 "set! permissions.default.image=2
 set! general.useragent.override=foo
 set! signon.rememberSignons=false
+set! network.proxy.socks=localhost
+set! network.proxy.socks_port=9999
+set! network.proxy.type=1
 set go=CMsbr
 set showtabline=never
 highlight Hint -append font: "Droid Sans Mono"; margin: 0em; padding: 0.1em; padding-right: 0.2em; 
