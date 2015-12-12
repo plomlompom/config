@@ -69,13 +69,13 @@ service keyboard-setup restart
 apt-get -y install ca-certificates
 apt-get -y install git
 git clone http://github.com/plomlompom/config
-config/symlink.sh
+config/bin/symlink.sh
 
 # Add user. Remove old user's config/ if it exists.
 useradd -m -s /bin/bash plom
 rm -rf /home/plom/config
 su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
-su plom -c '/home/plom/config/symlink.sh thinkpad'
+su plom -c '/home/plom/config/bin/symlink.sh thinkpad'
 
 # Set up editor.
 apt-get -y install vim

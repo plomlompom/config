@@ -8,8 +8,8 @@ perform the following tasks:
 
 - ensure the following DNS TXT record for @: v=spf1 mx -all
 
-- run (as root) config/setup_opendkim.sh $selector to set up system for DKIM key
-  signing, with a second parameter $keyfile if a key already exists; without
+- run (as root) config/bin/setup_opendkim.sh $selector to set up system for DKIM
+  key signing, with a second parameter $keyfile if a key already exists; without
   second parameter, this will generate a new key and print the DNS record to add
 
 - in the screen weechat/bitlbee session (run "screen -dr"), switch to the
