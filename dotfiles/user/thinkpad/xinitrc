@@ -3,5 +3,8 @@
 # Set keymap.
 setxkbmap de
 
+# Redshift to Berlin, Germany.
+redshift -l 53:13 &
+
 # Launch window manager.
 i3
