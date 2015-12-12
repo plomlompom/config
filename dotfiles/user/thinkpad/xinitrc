@@ -5,6 +5,3 @@ setxkbmap de
 
 # Launch window manager.
 i3
-
-# Run redshift for Berlin, Germany.
-redshift -l 53:13
