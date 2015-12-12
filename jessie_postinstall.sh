@@ -65,10 +65,18 @@ echo 'deb http://security.debian.org/ jessie/updates main contrib non-free' \
 echo 'deb http://ftp.debian.org/debian/ jessie-updates main contrib non-free' \
     >> /etc/apt/sources.list
 if [ "$1" = "thinkpad" ]; then
-    echo 'deb http://ftp.debian.org/debian/ testing main contrib non-free' >> /etc/apt/sources.list
-    echo 'deb http://security.debian.org/ testing/updates main contrib non-free' >> /etc/apt/sources.list
-    echo 'deb http://ftp.debian.org/debian/ testing-updates main contrib non-free' >> /etc/apt/sources.list
-    echo 'APT::Default-Release "stable";' >> /etc/apt/apt.conf.d/99defaultrelease
+    if [ "$2" = "T450s" ]; then
+        echo 'deb http://ftp.debian.org/debian/ jessie-backports main contrib' \
+' non-free' >> /etc/apt/sources.list
+    fi
+    echo 'deb http://ftp.debian.org/debian/ testing main contrib non-free' \
+        >> /etc/apt/sources.list
+    echo 'deb http://security.debian.org/ testing/updates main contrib' \
+' non-free' >> /etc/apt/sources.list
+    echo 'deb http://ftp.debian.org/debian/ testing-updates main contrib' \
+' non-free' >> /etc/apt/sources.list
+    echo 'APT::Default-Release "stable";' \
+        >> /etc/apt/apt.conf.d/99defaultrelease
 fi
 dhclient eth0
 apt-get update
@@ -203,9 +211,13 @@ elif [ "$1" = "thinkpad" ]; then
     apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu redshift
 
     # Set up OpenGL and hardware acceleration.
-    apt-get -y install libgl1-mesa-dri
-    apt-get -y install i965-va-driver
-    usermod -aG video plom
+    if [ "$1" = "X220s" ]; then
+        apt-get -y install libgl1-mesa-dri
+        apt-get -y install i965-va-driver
+        usermod -aG video plom
+    elif [ "$2" = "T450s" ]; then
+        apt-get -y -t jessie-backports install xserver-xorg-video-intel
+    fi
 
     # Install xrandr.
     apt-get -y install x11-xserver-utils
