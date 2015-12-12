@@ -213,7 +213,7 @@ fi
 passwd plom
 
 # Clean up.
-rm jessie_start.sh
+rm jessie_postinstall.sh
 
 # Finalize everything with a reboot.
 reboot
