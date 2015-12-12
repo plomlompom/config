@@ -5,9 +5,6 @@ set -e
 # Set root pw.
 passwd
 
-# Remove unused .bashrc.
-rm ~/.bashrc
-
 # Post-installation reduction.
 dpkg-query -Wf '${Package} ${Priority}\n' | grep ' required' | sed 's/ required//' > list_white_unsorted 
 echo 'ifupdown' >> list_white_unsorted 
