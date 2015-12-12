@@ -2,8 +2,13 @@
 set -x
 set -e
 
-if [ "$1" = "" ]; then
+if [ ! "$1" = "thinkpad" ] && [ ! "$1" = "server" ]; then
     echo "Need argument."
+    false
+fi
+
+if [ "$1" = "thinkpad" ] && [ ! "$2" = "X200s" ] && [ ! "$2" = "T450s" ]; then
+    echo "Need Thinkpad type."
     false
 fi
 
@@ -59,10 +64,12 @@ echo 'deb http://security.debian.org/ jessie/updates main contrib non-free' \
     >> /etc/apt/sources.list
 echo 'deb http://ftp.debian.org/debian/ jessie-updates main contrib non-free' \
     >> /etc/apt/sources.list
-#echo 'deb http://ftp.debian.org/debian/ testing main contrib non-free' >> /etc/apt/sources.list
-#echo 'deb http://security.debian.org/ testing/updates main contrib non-free' >> /etc/apt/sources.list
-#echo 'deb http://ftp.debian.org/debian/ testing-updates main contrib non-free' >> /etc/apt/sources.list
-#echo 'APT::Default-Release "stable"' >> /etc/apt/apt.conf.d/99defaultrelease
+if [ "$1" = "thinkpad" ]; then
+    echo 'deb http://ftp.debian.org/debian/ testing main contrib non-free' >> /etc/apt/sources.list
+    echo 'deb http://security.debian.org/ testing/updates main contrib non-free' >> /etc/apt/sources.list
+    echo 'deb http://ftp.debian.org/debian/ testing-updates main contrib non-free' >> /etc/apt/sources.list
+    echo 'APT::Default-Release "stable";' >> /etc/apt/apt.conf.d/99defaultrelease
+fi
 dhclient eth0
 apt-get update
 apt-get -y dist-upgrade
@@ -123,7 +130,7 @@ config/bin/symlink.sh
 useradd -m -s /bin/bash plom
 rm -rf /home/plom/config
 su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
-su plom -c '/home/plom/config/bin/symlink.sh server'
+su plom -c '/home/plom/config/bin/symlink.sh '$1
 
 # Set up editor.
 mkdir -p .vimbackups
@@ -186,7 +193,11 @@ elif [ "$1" = "thinkpad" ]; then
     # Set up sound.
     usermod -aG audio plom
     apt-get -y install alsa-utils
-    amixer -c 0 sset Master playback 100% unmute
+    if [ "$2" = "X200s" ]; then
+        amixer -c 0 sset Master playback 100% unmute
+    elif [ "$2" = "T450s" ]; then
+        amixer -c 1 sset Master playback 100% unmute
+    fi
 
     # Set up window system and OpenGL.
     apt-get -y install xserver-xorg xinit xterm i3 i3status dmenu
