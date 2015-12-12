@@ -55,6 +55,12 @@ ExecStart=/sbin/dhclient eth0
 WantedBy=multi-user.target
 EOF
     systemctl enable /etc/systemd/system/dhclient.service
+elif [ "$1" = "thinkpad" ]; then
+    if [ "$2" = "X200s" ]; then
+        echo 'X200s' > /etc/hostname
+    elif [ "$2" = "T450s" ]; then
+        echo 'T450s' > /etc/hostname
+    fi
 fi
 
 # Package management config, system upgrade.
