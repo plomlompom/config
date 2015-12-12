@@ -212,12 +212,12 @@ elif [ "$1" = "thinkpad" ]; then
 
     # Set up OpenGL and hardware acceleration.
     if [ "$2" = "X200s" ]; then
-        apt-get -y install libgl1-mesa-dri
         apt-get -y install i965-va-driver
-        usermod -aG video plom
     elif [ "$2" = "T450s" ]; then
         apt-get -y -t jessie-backports install xserver-xorg-video-intel
     fi
+    apt-get -y install libgl1-mesa-dri
+    usermod -aG video plom
 
     # Install xrandr.
     apt-get -y install x11-xserver-utils
