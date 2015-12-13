@@ -11,9 +11,8 @@ workspace_layout              tabbed
 set                           $mod Mod4
 floating_modifier             $mod
 
-# Launch xterm small-font white-on-black or big-font black-on-white. 
-bindsym $mod+Return           exec xterm -vb -ls -r -fa -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1 -fs 8
-bindsym $mod+Shift+Return     exec xterm -vb -ls -fa -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1 -fs 19
+# Launch xterm.
+bindsym $mod+Return           exec xterm
 
 # Launch programs via dmenu.
 bindsym $mod+d                exec dmenu_run

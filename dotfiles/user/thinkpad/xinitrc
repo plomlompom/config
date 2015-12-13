@@ -5,6 +5,7 @@ setxkbmap de
 
 # Read in X configuration.
 xrdb -merge ~/.Xresources
+xrdb -merge ~/.Xresources-local
 
 # Redshift to Berlin, Germany.
 redshift -rl 53:13 &

@@ -1,3 +1,6 @@
+! font size
+XTerm*faceSize: 14
+
 ! black
 *color0: #202020
 *color8: #3F3F3F
