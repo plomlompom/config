@@ -1,5 +1,5 @@
 ! font size
-XTerm*faceSize: 14
+XTerm*faceSize: 10
 
 ! black
 *color0: #202020
