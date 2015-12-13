@@ -26,7 +26,7 @@ else
         for file in `ls $dir_user_thinkpad`; do
             ln -fs $dir_user_thinkpad/$file ~/.$file
         done
-        if [ "$2" = "x200s" ]; then
+        if [ "$2" = "X200s" ]; then
             for file in `ls $dir_user_X200s`; do
                 ln -fs $dir_user_X200s/$file ~/.$file
             done
