@@ -7,7 +7,7 @@ setxkbmap de
 xrdb -merge ~/.Xresources
 
 # Redshift to Berlin, Germany.
-redshift -l 53:13 &
+redshift -rl 53:13 &
 
 # Launch window manager.
 i3
