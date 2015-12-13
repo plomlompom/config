@@ -1,0 +1,31 @@
+! black
+*color0: #202020
+*color8: #3F3F3F
+
+! red
+*color1: #A82020 
+*color9: #E82020
+
+! green
+*color2: #20A820
+*color10: #20E820
+
+! yellow
+*color3: #A8A820
+*color11: #E8E820 
+
+! blue
+*color4: #3F3FFF
+*color12: #9F9FFF
+
+! magenta
+*color5: #A83FFF
+*color13: #E89FFF
+
+! cyan
+*color6: #3FA8FF
+*color14: #9FE8FF
+
+! white
+*color7: #A8A8A8
+*color15: #E8E8E8
