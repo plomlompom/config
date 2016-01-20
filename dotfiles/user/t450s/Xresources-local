@@ -1,5 +1,11 @@
 ! font size
 XTerm*faceSize: 10
+xterm*VT100*faceSize1: 7
+xterm*VT100*faceSize2: 8
+xterm*VT100*faceSize3: 9
+xterm*VT100*faceSize4: 10
+xterm*VT100*faceSize5: 12
+xterm*VT100*faceSize6: 15
 
 ! black
 *color0: #202020
