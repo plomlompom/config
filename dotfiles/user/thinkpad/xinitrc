@@ -10,5 +10,8 @@ xrdb -merge ~/.Xresources-local
 # Redshift to Berlin, Germany.
 redshift -rl 53:13 &
 
+# Enforce QWERTZ.
+setxkbmap de
+
 # Launch window manager.
 i3
