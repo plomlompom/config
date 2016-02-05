@@ -142,7 +142,7 @@ config/bin/symlink.sh
 useradd -m -s /bin/bash plom
 rm -rf /home/plom/config
 su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
-su plom -c '/home/plom/config/bin/symlink.sh '$1 $2
+su plom -c '/home/plom/config/bin/symlink.sh '$1' '$2
 
 # Set up editor.
 mkdir -p .vimbackups
