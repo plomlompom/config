@@ -6,9 +6,6 @@ set -x
 ensure_line() {
     add_string="$1"
     file="$2"
-    echo "TESTESTEST"
-    echo $add_string
-    echo $file
     test=`grep "$add_string" "$file" | wc -l`
     if [ $test -lt 1 ]; then
         echo "$add_string" >> "$file"
