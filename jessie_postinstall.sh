@@ -182,7 +182,7 @@ if [ "$1" = "server" ]; then
     DEBIAN_FRONTEND=noninteractive apt-get -y install getmail4 procmail mutt \
         postfix maildrop
     cp config/systemfiles/main.cf /etc/postfix/main.cf
-    sed -i 's/HOSTNAME/'.$2.'/g' /etc/postfix/main.cf
+    sed -i 's/HOSTNAME/'$2'/g' /etc/postfix/main.cf
     cp config/systemfiles/aliases /etc/aliases
     newaliases
     service postfix restart
