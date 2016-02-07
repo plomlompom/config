@@ -12,6 +12,23 @@ if [ "$1" = "thinkpad" ] && [ ! "$2" = "X200s" ] && [ ! "$2" = "T450s" ]; then
     false
 fi
 
+if [ "$1" = "server" ] && [ ! "$2" = "plomlompom.com" ] && \
+        [ ! "$2" = "test.plomlompom.com" ]; then
+    echo "Need server type."
+    false
+fi
+
+# Some important variables
+if [ "$2" = "plomlompom.com" ]; then
+    hostname="plomlompom"
+elif [ "$2" = "test.plomlompom" ]; then
+    hostname="test.plomlompom.com"
+elif [ "$2" = "X200s" ]; then
+    hostname="X220s"
+elif [ "$2" = "T450s" ]; then
+    hostname="T450s"
+fi
+
 if [ "$1" = "server" ]; then
     # Set root pw.
     passwd
@@ -35,13 +52,13 @@ rm list_all_packages list_white_unsorted list_white list_black
 echo 'APT::Install-Recommends "false";' >> /etc/apt/apt.conf.d/99mindeps
 echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf.d/99mindeps
 
+# Set hostname and FQDN.
+echo $hostname > /etc/hostname
+hostname $hostname
 if [ "$1" = "server" ]; then
-    # Set hostname and FQDN.
-    echo 'plomlompom' > /etc/hostname
-    hostname 'plomlompom'
     echo '127.0.0.1 localhost' > /etc/hosts
     ip=`hostname -I`
-    echo "$ip plomlompom.com plomlompom" >> /etc/hosts
+    echo "$ip $2 $hostname" >> /etc/hosts
 
     # Call dhclient on startup.
     cat > /etc/systemd/system/dhclient.service << EOF
@@ -55,12 +72,6 @@ ExecStart=/sbin/dhclient eth0
 WantedBy=multi-user.target
 EOF
     systemctl enable /etc/systemd/system/dhclient.service
-elif [ "$1" = "thinkpad" ]; then
-    if [ "$2" = "X200s" ]; then
-        echo 'X200s' > /etc/hostname
-    elif [ "$2" = "T450s" ]; then
-        echo 'T450s' > /etc/hostname
-    fi
 fi
 
 # Package management config, system upgrade.

@@ -1,13 +1,13 @@
 #!/bin/sh
 
 set -x
+set -e
 
 dir_minimal=~/config/dotfiles/minimal
-dir_user_minimal=~/config/dotfiles/user/minimal
-dir_user_thinkpad=~/config/dotfiles/user/thinkpad
-dir_user_X200s=~/config/dotfiles/user/x200s
-dir_user_T450s=~/config/dotfiles/user/t450s
-dir_user_server=~/config/dotfiles/user/server
+dir_user_prefix=~/config/dotfiles/user
+dir_user_minimal=$dir_user_prefix/minimal
+dir_user_machine=$dir_user_prefix/$1
+dir_user_variety=$dir_user_prefix/$2
 dir_root=~/config/dotfiles/root
 homedir=`echo ~`
 find ~ -lname $homedir'/config/*' -delete
@@ -22,22 +22,10 @@ else
     for file in `ls $dir_user_minimal`; do
         ln -fs $dir_user_minimal/$file ~/.$file
     done
-    if [ "$1" = "thinkpad" ]; then
-        for file in `ls $dir_user_thinkpad`; do
-            ln -fs $dir_user_thinkpad/$file ~/.$file
-        done
-        if [ "$2" = "X200s" ]; then
-            for file in `ls $dir_user_X200s`; do
-                ln -fs $dir_user_X200s/$file ~/.$file
-            done
-        else
-            for file in `ls $dir_user_T450s`; do
-                ln -fs $dir_user_T450s/$file ~/.$file
-            done
-        fi
-    elif [ "$1" = "server" ]; then
-        for file in `ls $dir_user_server`; do
-            ln -fs $dir_user_server/$file ~/.$file
-        done
-    fi
+    for file in `ls $dir_user_machine`; do
+        ln -fs $dir_user_machine/$file ~/.$file
+    done
+    for file in `ls $dir_user_variety`; do
+        ln -fs $dir_user_variety/$file ~/.$file
+    done
 fi
