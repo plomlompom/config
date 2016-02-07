@@ -21,8 +21,8 @@ fi
 # Some important variables
 if [ "$2" = "plomlompom.com" ]; then
     hostname="plomlompom"
-elif [ "$2" = "test.plomlompom" ]; then
-    hostname="test.plomlompom.com"
+elif [ "$2" = "test.plomlompom.com" ]; then
+    hostname="test.plomlompom"
 elif [ "$2" = "X200s" ]; then
     hostname="X220s"
 elif [ "$2" = "T450s" ]; then
