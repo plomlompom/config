@@ -57,7 +57,7 @@ echo $hostname > /etc/hostname
 hostname $hostname
 if [ "$1" = "server" ]; then
     echo '127.0.0.1 localhost' > /etc/hosts
-    ip=`hostname -I`
+    ip=`hostname -I | cut -d " " -f 1`
     echo "$ip $2 $hostname" >> /etc/hosts
 
     # Call dhclient on startup.
