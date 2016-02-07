@@ -155,6 +155,12 @@ rm -rf /home/plom/config
 su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
 su plom -c '/home/plom/config/bin/symlink.sh '$1' '$2
 
+# Allow user to sudo.
+if [ "$1" = "thinkpad" ]; then
+    apt-get -y install sudo
+    adduser plom sudo
+fi
+
 # Set up editor.
 mkdir -p .vimbackups
 su plom -c 'mkdir -p /home/plom/.vimbackups/'
