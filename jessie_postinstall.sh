@@ -215,17 +215,16 @@ if [ "$1" = "server" ]; then
         # Send instructions mail.
         config/bin/simplemail.sh config/mails/server_postinstall_finished
     elif [ "$2" = "public" ]; then
-        apt-get -y install sudo
-        adduser plom sudo
         su plom -c '~/config/setup_go.sh '\
-            'https://storage.googleapis.com/golang/go1.5.3.linux-amd64.tar.gz'
+'https://storage.googleapis.com/golang/go1.5.3.linux-amd64.tar.gz'
         su plom -c 'git clone '\
             'https://github.com/plomlompom/htwtxt $GOPATH/src/htwtxt'
         su plom -c 'go get htwtxt'
         su plom -c 'mkdir ~/htwtxt'
         su plom -c 'cp -R $GOPATH/src/htwtxt/templates ~/htwtxt'
-        deluser plom sudo
-        apt-get -y --purge autoremove sudo
+        cp config/systemfiles/htwtxt.service \
+            /etc/systemd/system/htwtxt.service
+        systemctl enable /etc/systemd/system/htwtxt.service
     fi
 
 elif [ "$1" = "thinkpad" ]; then
