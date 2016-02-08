@@ -6,23 +6,27 @@ if [ ! "$1" = "thinkpad" ] && [ ! "$1" = "server" ]; then
     echo "Need argument."
     false
 fi
-
 if [ "$1" = "thinkpad" ] && [ ! "$2" = "X200s" ] && [ ! "$2" = "T450s" ]; then
     echo "Need Thinkpad type."
     false
 fi
-
-if [ "$1" = "server" ] && [ ! "$2" = "plomlompom.com" ] && \
-        [ ! "$2" = "test.plomlompom.com" ]; then
-    echo "Need server type."
+if [ "$1" = "server" ] && [ ! "$2" = "personal" ] && [ ! "$2" = "public" ]; then
+    echo "Need server purpose."
+    false
+fi
+if [ "$2" = "personal" ] && [ ! "$3" = "test.plomlompom.com" ] && \
+    [ ! "$3" = "plomlompom.com" ]; then
+    echo "Need server domain"
     false
 fi
 
 # Some important variables
-if [ "$2" = "plomlompom.com" ]; then
+if [ "$3" = "plomlompom.com" ]; then
     hostname="plomlompom"
-elif [ "$2" = "test.plomlompom.com" ]; then
+elif [ "$3" = "test.plomlompom.com" ]; then
     hostname="test.plomlompom"
+elif [ "$2" = "public" ]; then
+    hostname="twtxt.plomlompom"
 elif [ "$2" = "X200s" ]; then
     hostname="X220s"
 elif [ "$2" = "T450s" ]; then
@@ -58,7 +62,7 @@ hostname $hostname
 if [ "$1" = "server" ]; then
     echo '127.0.0.1 localhost' > /etc/hosts
     ip=`hostname -I | cut -d " " -f 1`
-    echo "$ip $2 $hostname" >> /etc/hosts
+    echo "$ip $hostname.com $hostname" >> /etc/hosts
 
     # Call dhclient on startup.
     cat > /etc/systemd/system/dhclient.service << EOF
@@ -153,7 +157,7 @@ config/bin/symlink.sh
 useradd -m -s /bin/bash plom
 rm -rf /home/plom/config
 su - plom -c 'git clone http://github.com/plomlompom/config /home/plom/config'
-su plom -c '/home/plom/config/bin/symlink.sh '$1' '$2
+su plom -c '/home/plom/config/bin/symlink.sh '$1' '$2' '$3
 
 # Allow user to sudo.
 if [ "$1" = "thinkpad" ]; then
@@ -182,7 +186,7 @@ if [ "$1" = "server" ]; then
     DEBIAN_FRONTEND=noninteractive apt-get -y install getmail4 procmail mutt \
         postfix maildrop
     cp config/systemfiles/main.cf /etc/postfix/main.cf
-    sed -i 's/HOSTNAME/'$2'/g' /etc/postfix/main.cf
+    sed -i 's/HOSTNAME/'$hostname.com'/g' /etc/postfix/main.cf
     cp config/systemfiles/aliases /etc/aliases
     newaliases
     service postfix restart
