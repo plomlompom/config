@@ -183,33 +183,38 @@ if [ "$1" = "server" ]; then
     su plom -c 'mkdir -p /home/plom/mail/new_inbox/{cur,new,tmp}'
     sed -i 's/^delete = true$/delete = false/g' \
         /home/plom/config/dotfiles/user/server/personal/minimal/getmail/getmailrc
-    DEBIAN_FRONTEND=noninteractive apt-get -y install getmail4 procmail mutt \
-        postfix maildrop
+    DEBIAN_FRONTEND=noninteractive apt-get -y install mutt postfix maildrop
     cp config/systemfiles/main.cf /etc/postfix/main.cf
     sed -i 's/HOSTNAME/'$hostname.com'/g' /etc/postfix/main.cf
     cp config/systemfiles/aliases /etc/aliases
     newaliases
     service postfix restart
+    if [ "$2" = "personal" ]; then
+    apt-get -y install getmail4 procmail
+    fi
 
     # Set up regular system update reminder.
     apt-get -y install cron
     su plom -c "echo '0 18 * * 0 ~/config/bin/simplemail.sh '\
         '~/config/mails/update_reminder' | crontab -"
 
-    # Set up screen/weechat/OTR/bitlbee. Make bitlbee listen only locally.
-    apt-get -y install screen weechat-plugins python-potr bitlbee
-    sed -i 's/^# DaemonInterface/DaemonInterface = 127.0.0.1 '\
+    if [ "$2" = "personal" ]; then
+        # Set up screen/weechat/OTR/bitlbee. Make bitlbee listen only locally.
+        apt-get -y install screen weechat-plugins python-potr bitlbee
+        sed -i 's/^# DaemonInterface/DaemonInterface = 127.0.0.1 '\
 '# DaemonInterface/' /etc/bitlbee/bitlbee.conf
-    sedtest=`grep -E '^DaemonInterface = 127.0.0.1 #' \
-        /etc/bitlbee/bitlbee.conf | wc -l | cut -d ' ' -f 1`
-    if [ 0 -eq $sedtest ]; then
-        false
-    fi
-    cp config/systemfiles/weechat.service  /etc/systemd/system/weechat.service
-    systemctl enable /etc/systemd/system/weechat.service
+        sedtest=`grep -E '^DaemonInterface = 127.0.0.1 #' \
+            /etc/bitlbee/bitlbee.conf | wc -l | cut -d ' ' -f 1`
+        if [ 0 -eq $sedtest ]; then
+            false
+        fi
+        cp config/systemfiles/weechat.service \
+            /etc/systemd/system/weechat.service
+        systemctl enable /etc/systemd/system/weechat.service
 
-    # Send instructions mail.
-    config/bin/simplemail.sh config/mails/server_postinstall_finished
+        # Send instructions mail.
+        config/bin/simplemail.sh config/mails/server_postinstall_finished
+    fi
 
 elif [ "$1" = "thinkpad" ]; then
     # Set up networking (wifi!).
