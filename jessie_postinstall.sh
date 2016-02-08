@@ -182,7 +182,7 @@ if [ "$1" = "server" ]; then
     su plom -c 'mkdir -p /home/plom/mail/inbox/{cur,new,tmp}'
     su plom -c 'mkdir -p /home/plom/mail/new_inbox/{cur,new,tmp}'
     sed -i 's/^delete = true$/delete = false/g' \
-        /home/plom/config/dotfiles/user/server/getmail/getmailrc
+        /home/plom/config/dotfiles/user/server/personal/minimal/getmail/getmailrc
     DEBIAN_FRONTEND=noninteractive apt-get -y install getmail4 procmail mutt \
         postfix maildrop
     cp config/systemfiles/main.cf /etc/postfix/main.cf

@@ -8,11 +8,11 @@ dir_user_prefix=~/config/dotfiles/user
 dir_user_minimal=$dir_user_prefix/minimal
 dir_user_machine=$dir_user_prefix/$1/minimal
 if [ "$3" = "" ]; then
-    dir_user_variety=$dir_user_machine/$2
+    dir_user_variety=$dir_user_prefix/$1/$2
 else
-    dir_user_variety=$dir_user_machine/$2/minimal
+    dir_user_variety=$dir_user_prefix/$1/$2/minimal
 fi
-dir_user_subvariety=$dir_user_variety/$3
+dir_user_subvariety=$dir_user_prefix/$1/$2/$3
 dir_root=~/config/dotfiles/root
 homedir=`echo ~`
 find ~ -lname $homedir'/config/*' -delete
