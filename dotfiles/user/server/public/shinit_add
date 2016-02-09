@@ -1,0 +1,4 @@
+# Server-specific .shinit additions. 
+
+# Golang dev environment
+export GOPATH=~/gopath

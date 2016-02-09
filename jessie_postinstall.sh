@@ -85,7 +85,7 @@ echo 'deb http://security.debian.org/ jessie/updates main contrib non-free' \
     >> /etc/apt/sources.list
 echo 'deb http://ftp.debian.org/debian/ jessie-updates main contrib non-free' \
     >> /etc/apt/sources.list
-if [ "$1" = "thinkpad" ]; then
+if [ "$1" = "thinkpad" || "$2" = "public" ]; then
     echo 'deb http://ftp.debian.org/debian/ jessie-backports main contrib' \
 ' non-free' >> /etc/apt/sources.list
     echo 'deb http://ftp.debian.org/debian/ testing main contrib non-free' \
@@ -214,6 +214,14 @@ if [ "$1" = "server" ]; then
 
         # Send instructions mail.
         config/bin/simplemail.sh config/mails/server_postinstall_finished
+
+    elif [ "$2" = "public" ]; then
+        # Set up twtxt environment.
+        apt-get -y -t jessie-backports install golang
+        su plom -c 'git clone '\
+            'https://github.com/plomlompom/htwtxt $GOPATH/src/htwtxt'
+        su plom -c 'go get htwtxt'
+        su plom -c 'mkdir ~/htwtxt'
     fi
 
 elif [ "$1" = "thinkpad" ]; then
