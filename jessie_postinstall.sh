@@ -85,7 +85,7 @@ echo 'deb http://security.debian.org/ jessie/updates main contrib non-free' \
     >> /etc/apt/sources.list
 echo 'deb http://ftp.debian.org/debian/ jessie-updates main contrib non-free' \
     >> /etc/apt/sources.list
-if [ "$1" = "thinkpad" || "$2" = "public" ]; then
+if [ "$1" = "thinkpad" ] || [ "$2" = "public" ]; then
     echo 'deb http://ftp.debian.org/debian/ jessie-backports main contrib' \
 ' non-free' >> /etc/apt/sources.list
     echo 'deb http://ftp.debian.org/debian/ testing main contrib non-free' \
