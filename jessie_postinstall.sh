@@ -97,7 +97,9 @@ if [ "$1" = "thinkpad" ] || [ "$2" = "public" ]; then
     echo 'APT::Default-Release "stable";' \
         >> /etc/apt/apt.conf.d/99defaultrelease
 fi
-dhclient eth0
+if [ "$1" = "thinkpad" ]; then
+    dhclient eth0
+fi
 apt-get update
 apt-get -y dist-upgrade
 
