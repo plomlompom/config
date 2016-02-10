@@ -221,6 +221,8 @@ if [ "$1" = "server" ]; then
         su - plom -c 'git clone '\
 'https://github.com/plomlompom/htwtxt $GOPATH/src/htwtxt'
         su - plom -c 'go get htwtxt'
+        path=`su - plom -c 'echo $GOPATH/bin/htwtxt'`
+        setcap 'cap_net_bind_service=+ep' $path
         su - plom -c 'mkdir ~/htwtxt'
     fi
 
