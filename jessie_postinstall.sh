@@ -219,6 +219,7 @@ if [ "$1" = "server" ]; then
 
     elif [ "$2" = "public" ]; then
         # Set up twtxt environment.
+        apt-get -y install screen
         apt-get -y -t jessie-backports install golang
         su - plom -c 'git clone '\
 'https://github.com/plomlompom/htwtxt $GOPATH/src/htwtxt'
