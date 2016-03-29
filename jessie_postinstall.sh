@@ -226,7 +226,7 @@ if [ "$1" = "server" ]; then
         su - plom -c 'go get htwtxt'
         path=`su - plom -c 'echo $GOPATH/bin/htwtxt'`
         setcap 'cap_net_bind_service=+ep' $path
-        su - plom -c 'mkdir ~/htwtxt'
+        su - plom -c 'mkdir -p ~/htwtxt'
     fi
 
 elif [ "$1" = "thinkpad" ]; then
