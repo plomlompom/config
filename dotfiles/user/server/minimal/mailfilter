@@ -1,6 +1,13 @@
 DEFAULT="$HOME/mail/new_inbox/"
 logfile "$HOME/.mailfilter.log"
 
+if ( /^To: .*heller@talon\.one.*/:D || /^Subject: .*Talon*/:D )
+{
+    DIR="$HOME/mail/talonone/"
+    `mkdir -p $DIR/{cur,new,tmp}`
+    to $DIR
+}
+
 if ( /^Subject: Postfix SMTP server: errors from /:D && \
     /^From: Mail Delivery System <MAILER-DAEMON@plomlompom\.com>/:D && \
     /^To: Postmaster <postmaster@plomlompom\.com>/:D )

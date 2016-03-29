@@ -60,6 +60,10 @@ serverlogs/
 spam-suspect/
 
 :0
+* ^Subject: .*talon.*
+talonone/
+
+:0
 * ^From: Twitter 
 twitter/
 
