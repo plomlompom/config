@@ -218,6 +218,7 @@ if [ "$1" = "server" ]; then
         config/bin/simplemail.sh config/mails/server_postinstall_finished
 
     elif [ "$2" = "public" ]; then
+
         # Set up twtxt environment.
         apt-get -y install screen
         apt-get -y -t jessie-backports install golang
@@ -230,6 +231,14 @@ if [ "$1" = "server" ]; then
         cp config/systemfiles/htwtxt_restart_reminder.service \
             /etc/systemd/system/htwtxt_restart_reminder.service
         systemctl enable /etc/systemd/system/htwtxt_restart_reminder.service
+
+        # Set up plomlombot.
+        apt-get -y python3 python3-venv python3-pip
+        su - plom -c 'cd && git clone http://github.com/plomlompom/plomlombot-irc'
+        su - plom -c 'mkdir -p ~/plomlombot_db'
+        cp config/systemfiles/plomlombot.service \
+            /etc/systemd/system/plomlombot.service
+        systemctl enable /etc/systemd/system/plomlombot.service
     fi
 
 elif [ "$1" = "thinkpad" ]; then

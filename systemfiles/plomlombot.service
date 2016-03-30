@@ -1,0 +1,12 @@
+# /etc/systemd/system/weechat.service
+
+[Unit]
+Description=plomlombot screen
+
+[Service]
+Type=forking
+User=plom
+ExecStart=/bin/sh -c 'screen -d -m ~/plomlombot-irc/run.sh "#zrolaps"'
+
+[Install]
+WantedBy=multi-user.target
