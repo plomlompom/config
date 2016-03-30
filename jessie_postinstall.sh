@@ -233,7 +233,7 @@ if [ "$1" = "server" ]; then
         systemctl enable /etc/systemd/system/htwtxt_restart_reminder.service
 
         # Set up plomlombot.
-        apt-get -y python3 python3-venv python3-pip
+        apt-get -y install python3 python3-venv python3-pip
         su - plom -c 'cd && git clone http://github.com/plomlompom/plomlombot-irc'
         su - plom -c 'mkdir -p ~/plomlombot_db'
         cp config/systemfiles/plomlombot.service \
