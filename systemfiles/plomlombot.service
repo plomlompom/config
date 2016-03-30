@@ -1,4 +1,4 @@
-# /etc/systemd/system/weechat.service
+# /etc/systemd/system/plomlombot.service
 
 [Unit]
 Description=plomlombot screen
@@ -6,7 +6,7 @@ Description=plomlombot screen
 [Service]
 Type=forking
 User=plom
-ExecStart=/bin/sh -c 'screen -d -m ~/config/bin/plomlombot.sh'
+ExecStart=/bin/sh -c 'LC_ALL=en_US.UTF8 screen -d -m ~/config/bin/plomlombot.sh'
 
 [Install]
 WantedBy=multi-user.target
