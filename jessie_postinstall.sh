@@ -227,6 +227,9 @@ if [ "$1" = "server" ]; then
         path=`su - plom -c 'echo $GOPATH/bin/htwtxt'`
         setcap 'cap_net_bind_service=+ep' $path
         su - plom -c 'mkdir -p ~/htwtxt'
+        cp config/systemfiles/htwtxt_restart_reminder.service \
+            /etc/systemd/system/htwtxt_restart_reminder.service
+        systemctl enable /etc/systemd/system/htwtxt_restart_reminder.service
     fi
 
 elif [ "$1" = "thinkpad" ]; then

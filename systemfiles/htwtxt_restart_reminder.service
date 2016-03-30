@@ -1,0 +1,12 @@
+# /etc/systemd/system/weechat.service
+
+[Unit]
+Description=htwtxt restart reminder
+
+[Service]
+Type=forking
+User=plom
+ExecStart=/bin/sh -c '~/config/bin/simplemail_out.sh ~/config/mail/htwtxt_restart'
+
+[Install]
+WantedBy=multi-user.target

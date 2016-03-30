@@ -1,0 +1,5 @@
+[SYSADMIN] [HTWTXT] Restart reminder
+
+The virtual server hosting the htwtxt server was restarted, so the htwtxt server
+itself needs to be restarted too, via (in screen) its
+~/config/bin/start_htwtxt.sh.
