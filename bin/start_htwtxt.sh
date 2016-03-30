@@ -1,5 +1,5 @@
 #!/bin/sh
-htwtxt \
+$GOPATH/bin/htwtxt \
     --contact 'see http://www.plomlompom.de/' \
     --mailport 587 \
     --mailserver smtp.gmail.com \
