@@ -6,7 +6,7 @@ Description=htwtxt restart reminder
 [Service]
 Type=forking
 User=plom
-ExecStart=/bin/sh -c '~/config/bin/simplemail_out.sh ~/config/mail/htwtxt_restart'
+ExecStart=/bin/sh -c '~/config/bin/simplemail_out.sh ~/config/mails/htwtxt_restart'
 
 [Install]
 WantedBy=multi-user.target
