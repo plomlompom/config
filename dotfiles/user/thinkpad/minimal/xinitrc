@@ -13,5 +13,8 @@ redshift -rl 53:13 &
 # Enforce QWERTZ.
 setxkbmap de
 
+# Set up compose key.
+xmodmap ~/.Xmodmap
+
 # Launch window manager.
 i3

@@ -4,5 +4,5 @@ $GOPATH/bin/htwtxt \
     --mailport 587 \
     --mailserver smtp.gmail.com \
     --mailuser christian.heller@gmail.com \
-    --port 80 \
+    --port 8000 \
     --signup

@@ -219,18 +219,19 @@ if [ "$1" = "server" ]; then
 
     elif [ "$2" = "public" ]; then
 
-        # Set up twtxt environment.
-        apt-get -y install screen
+        # Set up htwtxt environment.
+        apt-get -y install screen nginx
         apt-get -y -t jessie-backports install golang
         su - plom -c 'git clone '\
 'https://github.com/plomlompom/htwtxt $GOPATH/src/htwtxt'
         su - plom -c 'go get htwtxt'
         path=`su - plom -c 'echo $GOPATH/bin/htwtxt'`
-        setcap 'cap_net_bind_service=+ep' $path
+        #setcap 'cap_net_bind_service=+ep' $path
         su - plom -c 'mkdir -p ~/htwtxt'
         cp config/systemfiles/htwtxt_restart_reminder.service \
             /etc/systemd/system/htwtxt_restart_reminder.service
         systemctl enable /etc/systemd/system/htwtxt_restart_reminder.service
+        cp config/systemfiles/nginx.conf /etc/nginx/nginx.conf
 
         # Set up plomlombot.
         apt-get -y install python3 python3-venv python3-pip
