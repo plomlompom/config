@@ -222,8 +222,7 @@ if [ "$1" = "server" ]; then
         # Set up htwtxt environment.
         apt-get -y install screen nginx
         apt-get -y -t jessie-backports install golang
-        su - plom -c 'git clone '\
-'https://github.com/plomlompom/htwtxt $GOPATH/src/htwtxt'
+        su - plom -c 'git clone https://github.com/plomlompom/htwtxt $GOPATH/src/htwtxt'
         su - plom -c 'go get htwtxt'
         path=`su - plom -c 'echo $GOPATH/bin/htwtxt'`
         #setcap 'cap_net_bind_service=+ep' $path
@@ -240,6 +239,8 @@ if [ "$1" = "server" ]; then
         cp config/systemfiles/plomlombot.service \
             /etc/systemd/system/plomlombot.service
         systemctl enable /etc/systemd/system/plomlombot.service
+        mkdir /var/www/irclogs_zrolaps/
+        touch /var/www/password_irclogs_zrolaps
     fi
 
 elif [ "$1" = "thinkpad" ]; then
