@@ -248,9 +248,9 @@ if [ "$1" = "server" ]; then
 
         # Set up plomlombot logging infrastructure.
         mkdir -p /var/www/html/irclogs/
-        ln -s /home/plom/plomlombot_db/6f322d574618816aa2d6d1ceb4fd2551/3c0248e76a1de3a6ee5bf3421f7379b0/logs/ /var/www/html/irclogs/zrolaps/
+        ln -s /home/plom/plomlombot_db/6f322d574618816aa2d6d1ceb4fd2551/3c0248e76a1de3a6ee5bf3421f7379b0/logs/ /var/www/html/irclogs/zrolaps
         touch /var/www/password_irclogs_zrolaps
-        ln -s /home/plom/plomlombot_db/6f322d574618816aa2d6d1ceb4fd2551/657eea42f86866f2954d39f92a6c71ff/logs/ /var/www/html/irclogs/nodrama.de/
+        ln -s /home/plom/plomlombot_db/6f322d574618816aa2d6d1ceb4fd2551/657eea42f86866f2954d39f92a6c71ff/logs/ /var/www/html/irclogs/nodrama.de
         touch /var/www/password_irclogs_nodrama_de
     fi
 
