@@ -219,8 +219,8 @@ if [ "$1" = "server" ]; then
 
     elif [ "$2" = "public" ]; then
 
-        # Set up htwtxt environment.
-        apt-get -y install screen nginx
+        # Set up htwtxt and environment.
+        apt-get -y install screen
         apt-get -y -t jessie-backports install golang
         su - plom -c 'git clone https://github.com/plomlompom/htwtxt $GOPATH/src/htwtxt'
         su - plom -c 'go get htwtxt'
@@ -230,7 +230,13 @@ if [ "$1" = "server" ]; then
         cp config/systemfiles/htwtxt_restart_reminder.service \
             /etc/systemd/system/htwtxt_restart_reminder.service
         systemctl enable /etc/systemd/system/htwtxt_restart_reminder.service
+
+        # Set up nginx and letsencrypt.
+        apt-get -y install nginx
         cp config/systemfiles/nginx.conf /etc/nginx/nginx.conf
+        cd ~
+        git clone https://github.com/letsencrypt/letsencrypt
+        echo '0 18 * * 0 ~/config/bin/renew_certs.sh' | crontab -
 
         # Set up plomlombot.
         apt-get -y install python3 python3-venv python3-pip
@@ -239,8 +245,13 @@ if [ "$1" = "server" ]; then
         cp config/systemfiles/plomlombot.service \
             /etc/systemd/system/plomlombot.service
         systemctl enable /etc/systemd/system/plomlombot.service
-        mkdir /var/www/irclogs_zrolaps/
+
+        # Set up plomlombot logging infrastructure.
+        mkdir -p /var/www/html/irclogs/
+        ln -s /home/plom/plomlombot_db/6f322d574618816aa2d6d1ceb4fd2551/3c0248e76a1de3a6ee5bf3421f7379b0/logs/ /var/www/html/irclogs/zrolaps/
         touch /var/www/password_irclogs_zrolaps
+        ln -s /home/plom/plomlombot_db/6f322d574618816aa2d6d1ceb4fd2551/657eea42f86866f2954d39f92a6c71ff/logs/ /var/www/html/irclogs/nodrama.de/
+        touch /var/www/password_irclogs_nodrama_de
     fi
 
 elif [ "$1" = "thinkpad" ]; then
@@ -299,4 +310,4 @@ passwd plom
 rm jessie_postinstall.sh
 
 # Finalize everything with a reboot.
-reboot
+echo 'You may reboot now with the "reboot" command unless there's more to do.'

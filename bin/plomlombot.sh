@@ -1,3 +1,3 @@
 #!/bin/sh
 cd ~/plomlombot-irc
-./run.sh "#zrolaps"
+./run.sh -r 604800 "#zrolaps"
