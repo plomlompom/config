@@ -310,4 +310,4 @@ passwd plom
 rm jessie_postinstall.sh
 
 # Finalize everything with a reboot.
-echo 'You may reboot now with the "reboot" command unless there's more to do.'
+echo "You may reboot now with the 'reboot' command unless there's more to do."
