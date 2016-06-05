@@ -6,7 +6,7 @@ Description=plomlombot screen
 [Service]
 Type=forking
 User=plom
-ExecStart=/bin/sh -c 'LC_ALL=en_US.UTF8 screen -d -m ~/config/bin/plomlombot.sh && screen -d -m ~/config/bin/broiler_in.sh'
+ExecStart=/bin/sh -c 'LC_ALL=en_US.UTF8 screen -d -m ~/config/bin/plomlombot.sh && screen -d -m ~/config/bin/broiler_in.sh && screen -d -m ~/config/bin/hubbabubba.sh'
 
 [Install]
 WantedBy=multi-user.target

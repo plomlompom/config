@@ -225,7 +225,6 @@ if [ "$1" = "server" ]; then
         su - plom -c 'git clone https://github.com/plomlompom/htwtxt $GOPATH/src/htwtxt'
         su - plom -c 'go get htwtxt'
         path=`su - plom -c 'echo $GOPATH/bin/htwtxt'`
-        #setcap 'cap_net_bind_service=+ep' $path
         su - plom -c 'mkdir -p ~/htwtxt'
         cp config/systemfiles/htwtxt_restart_reminder.service \
             /etc/systemd/system/htwtxt_restart_reminder.service
@@ -252,6 +251,21 @@ if [ "$1" = "server" ]; then
         touch /var/www/password_irclogs_zrolaps
         ln -s /home/plom/plomlombot_db/6f322d574618816aa2d6d1ceb4fd2551/657eea42f86866f2954d39f92a6c71ff/logs/ /var/www/html/irclogs/nodrama.de
         touch /var/www/password_irclogs_nodrama_de
+        ln -s /home/plom/plomlombot_db/6f322d574618816aa2d6d1ceb4fd2551/a083c5d5efca3734294fa656692990b6/logs/ /var/www/html/irclogs/freakazoid
+        touch /var/www/password_irclogs_freakazoid
+
+        # Set up other web-served directories.
+        su - plom -c 'mkdir -p /home/plom/dump'
+        ln -s /home/plom/dump/ /var/www/html/dump
+        su - plom -c 'mkdir -p /home/plom/geheim'
+        ln -s /home/plom/geheim/ /var/www/html/geheim
+        su - plom -c 'mkdir -p /home/plom/lifelog'
+        ln -s /home/plom/lifelog/ /var/www/html/lifelog
+        su - plom -c 'git init --bare /home/plom/lifelog.git'
+        su - plom -c 'touch /home/plom/lifelog.git/hooks/post-update'
+        su - plom -c 'chmod a+x /home/plom/lifelog.git/hooks/post-update'
+        su - plom -c 'echo "#!/bin/sh" > /home/plom/lifelog.git/hooks/post-update'
+        su - plom -c 'echo "GIT_WORK_TREE=/home/plom/lifelog git checkout -f" >> /home/plom/lifelog.git/hooks/post-update'
     fi
 
 elif [ "$1" = "thinkpad" ]; then
