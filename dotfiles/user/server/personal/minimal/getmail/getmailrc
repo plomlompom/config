@@ -14,4 +14,4 @@ arguments = ("-m", "/home/plom/.procmailrc")
 
 # Delete retrieved mail from server.
 [options]
-delete = true
+delete = false

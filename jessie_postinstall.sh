@@ -259,6 +259,8 @@ if [ "$1" = "server" ]; then
         ln -s /home/plom/dump/ /var/www/html/dump
         su - plom -c 'mkdir -p /home/plom/geheim'
         ln -s /home/plom/geheim/ /var/www/html/geheim
+        su - plom -c 'mkdir -p /home/plom/lesekreis'
+        ln -s /home/plom/geheim/ /var/www/html/lesekreis
         su - plom -c 'mkdir -p /home/plom/lifelog'
         ln -s /home/plom/lifelog/ /var/www/html/lifelog
         su - plom -c 'git init --bare /home/plom/lifelog.git'
