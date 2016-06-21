@@ -264,10 +264,9 @@ if [ "$1" = "server" ]; then
         su - plom -c 'mkdir -p /home/plom/lifelog'
         ln -s /home/plom/lifelog/ /var/www/html/lifelog
         su - plom -c 'git init --bare /home/plom/lifelog.git'
-        su - plom -c 'touch /home/plom/lifelog.git/hooks/post-update'
+        su - plom -c 'cp ~/config/systemfiles/post-update ~/lifelog.git/hooks/'
         su - plom -c 'chmod a+x /home/plom/lifelog.git/hooks/post-update'
-        su - plom -c 'echo "#!/bin/sh" > /home/plom/lifelog.git/hooks/post-update'
-        su - plom -c 'echo "GIT_WORK_TREE=/home/plom/lifelog git checkout -f" >> /home/plom/lifelog.git/hooks/post-update'
+        apt-get -y isntall python3-docutils
     fi
 
 elif [ "$1" = "thinkpad" ]; then
