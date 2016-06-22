@@ -1,0 +1,4 @@
+#!/bin/sh
+LIFELOGDIR=/home/plom/lifelog
+GIT_WORK_TREE=$LIFELOGDIR git checkout -f
+find $LIFELOGDIR -name "*.rst" -exec sh -c 'rst2html $0 > ${0%.rst}.html' {} \;
