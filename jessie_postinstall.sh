@@ -266,7 +266,7 @@ if [ "$1" = "server" ]; then
         su - plom -c 'git init --bare /home/plom/lifelog.git'
         su - plom -c 'cp ~/config/systemfiles/post-update ~/lifelog.git/hooks/'
         su - plom -c 'chmod a+x /home/plom/lifelog.git/hooks/post-update'
-        apt-get -y isntall python3-docutils
+        apt-get -y install pandoc
     fi
 
 elif [ "$1" = "thinkpad" ]; then
