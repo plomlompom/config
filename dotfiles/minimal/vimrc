@@ -10,8 +10,8 @@ set binary
 
 " Indentation rules (tabs to 4 spaces).
 set expandtab
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 
 " Backups.
 set backup
