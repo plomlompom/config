@@ -1,5 +1,5 @@
 #!/bin/sh
-LIFELOGDIR=/home/plom/lifelog
-GIT_WORK_TREE=$LIFELOGDIR git checkout -f
-cd $LIFELOGDIR
+ZETTELDIR=/home/plom/zettel
+GIT_WORK_TREE=$ZETTELDIR git checkout -f
+cd $ZETTELDIR
 redo
