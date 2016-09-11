@@ -1,4 +1,5 @@
 #!/bin/sh
 LIFELOGDIR=/home/plom/lifelog
 GIT_WORK_TREE=$LIFELOGDIR git checkout -f
-find $LIFELOGDIR -name "*.rst" -type f -exec sh -c 'pandoc -s -f rst --mathml -t html5 $0 > ${0%.rst}.html' {} \;
+cd $LIFELOGDIR
+redo

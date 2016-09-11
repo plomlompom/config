@@ -192,7 +192,7 @@ if [ "$1" = "server" ]; then
     newaliases
     service postfix restart
     if [ "$2" = "personal" ]; then
-    apt-get -y install getmail4 procmail
+        apt-get -y install getmail4 procmail
     fi
 
     # Set up regular system update reminder.
@@ -266,7 +266,13 @@ if [ "$1" = "server" ]; then
         su - plom -c 'git init --bare /home/plom/lifelog.git'
         su - plom -c 'cp ~/config/systemfiles/post-update ~/lifelog.git/hooks/'
         su - plom -c 'chmod a+x /home/plom/lifelog.git/hooks/post-update'
-        apt-get -y install pandoc
+
+        # Install website generator tools
+        apt-get -y install pandoc wget
+        wget http://news.dieweltistgarnichtso.net/bin/archives/redo-sh.tar.gz
+        tar -oxzf redo-sh.tar.gz -C /usr/local
+        rm redo-sh.tar.gz
+        apt-get --purge autoremove wget
     fi
 
 elif [ "$1" = "thinkpad" ]; then
