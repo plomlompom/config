@@ -261,11 +261,11 @@ if [ "$1" = "server" ]; then
         ln -s /home/plom/geheim/ /var/www/html/geheim
         su - plom -c 'mkdir -p /home/plom/lesekreis'
         ln -s /home/plom/geheim/ /var/www/html/lesekreis
-        su - plom -c 'mkdir -p /home/plom/lifelog'
-        ln -s /home/plom/lifelog/ /var/www/html/lifelog
-        su - plom -c 'git init --bare /home/plom/lifelog.git'
-        su - plom -c 'cp ~/config/systemfiles/post-update ~/lifelog.git/hooks/'
-        su - plom -c 'chmod a+x /home/plom/lifelog.git/hooks/post-update'
+        su - plom -c 'mkdir -p /home/plom/zettel'
+        ln -s /home/plom/zettel/ /var/www/html/zettel
+        su - plom -c 'git init --bare /home/plom/zettel.git'
+        su - plom -c 'cp ~/config/systemfiles/post-update ~/zettel.git/hooks/'
+        su - plom -c 'chmod a+x /home/plom/zettel.git/hooks/post-update'
 
         # Install website generator tools
         apt-get -y install pandoc wget
