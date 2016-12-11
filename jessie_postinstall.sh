@@ -28,7 +28,7 @@ elif [ "$3" = "test.plomlompom.com" ]; then
 elif [ "$2" = "public" ]; then
     hostname="htwtxt.plomlompom"
 elif [ "$2" = "X200s" ]; then
-    hostname="X220s"
+    hostname="X200s"
 elif [ "$2" = "T450s" ]; then
     hostname="T450s"
 fi
