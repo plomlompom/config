@@ -118,6 +118,10 @@ if [ "$1" = "thinkpad" ]; then
 '#START_CHARGE_THRESH_BAT0/' /etc/default/tlp
     sed -i 's/^#STOP_CHARGE_THRESH_BAT0/STOP_CHARGE_THRESH_BAT0=95 '\
 '#STOP_CHARGE_THRESH_BAT0/' /etc/default/tlp
+    sed -i 's/^#START_CHARGE_THRESH_BAT1/START_CHARGE_THRESH_BAT0=10 '\
+'#START_CHARGE_THRESH_BAT1/' /etc/default/tlp
+    sed -i 's/^#STOP_CHARGE_THRESH_BAT1/STOP_CHARGE_THRESH_BAT0=95 '\
+'#STOP_CHARGE_THRESH_BAT1/' /etc/default/tlp
     sed -i 's/^#DEVICES_TO_DISABLE_ON_STARTUP/DEVICES_TO_DISABLE_ON_STARTUP='\
 '"bluetooth wifi wwan" #DEVICES_TO_DISABLE_ON_STARTUP/' /etc/default/tlp
     tlp start
