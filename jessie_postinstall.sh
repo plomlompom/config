@@ -315,7 +315,7 @@ elif [ "$1" = "thinkpad" ]; then
     apt-get -y install x11-xserver-utils
 
     # Set up pentadactyl. 
-    apt-get -y install iceweasel
+    apt-get -y install iceweasel xul-ext-noscript
     apt-get -y -t jessie-backports install xul-ext-pentadactyl
     apt-get -y install vim-gtk
     su plom -c 'mkdir -p /home/plom/downloads/'
