@@ -21,3 +21,34 @@ n_updates=$(printf "$status" | grep -vE '^\?\?' | wc -l)
 if [ "$n_updates" -gt 0 ]; then
   git commit -a -m 'Update metadata'
 fi
+
+
+furthermore, the url_catcher virtualenv run.sh script needs this (to compile uwsgi):
+
+apt-get install python3.4-dev
+
+
+also, these:
+
+# /etc/systemd/system/url_catcher.service
+
+[Unit]
+Description=URL catcher
+
+[Service]
+Type=forking
+User=plom
+ExecStart=/bin/sh -c 'LC_ALL=en_US.UTF8 screen -d -m ~/url_catcher.sh'
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+and url_catcher.sh:
+
+#!/bin/sh
+
+cd ~
+cd url-catcher
+./run.sh
