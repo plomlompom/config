@@ -1,0 +1,54 @@
+some stuff I need to incorporate later on:
+
+the blog post-update git hook:
+
+
+
+#!/bin/sh
+blog_dir=~/blog
+export GIT_DIR=$(pwd)
+export GIT_WORK_TREE="$blog_dir"
+git checkout -f
+cd "$GIT_WORK_TREE"
+redo
+git add metadata/author metadata/url metadata/title metadata/*.tmpl metadata/automatic_metadata captchas/linkable/*
+count=$(ls -1 metadata/*.automatic_metadata 2>/dev/null | wc -l)
+if [ "$count" != 0 ]; then
+  git add metadata/*.automatic_metadata
+fi
+status=$(git status -s)
+n_updates=$(printf "$status" | grep -vE '^\?\?' | wc -l)
+if [ "$n_updates" -gt 0 ]; then
+  git commit -a -m 'Update metadata'
+fi
+
+
+furthermore, the url_catcher virtualenv run.sh script needs this (to compile uwsgi):
+
+apt-get install python3.4-dev
+
+
+also, these:
+
+# /etc/systemd/system/url_catcher.service
+
+[Unit]
+Description=URL catcher
+
+[Service]
+Type=forking
+User=plom
+ExecStart=/bin/sh -c 'LC_ALL=en_US.UTF8 screen -d -m ~/url_catcher.sh'
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+and url_catcher.sh:
+
+#!/bin/sh
+
+cd ~
+cd url-catcher
+./run.sh
