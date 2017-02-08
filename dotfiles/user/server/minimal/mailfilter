@@ -16,3 +16,10 @@ if ( /^Subject: Postfix SMTP server: errors from /:D && \
     `mkdir -p $DIR/{cur,new,tmp}`
     to $DIR
 }
+
+if ( /^From: \"Nebenan\.de\" \<noreply@nebenan\.de\>/:D )
+{
+    DIR="$HOME/mail/nebenan_de/"
+    `mkdir -p $DIR/{cur,new,tmp}`
+    to $DIR
+}
