@@ -1,0 +1,23 @@
+---
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+
+  - include: tasks/hostname.yml
+    vars:
+      hostname: w530 
+
+  - include: tasks/apt_init.yml
+
+  - include: tasks/console_init.yml
+
+  - include: tasks/timezone.yml
+    vars:
+       timezone: Europe/Berlin
+
+  - name: ensure boot messages are not cleand on start up
+    replace:
+      dest: /etc/systemd/system/getty.target.wants/getty@tty1.service
+      regexp: '^TTYVTDisallocate=yes.*$'
+      replace: 'TTYVDisallocate=no'

@@ -1,0 +1,10 @@
+---
+
+- name: set /etc/timezone
+  shell: echo '{{ timezone }}' > /etc/timezone
+
+- name: set /etc/localtime
+  file:
+    src: /usr/share/zoneinfo/{{ timezone }}
+    path: /etc/localtime
+    state: link

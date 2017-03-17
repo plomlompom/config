@@ -1,0 +1,29 @@
+---
+
+- name: collect officially required packages
+  shell: dpkg-query -Wf '${Package} ${Priority}\n' | grep ' required' | sed 's/ required//' > /tmp/list_white_unsorted
+
+- name: add "ifupdown" and "isc-dhcp-client" (to keep internet connection afterwards) and "ansible" (to keep its modules available for continuing the configuration) to required packages
+  shell: echo 'ifupdown' >> /tmp/list_white_unsorted && echo 'isc-dhcp-client' >> /tmp/list_white_unsorted && echo 'ansible' >> /tmp/list_white_unsorted && sort /tmp/list_white_unsorted > /tmp/list_white
+
+- name: collect currently installed packages
+  shell: dpkg-query -Wf '${Package}\n' > /tmp/list_all_packages && sort /tmp/list_all_packages > /tmp/foo && mv /tmp/foo /tmp/list_all_packages
+
+- name: create black list of packages to mark as automatically installed from the difference between the required packages and the packages currently installed
+  shell: comm -3 /tmp/list_all_packages /tmp/list_white > /tmp/list_black
+
+- name: mark all packages from black list as automatically installed
+  shell: apt-mark auto $(cat /tmp/list_black)
+
+- name: purge all packages automatically installed that are not depended on
+  shell: DEBIAN_FRONTEND=noninteractive apt-get -y --purge autoremove
+
+- name: ensure flags directory exists
+  file:
+    path: flags
+    state: directory
+
+- name: set initial_purge_happened flag, so that this whole process does not get repeated
+  file:
+    path: flags/initial_purge_happened
+    state: touch
