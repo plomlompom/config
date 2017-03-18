@@ -19,11 +19,7 @@
   shell: DEBIAN_FRONTEND=noninteractive apt-get -y --purge autoremove
 
 - name: ensure flags directory exists
-  file:
-    path: flags
-    state: directory
+  file: path=flags state=directory
 
 - name: set initial_purge_happened flag, so that this whole process does not get repeated
-  file:
-    path: flags/initial_purge_happened
-    state: touch
+  file: path=flags/initial_purge_happened state=touch

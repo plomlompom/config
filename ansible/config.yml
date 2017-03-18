@@ -4,20 +4,76 @@
   become: yes
   tasks:
 
-  - include: tasks/hostname.yml
-    vars:
-      hostname: w530 
+  # Set hostname.
+  - name: symlink hostname file 
+    file: state=link force=yes src=/root/config/ansible/files/_etc_hostname dest=/etc/hostname   
+  - name: symlink hosts file 
+    file: state=link force=yes src=/root/config/ansible/files/_etc_hosts dest=/etc/hosts
+  - name: set hostname for current session
+    shell: hostname w530
 
-  - include: tasks/apt_init.yml
+  # Configure package management.
+  - name: symlink APT sources file
+    file: state=link force=yes src=/root/config/ansible/files/_etc_apt_sources.list dest=/etc/apt/sources.list
+  - name: update package lists
+    apt: update_cache=yes
+  - name: symlink APT config file
+    file: state=link force=yes src=/root/config/ansible/files/_etc_apt_apt.conf.d_99mindeps dest=/etc/apt/apt.conf.d/99mindeps
+  - name: check for initial_purge_happened flag
+    stat: path=flags/initial_purge_happened
+    register: initial_purge
+  - name: perform initial purge
+    include: tasks/initial_purge.yml
+    when: initial_purge.stat.exists == False
+  - name: APT - dist-upgrade
+    apt: upgrade=dist
 
-  - include: tasks/console_init.yml
+  # Configure console.
+  - name: symlink terminal config file
+    file: state=link force=yes src=/root/config/ansible/files/_etc_default_console-setup dest=/etc/default/console-setup
+  - name: symlink keyboard config file
+    file: state=link force=yes src=/root/config/ansible/files/_etc_default_keyboard dest=/etc/default/keyboard
+  - name: ensure locales is installed
+    apt: name=locales state=present
+  - name: ensure setupcon is installed
+    apt: name=console-setup state=present
+  - name: generate en_US.UTF-8 locale
+    locale_gen: name=en_US.UTF-8 state=present
+  - name: symlink /etc/profile (with locale export) 
+    file: state=link force=yes src=/root/config/ansible/files/_etc_profile dest=/etc/profile
+  - name: run setupcon to apply console settings from /etc/default/
+    command: setupcon
+  - name: ensure boot messages are not cleared on start up
+    replace: dest=/etc/systemd/system/getty.target.wants/getty@tty1.service regexp='^TTYVTDisallocate=yes.*$' replace='TTYVDisallocate=no'
 
-  - include: tasks/timezone.yml
-    vars:
-       timezone: Europe/Berlin
+  # Configure timezone.
+  - name: symlink timezone file
+    file: state=link force=yes src=/root/config/ansible/files/_etc_timezone dest=/etc/timezone
+  - name: set /etc/localtime
+    file: state=link force=yes src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
 
-  - name: ensure boot messages are not cleand on start up
-    replace:
-      dest: /etc/systemd/system/getty.target.wants/getty@tty1.service
-      regexp: '^TTYVTDisallocate=yes.*$'
-      replace: 'TTYVDisallocate=no'
+  # Set up editor
+  - name: set ~/.vimrc
+    file: state=link force=yes src=/root/config/ansible/dotfiles/vimrc dest=~/.vimrc
+  - name: set ~/.vimrc_add
+    file: state=link force=yes src=/root/config/ansible/dotfiles/vimrc_add dest=~/.vimrc_add
+  - name: ensure ~/.vimbackups directory
+    file: path=~/.vimbackups state=directory
+  - name: ensure vim is installed
+    apt: name=vim state=present
+
+  # Configure shell.
+  - name: set ~/.bashrc
+    file: state=link force=yes src=/root/config/ansible/dotfiles/bashrc dest=~/.bashrc
+  - name: set ~/.profile
+    file: state=link force=yes src=/root/config/ansible/dotfiles/profile dest=~/.profile
+  - name: set ~/.shinit
+    file: state=link force=yes src=/root/config/ansible/dotfiles/shinit dest=~/.shinit
+  - name: set ~/.shinit_color
+    file: state=link force=yes src=/root/config/ansible/dotfiles/shinit_color dest=~/.shinit_color
+
+  # Set up git.
+  - name: set ~/.gitconfig
+    file: state=link force=yes src=/root/config/ansible/dotfiles/gitconfig dest=~/.gitconfig
+  - name: ensure git is installed
+    apt: name=git state=present

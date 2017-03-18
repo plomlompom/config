@@ -1,0 +1,6 @@
+# Initialization for login shells.
+
+# Tell interactive shells to look in ~/.shinit for setup.
+ENV=$HOME/.shinit
+export ENV
+. $ENV

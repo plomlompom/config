@@ -1,0 +1,30 @@
+" Activate syntax highlighting.
+syntax on
+filetype plugin on
+
+" Number lines.
+set number
+
+" Don't add unsolicited final newline.
+set binary
+
+" Indentation rules (tabs to 4 spaces).
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
+" Backups.
+set backup
+set backupdir=~/.vimbackups
+let myvar = strftime("%Y-%m-%d_%H-%M-%S")
+let myvar = "set backupext=_". myvar
+execute myvar
+
+" Keep syntax highlighting healthy.
+autocmd BufEnter * :syntax sync fromstart
+
+" Mark the 80-th column.
+set colorcolumn=80
+
+" Source additions
+source ~/.vimrc_add
