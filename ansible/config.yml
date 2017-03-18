@@ -37,9 +37,12 @@
     command: setupcon
 
   # Miscellaneous.
-  - name: Ensure dotfile symlinks
+  - name: Ensure minimal dotfile symlinks
     file: state=link force=yes src={{item}} dest=~/.{{item|basename}}
-    with_fileglob: ~/config/ansible/files/dotfiles/*
+    with_fileglob: ~/config/ansible/files/dotfiles/minimal/*
+  - name: Ensure root user dotfile symlinks
+    file: state=link force=yes src={{item}} dest=~/.{{item|basename}}
+    with_fileglob: ~/config/ansible/files/dotfiles/root/*
   - name: ensure ~/.vimbackups directory
     file: state=directory dest=~/.vimbackups
   - name: ensure man-db, manpages is installed
@@ -49,13 +52,22 @@
     - manpages
   - name: set /etc/localtime
     file: state=link force=yes src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
-  - name: ensure git, vim, less are installed
+  - name: ensure sudo, git, vim, less are installed
     apt: name={{item}} state=present
     with_items:
     - git
     - vim
     - less
-  - name: create user plom
-    user: name=plom
+    - sudo
   - name: ensure boot messages are not cleared on start up
     replace: dest=/etc/systemd/system/getty.target.wants/getty@tty1.service regexp='^TTYVTDisallocate=yes.*$' replace='TTYVDisallocate=no'
+
+  # Config user.
+  - name: create user plom
+    user: name=plom
+  - name: have config repo in user directory
+    git: repo=git://github.com/plomlompom/config dest=/home/plom/config
+    become_user: plom
+    become_method: su
+  - name: ensure user has sudo privileges
+    command: adduser plom sudo
