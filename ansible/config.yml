@@ -6,7 +6,7 @@
 
   - name: symlink system files
     file: state=link force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
-    with_fileglob: ~/config/ansible/files/*
+    with_fileglob: ~/config/ansible/files/system/*
   - name: set hostname for current session
     shell: hostname w530
 
@@ -23,6 +23,9 @@
     apt: upgrade=dist
 
   # Configure console.
+  - name: symlink console config files
+    file: state=link force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
+    with_fileglob: ~/config/ansible/files/console/*
   - name: ensure locales and console-setup are installed
     apt: name={{item}} state=present
     with_items:
@@ -36,7 +39,9 @@
   # Miscellaneous.
   - name: Ensure dotfile symlinks
     file: state=link force=yes src={{item}} dest=~/.{{item|basename}}
-    with_fileglob: ~/config/ansible/dotfiles/*
+    with_fileglob: ~/config/ansible/files/dotfiles/*
+  - name: ensure ~/.vimbackups directory
+    file: state=directory dest=~/.vimbackups
   - name: ensure man-db, manpages is installed
     apt: name={{item}} state=present
     with_items:
