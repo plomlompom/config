@@ -51,13 +51,14 @@
     - manpages
   - name: set /etc/localtime
     file: state=link force=yes src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
-  - name: ensure sudo, git, vim, less are installed
+  - name: ensure sudo, git, vim, less, openssh are installed
     apt: name={{item}} state=present
     with_items:
     - git
     - vim
     - less
     - sudo
+    - openssh-client
   - name: ensure boot messages are not cleared on start up
     replace: dest=/etc/systemd/system/getty.target.wants/getty@tty1.service regexp='^TTYVTDisallocate=yes.*$' replace='TTYVDisallocate=no'
 
