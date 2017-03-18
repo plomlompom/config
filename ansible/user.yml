@@ -5,7 +5,6 @@
     file: state=directory dest=~/.vimbackups
   - name: Ensure dotfile symlinks
     file: state=link force=yes src={{item}} dest=~/.{{item|basename}}
-    with_fileglob: ~/config/ansible/files/dotfiles/minimal/*
-  - name: Ensure user dotfile symlinks
-    file: state=link force=yes src={{item}} dest=~/.{{item|basename}}
-    with_fileglob: ~/config/ansible/files/dotfiles/user/*
+    - ~/configdotfiles/minimal/*
+    - ~/configdotfiles/user/minimal/*
+    - ~/configdotfiles/user/thinkpad/minimal/*

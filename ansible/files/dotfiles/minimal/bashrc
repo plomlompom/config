@@ -1,5 +1,0 @@
-# Bash as a non-login shell in non-POSIX-mode does not read in the startup
-# script at the path in $ENV. This forces it to still read in the ~/.shinit
-# startup script for non-login shells.
-
-. ~/.shinit
