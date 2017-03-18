@@ -65,6 +65,6 @@
   - name: create user plom with sudo privileges and bash shell
     user: name=plom groups=sudo shell=/bin/bash
   - name: have config repo in user directory
-    git: repo=git://github.com/plomlompom/config dest=/home/plom/config
+    git: repo=https://github.com/plomlompom/config dest=/home/plom/config
     become_user: plom
     become_method: su
