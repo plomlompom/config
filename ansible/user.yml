@@ -8,3 +8,4 @@
     with_fileglob:
     - ~/config/dotfiles/minimal/*
     - ~/config/dotfiles/user/thinkpad/minimal/*
+    - ~/config/dotfiles/user/thinkpad/T450s/*
