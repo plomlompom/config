@@ -17,4 +17,4 @@ setxkbmap de
 xmodmap ~/.Xmodmap
 
 # Launch window manager.
-i3
+i3 -c ~/.i3
