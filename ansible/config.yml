@@ -5,7 +5,7 @@
   tasks:
 
   - name: symlink system files
-    file: state=link force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
+    file: state=hard force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
     with_fileglob: ~/config/ansible/files/system/*
   - name: set hostname for current session
     shell: hostname w530
@@ -69,3 +69,19 @@
     git: repo=https://github.com/plomlompom/config dest=/home/plom/config
     become_user: plom
     become_method: su
+
+  # Ensure minimal X window environment.
+  - name: ensure minimal X window environment
+    apt: name={{item}} state=present
+    with_items:
+    - xserver-xorg
+    - xinit
+    - libpam-systemd # needed to start X as non-root
+  - name: ensure basic X tools
+    apt: name={{item}} state=present
+    with_items:
+    - xterm
+    - redshift 
+    - i3
+    - i3status
+    - dmenu
