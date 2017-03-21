@@ -60,7 +60,7 @@
     - sudo
     - openssh-client
   - name: ensure boot messages are not cleared on start up
-    replace: dest=/etc/systemd/system/getty.target.wants/getty@tty1.service regexp='^TTYVTDisallocate=yes.*$' replace='TTYVDisallocate=no'
+    replace: dest=/etc/systemd/system/getty.target.wants/getty@tty1.service regexp='^TTYVTDisallocate=yes.*$' replace='TTYVTDisallocate=no'
 
   # Config user.
   - name: create user plom with sudo privileges and bash shell
