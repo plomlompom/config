@@ -9,3 +9,5 @@
     - ~/config/dotfiles/minimal/*
     - ~/config/dotfiles/user/thinkpad/minimal/*
     - ~/config/dotfiles/user/thinkpad/W530/*
+  - name: ensure ~/downloads directory
+    file: state=directory dest=~/downloads

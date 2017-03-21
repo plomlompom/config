@@ -70,18 +70,27 @@
     become_user: plom
     become_method: su
 
-  # Ensure minimal X window environment.
+  # Ensure X window environment.
   - name: ensure minimal X window environment
     apt: name={{item}} state=present
     with_items:
     - xserver-xorg
-    - xinit
-    - libpam-systemd # needed to start X as non-root
+    - xinit  # contains startx
+    - libpam-systemd  # needed to start X as non-root
   - name: ensure basic X tools
     apt: name={{item}} state=present
     with_items:
+    - x11-xserver-utils  # includes xrdb which applies .Xresources files
     - xterm
     - redshift 
     - i3
     - i3status
     - dmenu
+
+  # Set up pentadactyl.
+  - name: ensure browser environment
+    apt: name={{item}} state=present
+    - iceweasel
+    - xul-ext-noscript
+    - xul-ext-pentadactyl
+    - vim-gtk  # used by pentadactyl for text editing
