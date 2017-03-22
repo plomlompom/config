@@ -74,14 +74,15 @@
   - name: ensure minimal X window environment
     apt: name={{item}} state=present
     with_items:
-    - xserver-xorg
+    - xserver-xorg-core
+    - xserver-xorg-input-evdev  # supports lal input devices the kernel knows about
     - xinit  # contains startx
     - libpam-systemd  # needed to start X as non-root
   - name: ensure basic X tools
     apt: name={{item}} state=present
     with_items:
-    - x11-xserver-utils  # includes xrdb which applies .Xresources files
     - xterm
+    - x11-xserver-utils  # includes xrdb which applies .Xresources files
     - redshift 
     - i3
     - i3status
@@ -90,6 +91,7 @@
   # Set up pentadactyl.
   - name: ensure browser environment
     apt: name={{item}} state=present
+    with_items:
     - iceweasel
     - xul-ext-noscript
     - xul-ext-pentadactyl
