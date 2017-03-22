@@ -75,12 +75,13 @@
     apt: name={{item}} state=present
     with_items:
     - xserver-xorg-core
-    - xserver-xorg-input-evdev  # supports lal input devices the kernel knows about
+    - xserver-xorg-input-evdev  # supports all input devices the kernel knows about
     - xinit  # contains startx
     - libpam-systemd  # needed to start X as non-root
   - name: ensure basic X tools
     apt: name={{item}} state=present
     with_items:
+    - libgl1-mesa-dri  # necessary for OpenGL 3D acceleration to work
     - xterm
     - x11-xserver-utils  # includes xrdb which applies .Xresources files
     - redshift 
