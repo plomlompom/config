@@ -22,6 +22,15 @@
   - name: APT - dist-upgrade
     apt: upgrade=dist
 
+  # Upgrade kernel.
+  - name: ensure newest kernel and grub are installed
+    apt: name={{item}} state=present
+    with_items:
+    - linux-image-amd64
+    - grub2
+  - name: update grub
+    shell: update-grub
+
   # Configure console.
   - name: symlink console config files
     file: state=link force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
@@ -78,10 +87,13 @@
     - xserver-xorg-input-evdev  # supports all input devices the kernel knows about
     - xinit  # contains startx
     - libpam-systemd  # needed to start X as non-root
+  - name: ensure 3d acceleration and optimus switch
+    - libgl1-mesa-dri  # necessary for OpenGL 3D acceleration to work
+    - bumblebee-nvidia
+    - primus
   - name: ensure basic X tools
     apt: name={{item}} state=present
     with_items:
-    - libgl1-mesa-dri  # necessary for OpenGL 3D acceleration to work
     - xterm
     - x11-xserver-utils  # includes xrdb which applies .Xresources files
     - redshift 
