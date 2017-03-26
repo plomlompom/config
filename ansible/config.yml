@@ -88,7 +88,11 @@
     - xinit  # contains startx
     - libpam-systemd  # needed to start X as non-root
   - name: ensure 3d acceleration and optimus switch
+    apt: name={{item}} state=present
+    with_items:
+    - linux-headers-amd64  # necessary to build proper nvidia-driver module
     - libgl1-mesa-dri  # necessary for OpenGL 3D acceleration to work
+    - libglu1-mesa  # necessary for OpenGL 3D acceleration to work
     - bumblebee-nvidia
     - primus
   - name: ensure basic X tools
