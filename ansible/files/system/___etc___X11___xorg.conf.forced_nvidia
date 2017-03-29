@@ -1,0 +1,34 @@
+# This is the Optimus-specific configuration recommended by the "NVIDIA
+# Accelerated Linux Graphics Drivre README and Installation Guide", Chapter 32
+# "Offloading Graphics Display with RandR 1.4" 
+# (<http://us.download.nvidia.com/XFree86/Linux-x86/346.35/README/randr14.html>)
+# with the "AllowEmptyInitialConfigratuion" added as described by
+# <http://us.download.nvidia.com/XFree86/Linux-x86/346.35/README/randr14.html>.
+
+Section "ServerLayout"
+    Identifier "layout"
+    Screen 0 "nvidia"
+    Inactive "intel"
+EndSection
+
+Section "Device"
+    Identifier "nvidia"
+    Driver "nvidia"
+    BusID "PCI:01:00:0"
+    Option "AllowEmptyInitialConfiguration"
+EndSection
+
+Section "Screen"
+    Identifier "nvidia"
+    Device "nvidia"
+EndSection
+
+Section "Device"
+    Identifier "intel"
+    Driver "modesetting"
+EndSection
+
+Section "Screen"
+    Identifier "intel"
+    Device "intel"
+EndSection
