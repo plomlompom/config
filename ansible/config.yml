@@ -31,6 +31,15 @@
   - name: update grub
     shell: update-grub
 
+  # Ensure power management.
+  - name: ensure newest kernel and grub are installed
+    apt: name={{item}} state=present
+    with_items:
+    - tlp
+    - acpi-call-dkms
+  - name: start TLP
+    shell: tlp start
+
   # Configure console.
   - name: symlink console config files
     file: state=link force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
