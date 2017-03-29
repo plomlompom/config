@@ -16,5 +16,14 @@ setxkbmap de
 # Set up compose key.
 xmodmap ~/.Xmodmap
 
+# Optionally, for certain Optimus systems with a first GPU connected to the
+# display and a second (NVidia) GPU providing 3D acceleration, use the first GPU
+# as sink for the second. This may confuse DPI settings, so re-set those.
+if [ "${NVIDIA_DIRECT}" ]; then
+  xrandr --setprovideroutputsource modesetting NVIDIA-0
+  xrandr --auto
+  xrandr --dpi 96
+fi
+
 # Launch window manager.
 i3 -c ~/.i3
