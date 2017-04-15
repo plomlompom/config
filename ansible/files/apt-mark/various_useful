@@ -1,4 +1,4 @@
-alsamixer
+alsa-utils
 git
 less
 openssh-client
