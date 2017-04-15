@@ -4,6 +4,9 @@
   become: yes
   tasks:
 
+  - name: ensure directories for symlinks exist
+    file: state=directory dest={{item}}
+    with_lines: cat ~/config/ansible/files/dirs | sed -e 's/ *#.*$//'
   - name: symlink system files
     file: state=hard force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
     with_fileglob: ~/config/ansible/files/system/*
@@ -50,7 +53,7 @@
     with_lines: cat ~/config/ansible/files/apt-mark/man | sed -e 's/ *#.*$//'
   - name: set /etc/localtime
     file: state=link force=yes src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
-  - name: ensure various useful tools are installed – sudo, git, vim, less, openssh, alsamixer
+  - name: ensure various useful tools are installed – sudo, git, vim, less, openssh
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark/various_useful | sed -e 's/ *#.*$//'
   - name: ensure boot messages are not cleared on start up
