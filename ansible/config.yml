@@ -81,7 +81,7 @@
     with_lines: cat ~/config/ansible/files/apt-mark/browser_environment | sed -e 's/ *#.*$//'
 
   # Ensure wifi.
-  - name: ensure browser environment
+  - name: ensure wifi configuration
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark/wifi | sed -e 's/ *#.*$//'
 
