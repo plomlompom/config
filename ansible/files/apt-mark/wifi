@@ -1,0 +1,4 @@
+firmware-iwlwifi  # wifi driver
+wicd-cli  # thanks to my own wicd_wrapper.sh should be enough for most stuff
+wicd-curses  # although this currently is very buggy
+wicd-gtk  # workaround for when wicd-curses fails
