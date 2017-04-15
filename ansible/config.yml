@@ -16,15 +16,6 @@
   - name: APT - dist-upgrade
     apt: upgrade=dist
 
-  ## Upgrade kernel.
-  #- name: ensure newest kernel and grub are installed
-  #  apt: name={{item}} state=present
-  #  with_items:
-  #  - linux-image-amd64
-  #  - grub2
-  #- name: update grub
-  #  shell: update-grub
-
   # Ensure power management.
   - name: ensure power management tools are installed
     apt: name={{item}} state=present
@@ -94,11 +85,6 @@
     with_lines: cat ~/config/ansible/files/apt-mark/browser_environment | sed -e 's/ *#.*$//'
 
   # Remove undesired packages
-#  - name: register number of installed packages
-#    shell: dpkg-query -Wf 'x' | wc -c
-#    register: package_count
-#  
-#
   - name: collect desired packages
     shell: cat files/apt-mark/*  | sed -e 's/ *#.*$//' > /tmp/white_list_unsorted && sort /tmp/white_list_unsorted > /tmp/white_list_sorted
   - name: collect currently installed packages
