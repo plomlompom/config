@@ -1,4 +1,5 @@
 alsa-utils
+eject
 ffmpeg  # somehow this is needed to make youtube-dl grab 1080p versions of videos
 libdvd-pkg  # decss stuff
 mpv
