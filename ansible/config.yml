@@ -80,6 +80,11 @@
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark/browser_environment | sed -e 's/ *#.*$//'
 
+  # Ensure audio/video consumption necessities.
+  - name: ensure multimedia tools
+    apt: name={{item}} state=present
+    with_lines: cat ~/config/ansible/files/apt-mark/multimedia | sed -e 's/ *#.*$//'
+
   # Remove undesired packages
   - name: collect desired packages
     shell: cat files/apt-mark/*  | sed -e 's/ *#.*$//' > /tmp/white_list_unsorted && sort /tmp/white_list_unsorted > /tmp/white_list_sorted
