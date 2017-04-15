@@ -25,18 +25,20 @@
   # Upgrade kernel.
   - name: ensure newest kernel and grub are installed
     apt: name={{item}} state=present
-    with_items:
-    - linux-image-amd64
-    - grub2
+    with_lines: cat ~/config/ansible/files/apt-mark/newest_kernel | sed -e 's/ *#.*$//'
+    #with_items:
+    #- linux-image-amd64
+    #- grub2
   - name: update grub
     shell: update-grub
 
   # Ensure power management.
   - name: ensure power management tools are installed
     apt: name={{item}} state=present
-    with_items:
-    - tlp
-    - acpi-call-dkms
+    with_lines: cat ~/config/ansible/files/apt-mark/power_management | sed -e 's/ *#.*$//'
+    #with_items:
+    #- tlp
+    #- acpi-call-dkms
   - name: start TLP
     shell: tlp start
 
@@ -46,9 +48,10 @@
     with_fileglob: ~/config/ansible/files/console/*
   - name: ensure locales and console-setup are installed
     apt: name={{item}} state=present
-    with_items:
-    - locales
-    - console-setup
+    with_lines: cat ~/config/ansible/files/apt-mark/console | sed -e 's/ *#.*$//'
+    #with_items:
+    #- locales
+    #- console-setup
   - name: generate en_US.UTF-8 locale
     locale_gen: name=en_US.UTF-8 state=present
   - name: run setupcon to apply console settings from /etc/default/
@@ -64,19 +67,21 @@
     file: state=directory dest=~/.vimbackups
   - name: ensure man-db, manpages is installed
     apt: name={{item}} state=present
-    with_items:
-    - man-db
-    - manpages
+    with_lines: cat ~/config/ansible/files/apt-mark/man | sed -e 's/ *#.*$//'
+    #with_items:
+    #- man-db
+    #- manpages
   - name: set /etc/localtime
     file: state=link force=yes src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
   - name: ensure sudo, git, vim, less, openssh are installed
     apt: name={{item}} state=present
-    with_items:
-    - git
-    - vim
-    - less
-    - sudo
-    - openssh-client
+    with_lines: cat ~/config/ansible/files/apt-mark/sudo_git_vim_less_openssh | sed -e 's/ *#.*$//'
+    #with_items:
+    #- git
+    #- vim
+    #- less
+    #- sudo
+    #- openssh-client
   - name: ensure boot messages are not cleared on start up
     replace: dest=/etc/systemd/system/getty.target.wants/getty@tty1.service regexp='^TTYVTDisallocate=yes.*$' replace='TTYVTDisallocate=no'
 
@@ -91,46 +96,57 @@
   # Ensure X window environment.
   - name: ensure minimal X window environment
     apt: name={{item}} state=present
-    with_items:
-    - xserver-xorg-core
-    - xserver-xorg-input-evdev  # supports all input devices the kernel knows about
-    - xinit  # contains startx
-    - libpam-systemd  # needed to start X as non-root
+    with_lines: cat ~/config/ansible/files/apt-mark/minimal_x | sed -e 's/ *#.*$//'
+    #with_items:
+    #- xserver-xorg-core
+    #- xserver-xorg-input-evdev  # supports all input devices the kernel knows about
+    #- xinit  # contains startx
+    #- libpam-systemd  # needed to start X as non-root
   - name: ensure 3d acceleration and optimus switch
     apt: name={{item}} state=present
-    with_items:
-    - linux-headers-amd64  # necessary to build proper nvidia-driver module
-    - libgl1-mesa-dri  # necessary for OpenGL 3D acceleration to work
-    - libglu1-mesa  # necessary for OpenGL 3D acceleration to work
-    - bumblebee-nvidia
-    - primus
+    with_lines: cat ~/config/ansible/files/apt-mark/3d_acceleration | sed -e 's/ *#.*$//'
+    #with_items:
+    #- linux-headers-amd64  # necessary to build proper nvidia-driver module
+    #- libgl1-mesa-dri  # necessary for OpenGL 3D acceleration to work
+    #- libglu1-mesa  # necessary for OpenGL 3D acceleration to work
+    #- bumblebee-nvidia
+    #- primus
   - name: ensure basic X tools
     apt: name={{item}} state=present
-    with_items:
-    - xterm
-    - x11-xserver-utils  # includes xrdb which applies .Xresources files
-    - redshift 
-    - i3
-    - i3status
-    - dmenu
+    with_lines: cat ~/config/ansible/files/apt-mark/basic_x_tools | sed -e 's/ *#.*$//'
+    #with_items:
+    #- xterm
+    #- x11-xserver-utils  # includes xrdb which applies .Xresources files
+    #- redshift 
+    #- i3
+    #- i3status
+    #- suckless-tools 
 
   # Set up pentadactyl.
   - name: ensure browser environment
     apt: name={{item}} state=present
-    with_items:
-    - iceweasel
-    - xul-ext-noscript
-    - xul-ext-pentadactyl
-    - vim-gtk  # used by pentadactyl for text editing
+    with_lines: cat ~/config/ansible/files/apt-mark/browser_environment | sed -e 's/ *#.*$//'
+    #with_items:
+    #- iceweasel
+    #- xul-ext-noscript
+    #- xul-ext-pentadactyl
+    #- vim-gtk  # used by pentadactyl for text editing
 
   # Remove undesired packages
-  - name: collect required packages
-    shell: cat files/apt-mark/* > /tmp/white_list_unsorted && sort /tmp/white_list_unsorted > /tmp/white_list_sorted
+#  - name: register number of installed packages
+#    shell: dpkg-query -Wf 'x' | wc -c
+#    register: package_count
+#  
+#
+  - name: collect desired packages
+    shell: cat files/apt-mark/*  | sed -e 's/ *#.*$//' > /tmp/white_list_unsorted && sort /tmp/white_list_unsorted > /tmp/white_list_sorted
   - name: collect currently installed packages
     shell: dpkg-query -Wf '${Package}\n' > /tmp/all_unsorted && sort /tmp/all_unsorted > /tmp/all_sorted
   - name: create black list of packages to mark as automatically installed from the difference between the required packages and the packages currently installed
     shell: comm -3 /tmp/all_sorted /tmp/white_list_sorted > /tmp/list_black
   - name: mark all packages from black list as automatically installed
     shell: apt-mark auto $(cat /tmp/list_black)
+  - name: mark all packages from white list as manually installed
+    shell: apt-mark manual $(cat /tmp/white_list_unsorted)
   - name: purge all packages automatically installed that are not depended on
     shell: DEBIAN_FRONTEND=noninteractive apt-get -y --purge autoremove

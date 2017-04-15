@@ -1,0 +1,6 @@
+i3
+i3status
+redshift
+suckless-tools
+xterm
+x11-xserver-utils  # includes xrdb which applies .Xresources files

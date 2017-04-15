@@ -1,0 +1,5 @@
+bumblebee-nvidia
+libgl1-mesa-dri  # necessary for OpenGL 3D acceleration to work
+libglu1-mesa  # necessary for OpenGL 3D acceleration to work
+linux-headers-amd64  # necessary to build proper nvidia-driver module
+primus
