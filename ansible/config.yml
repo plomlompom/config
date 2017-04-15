@@ -20,22 +20,18 @@
   - name: ensure power management tools are installed
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark/power_management | sed -e 's/ *#.*$//'
-    #with_items:
-    #- tlp
-    #- acpi-call-dkms
   - name: start TLP
     shell: tlp start
 
   # Configure console.
+  #
+  # For some reason, some settings are only applied two reboots after this.
   - name: symlink console config files
     file: state=link force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
     with_fileglob: ~/config/ansible/files/console/*
   - name: ensure locales and console-setup are installed
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark/console | sed -e 's/ *#.*$//'
-    #with_items:
-    #- locales
-    #- console-setup
   - name: generate en_US.UTF-8 locale
     locale_gen: name=en_US.UTF-8 state=present
   - name: run setupcon to apply console settings from /etc/default/
@@ -49,14 +45,14 @@
     - ~/config/dotfiles/root/*
   - name: ensure ~/.vimbackups directory
     file: state=directory dest=~/.vimbackups
-  - name: ensure man-db, manpages is installed
+  - name: ensure man-db, manpages are installed
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark/man | sed -e 's/ *#.*$//'
   - name: set /etc/localtime
     file: state=link force=yes src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
-  - name: ensure sudo, git, vim, less, openssh are installed
+  - name: ensure various useful tools are installed: sudo, git, vim, less, openssh, alsamixer
     apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/sudo_git_vim_less_openssh | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/apt-mark/various_useful | sed -e 's/ *#.*$//'
   - name: ensure boot messages are not cleared on start up
     replace: dest=/etc/systemd/system/getty.target.wants/getty@tty1.service regexp='^TTYVTDisallocate=yes.*$' replace='TTYVTDisallocate=no'
 

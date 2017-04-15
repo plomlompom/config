@@ -1,3 +1,3 @@
 ansible
-ifupdown
-isc-dhcp-client
+ifupdown  # needed for internet connectivity
+isc-dhcp-client  # needed for internet connectivity

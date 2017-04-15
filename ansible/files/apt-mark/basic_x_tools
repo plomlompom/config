@@ -1,6 +1,6 @@
 i3
 i3status
 redshift
-suckless-tools
+suckless-tools  # contains dmenu; not using virtual packages as that won't be marked manually installed
 xterm
 x11-xserver-utils  # includes xrdb which applies .Xresources files
