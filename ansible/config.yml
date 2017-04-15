@@ -22,15 +22,15 @@
   - name: APT - dist-upgrade
     apt: upgrade=dist
 
-  # Upgrade kernel.
-  - name: ensure newest kernel and grub are installed
-    apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/newest_kernel | sed -e 's/ *#.*$//'
-    #with_items:
-    #- linux-image-amd64
-    #- grub2
-  - name: update grub
-    shell: update-grub
+  ## Upgrade kernel.
+  #- name: ensure newest kernel and grub are installed
+  #  apt: name={{item}} state=present
+  #  with_lines: cat ~/config/ansible/files/apt-mark/newest_kernel | sed -e 's/ *#.*$//'
+  #  #with_items:
+  #  #- linux-image-amd64
+  #  #- grub2
+  #- name: update grub
+  #  shell: update-grub
 
   # Ensure power management.
   - name: ensure power management tools are installed
