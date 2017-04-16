@@ -7,6 +7,12 @@ check_wifi_id_set() {
   fi
 }
 
+ensure_wifi_on() {
+  if [ ! "$(wifi)" = "wifi      = on" ]; then
+    sudo wifi on
+  fi
+}
+
 print_usage() {
   echo 'Available commands:'
   echo '  eth_connect'
@@ -29,6 +35,7 @@ elif [ "${1}" = 'eth_disconnect' ]; then
   wicd-cli --wired --disconnect
 
 elif [ "${1}" = 'wifi_scan' ]; then
+  ensure_wifi_on
   wicd-cli --wireless --scan
   wicd-cli --wireless --list-networks
 
@@ -46,6 +53,7 @@ elif [ "${1}" = 'wifi_set_wpa' ]; then
   wicd-cli --wireless --network="${2}" --network-property=key --set-to="${3}"
 
 elif [ "${1}" = 'wifi_connect' ]; then
+  ensure_wifi_on
   check_wifi_id_set "${2}"
   wicd-cli --wireless --network="${2}" --connect
 
