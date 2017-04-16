@@ -10,8 +10,8 @@ fi
 backlight_dir=/sys/class/backlight/intel_backlight
 max_brightness=$(cat "${backlight_dir}"/max_brightness)
 target="${backlight_dir}"/brightness
-fract=$(expr "${max_brightness}" / 100)
 if [ "${1}" = "+" -o "${1}" = "-" ]; then
+  fract=$(expr "${max_brightness}" / 20)
   cur_brightness=$(cat "${backlight_dir}"/brightness)
   brightness=$(expr "${cur_brightness}" "${1}" "${fract}")
   if [ "${brightness}" -gt "${max_brightness}" ]; then
@@ -26,6 +26,7 @@ percentage=${1}
 if [ "${percentage}" = '100' ]; then
   sudo sh -c 'echo '"${max_brightness}"' > '"${target}"
 else
+  fract=$(expr "${max_brightness}" / 100)
   brightness=$(expr "${percentage}" \* "${fract}")
   sudo sh -c 'echo '"${brightness}"' > '"${target}"
 fi
