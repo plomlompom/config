@@ -1,0 +1,2 @@
+event=button/f20
+action=amixer set Mic toggle

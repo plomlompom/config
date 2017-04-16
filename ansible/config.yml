@@ -93,6 +93,13 @@
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark/multimedia | sed -e 's/ *#.*$//'
 
+  # Ensure hotkeys.
+  #
+  # For some reason, the brightness hotkeys still won't be available unless acpid is restarted (yes, after reboot).
+  - name: ensure hotkeys 
+    apt: name={{item}} state=present
+    with_lines: cat ~/config/ansible/files/apt-mark/hotkeys | sed -e 's/ *#.*$//'
+
   # Remove undesired packages
   - name: collect desired packages
     shell: cat files/apt-mark/*  | sed -e 's/ *#.*$//' > /tmp/white_list_unsorted && sort /tmp/white_list_unsorted > /tmp/white_list_sorted
