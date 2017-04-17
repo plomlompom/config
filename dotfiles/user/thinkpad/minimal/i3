@@ -79,5 +79,5 @@ bindsym $mod+Shift+P          exit
 
 # Select "i3status" as i3 status bar.
 bar {
-        status_command            i3status
+  status_command i3status | ~/config/bin/i3status_wrapper.py
 }
