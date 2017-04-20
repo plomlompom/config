@@ -74,6 +74,8 @@
   - name: ensure 3d acceleration and optimus switch
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark/3d_acceleration | sed -e 's/ *#.*$//'
+  - name: ensure user plom is in bumblebee group
+    user: name=plom groups=bumblebee append=yes
   - name: ensure basic X tools
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark/basic_x_tools | sed -e 's/ *#.*$//'
