@@ -1,5 +1,6 @@
 i3
 i3status
+python3  # this is what the i3status wrapper is written in
 redshift
 suckless-tools  # contains dmenu; not using virtual packages as that won't be marked manually installed
 xterm
