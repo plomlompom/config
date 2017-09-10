@@ -6,7 +6,7 @@
 
   - name: ensure directories for symlinks exist
     file: state=directory dest={{item}}
-    with_lines: cat ~/config/ansible/files/dirs | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/dirs_new | sed -e 's/ *#.*$//'
   - name: symlink system files
     file: state=hard force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
     with_fileglob: ~/config/ansible/files/system_new/minimal/*
