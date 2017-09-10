@@ -100,9 +100,12 @@
   #  with_lines: cat ~/config/ansible/files/apt-mark_new/W530/wicd | sed -e 's/ *#.*$//'
 
   # Ensure audio/video consumption necessities.
+  - name: ensure multimedia tools
+    apt: name={{item}} state=present
+    with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/multimedia | sed -e 's/ *#.*$//'
   #- name: ensure multimedia tools
   #  apt: name={{item}} state=present
-  #  with_lines: cat ~/config/ansible/files/apt-mark/multimedia | sed -e 's/ *#.*$//'
+  #  with_lines: cat ~/config/ansible/files/apt-mark_new/W530/multimedia | sed -e 's/ *#.*$//'
 
   # Ensure hotkeys.
   #

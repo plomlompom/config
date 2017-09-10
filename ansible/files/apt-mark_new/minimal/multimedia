@@ -1,0 +1,3 @@
+alsa-utils
+mpv
+youtube-dl  # needed by mpv to directly work YouTube URLs
