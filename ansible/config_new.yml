@@ -87,9 +87,9 @@
     with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/browser_environment | sed -e 's/ *#.*$//'
 
   # Ensure wifi.
-  #- name: ensure wifi configuration
-  #  apt: name={{item}} state=present
-  #  with_lines: cat ~/config/ansible/files/apt-mark/wifi | sed -e 's/ *#.*$//'
+  - name: ensure wifi configuration
+    apt: name={{item}} state=present
+    with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/wifi | sed -e 's/ *#.*$//'
 
   # Ensure audio/video consumption necessities.
   #- name: ensure multimedia tools
