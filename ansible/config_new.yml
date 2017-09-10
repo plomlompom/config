@@ -6,12 +6,13 @@
 
   - name: ensure directories for symlinks exist
     file: state=directory dest={{item}}
-    with_lines: cat ~/config/ansible/files/dirs_new | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/dirs | sed -e 's/ *#.*$//'
   - name: symlink system files
     file: state=hard force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
-    with_fileglob: ~/config/ansible/files/system/*
+    with_fileglob: ~/config/ansible/files/system_new/minimal/*
+    with_fileglob: ~/config/ansible/files/system_new/{{ system_name }}/*
   - name: set hostname for current session
-    shell: hostname w530
+    shell: hostname {{ system_name }} 
 
   # Init package management.
   - name: update package lists
@@ -22,7 +23,7 @@
   # Ensure power management.
   - name: ensure power management tools are installed
     apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/power_management | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/power_management | sed -e 's/ *#.*$//'
   - name: start TLP
     shell: tlp start
 
@@ -34,7 +35,7 @@
     with_fileglob: ~/config/ansible/files/console/*
   - name: ensure locales and console-setup are installed
     apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/console | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/apt-mark/minimal/console | sed -e 's/ *#.*$//'
   - name: generate en_US.UTF-8 locale
     locale_gen: name=en_US.UTF-8 state=present
   - name: run setupcon to apply console settings from /etc/default/
@@ -50,12 +51,12 @@
     file: state=directory dest=~/.vimbackups
   - name: ensure man-db, manpages are installed
     apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/man | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/apt-mark/minimal/man | sed -e 's/ *#.*$//'
   - name: set /etc/localtime
     file: state=link force=yes src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
   - name: ensure various useful tools are installed – sudo, git, vim, less, openssh
     apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/various_useful | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/apt-mark/minimal/various_useful | sed -e 's/ *#.*$//'
   - name: ensure boot messages are not cleared on start up
     replace: dest=/etc/systemd/system/getty.target.wants/getty@tty1.service regexp='^TTYVTDisallocate=yes.*$' replace='TTYVTDisallocate=no'
 
@@ -70,41 +71,41 @@
   # Ensure X window environment.
   - name: ensure minimal X window environment
     apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/minimal_x | sed -e 's/ *#.*$//'
-  - name: ensure 3d acceleration and optimus switch
-    apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/3d_acceleration | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/apt-mark/{{ system_name }}/minimal_x | sed -e 's/ *#.*$//'
+  #- name: ensure 3d acceleration and optimus switch
+  #  apt: name={{item}} state=present
+  #  with_lines: cat ~/config/ansible/files/apt-mark/3d_acceleration | sed -e 's/ *#.*$//'
   - name: ensure user plom is in bumblebee group
     user: name=plom groups=bumblebee append=yes
   - name: ensure basic X tools
     apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/basic_x_tools | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/apt-mark/minimal/basic_x_tools | sed -e 's/ *#.*$//'
 
   # Set up pentadactyl.
   - name: ensure browser environment
     apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/browser_environment | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/apt-mark/minimal/browser_environment | sed -e 's/ *#.*$//'
 
   # Ensure wifi.
-  - name: ensure wifi configuration
-    apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/wifi | sed -e 's/ *#.*$//'
+  #- name: ensure wifi configuration
+  #  apt: name={{item}} state=present
+  #  with_lines: cat ~/config/ansible/files/apt-mark/wifi | sed -e 's/ *#.*$//'
 
   # Ensure audio/video consumption necessities.
-  - name: ensure multimedia tools
-    apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/multimedia | sed -e 's/ *#.*$//'
+  #- name: ensure multimedia tools
+  #  apt: name={{item}} state=present
+  #  with_lines: cat ~/config/ansible/files/apt-mark/multimedia | sed -e 's/ *#.*$//'
 
   # Ensure hotkeys.
   #
   # For some reason, the brightness hotkeys still won't be available unless acpid is restarted (yes, after reboot).
-  - name: ensure hotkeys 
-    apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark/hotkeys | sed -e 's/ *#.*$//'
+  #- name: ensure hotkeys 
+  #  apt: name={{item}} state=present
+  #  with_lines: cat ~/config/ansible/files/apt-mark/hotkeys | sed -e 's/ *#.*$//'
 
   # Remove undesired packages
   - name: collect desired packages
-    shell: cat files/apt-mark/*  | sed -e 's/ *#.*$//' > /tmp/white_list_unsorted && sort /tmp/white_list_unsorted > /tmp/white_list_sorted
+    shell: cat files/apt-mark/minimal/* files/apt-mark/{{ system_name }}/*  | sed -e 's/ *#.*$//' > /tmp/white_list_unsorted && sort /tmp/white_list_unsorted > /tmp/white_list_sorted
   - name: collect currently installed packages
     shell: dpkg-query -Wf '${Package}\n' > /tmp/all_unsorted && sort /tmp/all_unsorted > /tmp/all_sorted
   - name: create black list of packages to mark as automatically installed from the difference between the required packages and the packages currently installed
@@ -115,3 +116,4 @@
     shell: apt-mark manual $(cat /tmp/white_list_unsorted)
   - name: purge all packages automatically installed that are not depended on
     shell: DEBIAN_FRONTEND=noninteractive apt-get -y --purge autoremove
+

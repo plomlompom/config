@@ -1,0 +1,2 @@
+acpi-call-dkms  # needed for tlp to access Thinkpad-specific features
+tlp

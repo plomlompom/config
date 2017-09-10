@@ -1,0 +1,6 @@
+alsa-utils
+eject
+ffmpeg  # somehow this is needed to make youtube-dl grab 1080p versions of videos
+libdvd-pkg  # decss stuff
+mpv
+youtube-dl  # needed by mpv to directly work YouTube URLs

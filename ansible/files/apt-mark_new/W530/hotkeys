@@ -1,0 +1,1 @@
+acpid  # captures hotkey presses and triggers respective /etc/acpi/events/*
