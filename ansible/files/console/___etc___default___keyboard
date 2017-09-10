@@ -1,2 +1,4 @@
-XKBMODEL="pc105"  # questionable, but works fine as default
+# setting XKBMODEL to the questionable default seems to be necessary and works nicely
+# curiously, putting a comment on the same line as a variable setting seems to break things
+XKBMODEL="pc105"
 XKBLAYOUT="de"
