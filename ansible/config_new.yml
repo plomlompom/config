@@ -38,8 +38,8 @@
     with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/console | sed -e 's/ *#.*$//'
   - name: generate en_US.UTF-8 locale
     locale_gen: name=en_US.UTF-8 state=present
-  - name: Touch console config link targets so setupcon does not ignore them.
-    file: state=touch dest=~/config/ansible/files/console/*
+  - name: Touch keyboard config file so setupcon does not ignore it.
+    command: touch /etc/default/keyboard
   - name: run setupcon to apply console settings from /etc/default/
     command: setupcon
 
