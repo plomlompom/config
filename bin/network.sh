@@ -5,22 +5,9 @@ wifi_interface=wls1
 
 ensure_wifi_on() {
   if [ ! "$(wifi)" = "wifi      = on" ]; then
-    wifi on
+    #wifi on
     ip link set "$wifi_interface" up
   fi
-}
-
-print_usage() {
-  echo 'Available commands:'
-  echo '  eth_connect'
-  echo '  eth_disconnect'
-  echo '  wifi_scan'
-  echo '  wifi_connect_open SSID'
-  echo '  wifi_set_wpa SSID KEY'
-  echo '  wifi_connect_wep_ascii SSID KEY'
-  echo '  wifi_connect_wep_hex SSID KEY'
-  echo '  wifi_connect_wpa SSID KEY'
-  echo '  wifi_disconnect'
 }
 
 if ! echo "${1}"; then
@@ -64,7 +51,13 @@ elif [ "${1}" = 'wifi_disconnect' ]; then
   ip link set "$wifi_interface" down
 
 else
-  echo 'Unknown command.'
-  print_usage
-  exit 1
+  echo 'Available commands:'
+  echo '  eth_connect'
+  echo '  eth_disconnect'
+  echo '  wifi_scan'
+  echo '  wifi_connect_open SSID'
+  echo '  wifi_connect_wep_ascii SSID KEY'
+  echo '  wifi_connect_wep_hex SSID KEY'
+  echo '  wifi_connect_wpa SSID KEY'
+  echo '  wifi_disconnect'
 fi
