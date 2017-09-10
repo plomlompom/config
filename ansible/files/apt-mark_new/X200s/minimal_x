@@ -1,3 +1,0 @@
-libpam-systemd  # needed to start X as non-root
-xinit  # contains startx
-xserver-xorg-core

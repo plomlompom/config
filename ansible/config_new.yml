@@ -71,7 +71,7 @@
   # Ensure X window environment.
   - name: ensure minimal X window environment
     apt: name={{item}} state=present
-    with_lines: cat ~/config/ansible/files/apt-mark_new/{{ system_name }}/minimal_x | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/minimal_x | sed -e 's/ *#.*$//'
   #- name: ensure 3d acceleration and optimus switch
   #  apt: name={{item}} state=present
   #  with_lines: cat ~/config/ansible/files/apt-mark/3d_acceleration | sed -e 's/ *#.*$//'
@@ -105,7 +105,7 @@
 
   # Remove undesired packages
   - name: collect desired packages
-    shell: cat files/apt-mark/minimal/* files/apt-mark_new/{{ system_name }}/*  | sed -e 's/ *#.*$//' > /tmp/white_list_unsorted && sort /tmp/white_list_unsorted > /tmp/white_list_sorted
+    shell: cat files/apt-mark_new/minimal/* files/apt-mark_new/{{ system_name }}/*  | sed -e 's/ *#.*$//' > /tmp/white_list_unsorted && sort /tmp/white_list_unsorted > /tmp/white_list_sorted
   - name: collect currently installed packages
     shell: dpkg-query -Wf '${Package}\n' > /tmp/all_unsorted && sort /tmp/all_unsorted > /tmp/all_sorted
   - name: create black list of packages to mark as automatically installed from the difference between the required packages and the packages currently installed

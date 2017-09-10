@@ -1,1 +1,2 @@
+XKBMODEL="pc105"  # questionable, but works fine as default
 XKBLAYOUT="de"
