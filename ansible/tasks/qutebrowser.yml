@@ -1,0 +1,46 @@
+---
+
+- name: Set qutebrowser, python3-pypeg2 facts.
+  set_fact:
+    qutebrowser_deb_url: https://github.com/qutebrowser/qutebrowser/releases/download/v0.11.0/qutebrowser_0.11.0-1_all.deb
+    python3pypeg2_deb_url: https://qutebrowser.org/python3-pypeg2_2.15.2-1_all.deb
+    qutebrowser_deb_path: /tmp/qutebrowser.deb
+    python3pypeg2_deb_path: /tmp/python3-pypeg2.deb
+
+
+- name: Check if qutebrowser is installed.
+  command: dpkg-query -W qutebrowser
+  register: qutebrowser_debcheck
+  failed_when: qutebrowser_debcheck.rc > 1
+  changed_when: qutebrowser_debcheck.rc == 1
+
+- name: Check if qutebrowser-dependency python3-pypeg2 is installed.
+  command: dpkg-query -W python3-pypeg2 
+  register: python3pypeg2_debcheck
+  failed_when: python3pypeg2_debcheck.rc > 1
+  changed_when: python3pypeg2_debcheck.rc == 1
+  when: qutebrowser_debcheck.rc == 1
+
+- name: Download python3-pypeg2 package.
+  get_url: url={{ python3pypeg2_deb_url }} dest={{ python3pypeg2_deb_path }}
+  when: qutebrowser_debcheck.rc == 1 and python3pypeg2_debcheck.rc == 1
+
+- name: Download qutebrowser package.
+  get_url: url={{ qutebrowser_deb_url }} dest={{ qutebrowser_deb_path }}
+  when: qutebrowser_debcheck.rc == 1
+
+# We use command: apt as a workaround because the Ansible apt module installs
+# the Depends of the .deb marked as manual while we want them marked as auto.
+- name: Install python3-pypeg2 package,
+  command: apt install --yes "{{ python3pypeg2_deb_path}}"
+  when: qutebrowser_debcheck.rc == 1 and python3pypeg2_debcheck.rc == 1
+
+- name: Mark python3-pypeg2 package as automatically installed.
+  command: apt-mark auto python3-pypeg2
+  when: qutebrowser_debcheck.rc == 1 and python3pypeg2_debcheck.rc == 1
+
+# We use command: apt as a workaround because the Ansible apt module installs
+# the Depends of the .deb marked as manual while we want them marked as auto.
+- name: Install qutebrowser package.
+  command: apt install --yes "{{ qutebrowser_deb_path}}"
+  when: qutebrowser_debcheck.rc == 1

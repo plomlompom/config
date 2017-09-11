@@ -9,8 +9,9 @@
     with_lines: cat ~/config/ansible/files/dirs_new | sed -e 's/ *#.*$//'
   - name: symlink system files
     file: state=hard force=yes src={{item}} dest={{item|basename|regex_replace('___','/')}}
-    with_fileglob: ~/config/ansible/files/system_new/minimal/*
-    with_fileglob: ~/config/ansible/files/system_new/{{ system_name }}/*
+    with_fileglob:
+    - ~/config/ansible/files/system_new/minimal/*
+    - ~/config/ansible/files/system_new/{{ system_name }}/*
   - name: set hostname for current session
     shell: hostname {{ system_name }} 
 
@@ -65,10 +66,10 @@
   # Config user.
   - name: create user plom with sudo privileges and bash shell
     user: name=plom groups=sudo shell=/bin/bash
-  - name: have config repo in user directory
-    git: repo=https://github.com/plomlompom/config dest=/home/plom/config
-    become_user: plom
-    become_method: su
+  #- name: have config repo in user directory
+  #  git: repo=https://github.com/plomlompom/config dest=/home/plom/config
+  #  become_user: plom
+  #  become_method: su
 
   # Ensure X window environment.
   - name: ensure minimal X window environment
@@ -86,7 +87,9 @@
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/basic_x_tools | sed -e 's/ *#.*$//'
 
-  # Set up pentadactyl.
+  # Set up qutebrowser.
+  - name: ensure qutebrowser
+    include: tasks/qutebrowser.yml
   - name: ensure browser environment
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/browser_environment | sed -e 's/ *#.*$//'
