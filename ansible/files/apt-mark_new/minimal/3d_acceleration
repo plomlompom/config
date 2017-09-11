@@ -1,1 +1,2 @@
 libglu1-mesa  # tested as necessary for OpenGL 3D acceleration to work
+libgl1-mesa-dri  # tested as necessary for OpenGL 3D acceleration to work

@@ -1,4 +1,3 @@
 bumblebee-nvidia
-libgl1-mesa-dri  # tested as necessary for OpenGL 3D acceleration to work
 linux-headers-amd64  # tested as necessary to build proper nvidia-driver module
 primus  # bridge by which bumblebee will deliver Nvidia-renderend content to Intel card

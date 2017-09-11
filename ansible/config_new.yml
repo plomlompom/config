@@ -75,10 +75,10 @@
   - name: ensure minimal X window environment
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/minimal_x | sed -e 's/ *#.*$//'
-  - name: ensure 3d acceleration core
+  - name: ensure 3d acceleration
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/3d_acceleration | sed -e 's/ *#.*$//'
-  #- name: ensure further 3d acceleration and optimus switch
+  #- name: ensure optimus switch
   #  apt: name={{item}} state=present
   #  with_lines: cat ~/config/ansible/files/apt-mark_new/W530/3d_acceleration | sed -e 's/ *#.*$//'
   #- name: ensure user plom is in bumblebee group
