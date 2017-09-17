@@ -7,7 +7,6 @@
     qutebrowser_deb_path: /tmp/qutebrowser.deb
     python3pypeg2_deb_path: /tmp/python3-pypeg2.deb
 
-
 - name: Check if qutebrowser is installed.
   command: dpkg-query -W qutebrowser
   register: qutebrowser_debcheck
