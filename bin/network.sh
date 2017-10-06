@@ -30,6 +30,8 @@ elif [ "${1}" = 'wifi_connect_open' ]; then
   ensure_wifi_on
   iw dev "$wifi_interface" connect "${2}"
   #dhclient "$wifi_interface" 
+  #ip route delete default
+  #ip route add default via 192.168.1.1 dev wls1
 
 elif [ "${1}" = 'wifi_connect_wep_ascii' ]; then
   ensure_wifi_on

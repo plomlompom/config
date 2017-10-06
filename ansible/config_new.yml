@@ -102,6 +102,7 @@
   - name: ensure wifi configuration
     apt: name={{item}} state=present
     with_lines: cat ~/config/ansible/files/apt-mark_new/minimal/wifi | sed -e 's/ *#.*$//'
+    with_lines: cat ~/config/ansible/files/apt-mark_new/X200s/wifi | sed -e 's/ *#.*$//'
   #- name: ensure wicd
   #  apt: name={{item}} state=present
   #  with_lines: cat ~/config/ansible/files/apt-mark_new/W530/wicd | sed -e 's/ *#.*$//'
