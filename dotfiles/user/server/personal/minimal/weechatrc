@@ -6,7 +6,7 @@
 /server add localhost localhost
 /connect localhost
 /server del freenode
-/server add freenode irc.freenode.net -nicks=plomlompom,plomlomp0m,ploml0mp0m,pl0ml0mp0m -realname="Christian Heller" -autojoin=#nodrama.de,#twitter.de,#freie-gesellschaft,#zrolaps,#twtxt,#freakazoid
+/server add freenode irc.freenode.net -nicks=plomlompom,plomlomp0m,ploml0mp0m,pl0ml0mp0m -realname="Christian Heller" -autojoin=#nodrama.de,#twitter.de,#freie-gesellschaft,#zrolaps,#twtxt,#freakazoid,#nodrama.finance,#unordentlich
 /server add rizon irc.rizon.net -nicks=AlfredEdel,AlfredEde1,A1fredEdel,A1fredEde1 -autojoin=#8chan-deutsch,#mememagic -username=foo
 /server add quakenet irc.quakenet.org -nicks=plomlompom,plomlomp0m,ploml0mp0m,pl0ml0mp0m -realname="Christian Heller" -autojoin=#rgrd
 /connect freenode
