@@ -29,7 +29,7 @@
   - name: ensure power management tools are installed
     apt: name={{item}} state=present
     with_lines:
-    - cat ~/config/ansible/files/apt-mark_new/minimal/disk_encryption sed -e 's/ *#.*$//'
+    - cat ~/config/ansible/files/apt-mark_new/minimal/disk_encryption | sed -e 's/ *#.*$//'
 
   # Ensure power management.
   - name: ensure power management tools are installed
