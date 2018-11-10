@@ -25,6 +25,12 @@
   - name: APT - dist-upgrade
     apt: upgrade=dist
 
+  # Ensure packages needed for disk encryption on startup (how does this work?)
+  - name: ensure power management tools are installed
+    apt: name={{item}} state=present
+    with_lines:
+    - cat ~/config/ansible/files/apt-mark_new/minimal/disk_encryption sed -e 's/ *#.*$//'
+
   # Ensure power management.
   - name: ensure power management tools are installed
     apt: name={{item}} state=present
