@@ -7,8 +7,15 @@
 # contains the local ~/.ssh/id_rsa.pub, and also any old
 # /etc/ssh/sshd_config.
 #
-# Dependencies: ssh, scp, sshpass, ~/.ssh/id_rsa.pub
+# Dependencies: ssh, scp, sshpass, ~/.ssh/id_rsa.pub, properly
+# configured sshd_config file in reach.
 set -e
+
+# Location auf a sshd_config with "PermitRootLogin no" and
+# "PasswordAuthentication no".
+system_path_sshd_config='/etc/ssh/sshd_config'
+config_tree_prefix='~/config/all_new_2018/linkable_etc_files/server/'
+local_path_sshd_config="$config_tree_prefix""$system_path_sshd_config"
 
 # Ensure we have a server name as argument.
 if [ $# -eq 0 ]; then
@@ -27,7 +34,8 @@ export SSHPASS="$PW_ROOT"
 
 # Create user plom, and his ~/.ssh/authorized_keys based on the local
 # ~/.ssh/id_rsa.pub; ensure the result has proper permissions and
-# ownerships. Then disable root and pw login, and restart ssh daemon.
+# ownerships. Then disable root and pw login by copying over the
+# sshd_config and restart ssh daemon.
 #
 # This could be a line or two shorter by using ssh-copy-id, but that
 # would require setting a password for user plom otherwise not needed.
@@ -38,5 +46,5 @@ sshpass -e ssh root@"$server" \
         'chown plom:plom /tmp/authorized_keys && '\
         'chmod u=rw,go= /tmp/authorized_keys && '\
         'mv /tmp/authorized_keys /home/plom/.ssh/'
-sshpass -e scp sshd_config root@"$server":/etc/ssh/sshd_config
+sshpass -e scp "$local_path_sshd_config" root@"$server":"$system_path_sshd_config"
 sshpass -e ssh root@"$server" 'service ssh restart'

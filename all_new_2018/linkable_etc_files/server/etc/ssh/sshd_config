@@ -30,7 +30,7 @@ Port 443 # used for networks where 22 is banned
 # Authentication:
 
 #LoginGraceTime 2m
-PermitRootLogin no 
+PermitRootLogin no
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
@@ -124,4 +124,4 @@ Subsystem sftp	/usr/lib/openssh/sftp-server
 #	ForceCommand cvs server
 
 ClientAliveInterval 120
-PasswordAuthentication no 
+PasswordAuthentication no
