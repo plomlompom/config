@@ -6,7 +6,7 @@
 set -e
 
 target="$1"
-if [ ! "${target}" = "all" ] && [ ! "$target}" = "server" ]; then
+if [ ! "${target}" = "all" ] && [ ! "${target}" = "server" ]; then
     echo "Need proper target."
     false
 fi
