@@ -14,7 +14,9 @@ fi
 config_tree_prefix="${HOME}/config/all_new_2018/linkable_etc_files/"
 cd "${config_tree_prefix}""${target}"
 for path in $(find . -type f); do
-    src=$(echo "${path}" | cut -c2-)
-    dest=$(realpath "${path}")
-    ln -fs "${dest}" "${src}"
+    linking=$(echo "${path}" | cut -c2-)
+    linked=$(realpath "${path}")
+    dir=$(dirname "${linking}")
+    mkdir -p "${dir}"
+    ln -fs "${linked}" "${linking}"
 done
