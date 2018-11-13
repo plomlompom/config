@@ -6,6 +6,11 @@
 set -e
 
 target="$1"
+if [ ! "${target}" = "all" ] && [ ! "$target}" = "server" ]; then
+    echo "Need proper target."
+    false
+fi
+
 config_tree_prefix="${HOME}/config/all_new_2018/linkable_etc_files/"
 cd "${config_tree_prefix}""${target}"
 for path in $(find . -type f); do
