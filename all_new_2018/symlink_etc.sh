@@ -6,9 +6,9 @@
 set -e
 
 target="$1"
-config_tree_prefix="~/config/all_new_2018/linkable_etc_files/"
-cd "$config_tree_prefix""$target"
+config_tree_prefix="${HOME}/config/all_new_2018/linkable_etc_files/"
+cd "${config_tree_prefix}""${target}"
 for path in $(find .); do
-    dest=$(echo "$path" | cut -c2-)
-    ln -fs "$path" "$dest"
+    dest=$(echo "${path}" | cut -c2-)
+    ln -fs "${path}" "${dest}"
 done

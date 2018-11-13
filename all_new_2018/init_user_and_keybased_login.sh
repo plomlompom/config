@@ -14,8 +14,8 @@ set -e
 # Location auf a sshd_config with "PermitRootLogin no" and
 # "PasswordAuthentication no".
 system_path_sshd_config='/etc/ssh/sshd_config'
-config_tree_prefix='~/config/all_new_2018/linkable_etc_files/server/'
-local_path_sshd_config="$config_tree_prefix""$system_path_sshd_config"
+config_tree_prefix="${HOME}/config/all_new_2018/linkable_etc_files/server/"
+local_path_sshd_config="${config_tree_prefix}""${system_path_sshd_config}"
 
 # Ensure we have a server name as argument.
 if [ $# -eq 0 ]; then
@@ -30,7 +30,7 @@ printf "Server root password: "
 read PW_ROOT
 stty echo
 printf "\n"
-export SSHPASS="$PW_ROOT"
+export SSHPASS="${PW_ROOT}"
 
 # Create user plom, and his ~/.ssh/authorized_keys based on the local
 # ~/.ssh/id_rsa.pub; ensure the result has proper permissions and
@@ -39,12 +39,12 @@ export SSHPASS="$PW_ROOT"
 #
 # This could be a line or two shorter by using ssh-copy-id, but that
 # would require setting a password for user plom otherwise not needed.
-sshpass -e scp ~/.ssh/id_rsa.pub root@"$server":/tmp/authorized_keys
-sshpass -e ssh root@"$server" \
+sshpass -e scp ~/.ssh/id_rsa.pub root@"${server}":/tmp/authorized_keys
+sshpass -e ssh root@"${server}" \
         'useradd -m plom && '\
         'mkdir /home/plom/.ssh && '\
         'chown plom:plom /tmp/authorized_keys && '\
         'chmod u=rw,go= /tmp/authorized_keys && '\
         'mv /tmp/authorized_keys /home/plom/.ssh/'
-sshpass -e scp "$local_path_sshd_config" root@"$server":"$system_path_sshd_config"
-sshpass -e ssh root@"$server" 'service ssh restart'
+sshpass -e scp "${local_path_sshd_config}" root@"${server}":"${system_path_sshd_config}"
+sshpass -e ssh root@"${server}" 'service ssh restart'
