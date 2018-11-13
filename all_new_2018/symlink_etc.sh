@@ -8,7 +8,8 @@ set -e
 target="$1"
 config_tree_prefix="${HOME}/config/all_new_2018/linkable_etc_files/"
 cd "${config_tree_prefix}""${target}"
-for path in $(find .); do
-    dest=$(echo "${path}" | cut -c2-)
-    ln -fs "${path}" "${dest}"
+for path in $(find . -type f); do
+    src=$(echo "${path}" | cut -c2-)
+    dest=$(realpath "${path}")
+    ln -fs "${dest}" "${src}"
 done
