@@ -1,4 +1,4 @@
-# connectivity
+# needed to log in to server via ssh
 openssh-server
 # provides /etc/inputrc and understanding of ctrl+arrow key combos
 readline-common

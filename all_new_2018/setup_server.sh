@@ -18,5 +18,9 @@ apt update
 # we don't need to get more data than necessary.
 apt -y dist-upgrade
 
-# If we have not yet set the shell for user plom, ensure it here.
+# Set Berlin localtime.
+#ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
+# If we have not yet set the shell for user plom, ensure it here. This
+# is mostly for convenience.
 usermod -s /bin/bash plom
