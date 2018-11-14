@@ -9,7 +9,8 @@ config_tree_prefix="${HOME}/config/all_new_2018/apt-mark/"
 dpkg-query -Wf '${Package} ${Priority}\n' | grep ' required' | sed 's/ required//' > /tmp/list_white_unsorted
 for target in "$@"; do
     path="${config_tree_prefix}${target}"
-    for line in $(cat "${path}"); do
+    #for line in $(cat "${path}"); do
+    cat "${path}" | while read line; do
         if [ ! $(echo "${line}" | cut -c1) = "#" ]; then
             echo "${line}" >> /tmp/list_white_unsorted
         fi
