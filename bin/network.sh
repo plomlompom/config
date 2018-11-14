@@ -29,19 +29,19 @@ elif [ "${1}" = 'wifi_scan' ]; then
 elif [ "${1}" = 'wifi_connect_open' ]; then
   ensure_wifi_on
   iw dev "$wifi_interface" connect "${2}"
-  #dhclient "$wifi_interface" 
+  dhclient "$wifi_interface" 
   #ip route delete default
   #ip route add default via 192.168.1.1 dev wls1
 
 elif [ "${1}" = 'wifi_connect_wep_ascii' ]; then
   ensure_wifi_on
   iw dev "$wifi_interface" connect "${2}" key 0:"${3}"
-  #dhclient "$wifi_interface" 
+  dhclient "$wifi_interface" 
 
 elif [ "${1}" = 'wifi_connect_wep_hex' ]; then
   ensure_wifi_on
   iw dev "$wifi_interface" connect "${2}" key d:0:"${3}"
-  #dhclient "$wifi_interface" 
+  dhclient "$wifi_interface" 
 
 elif [ "${1}" = 'wifi_connect_wpa' ]; then
   ensure_wifi_on

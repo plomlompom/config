@@ -13,6 +13,9 @@ redshift -rl 53:13 &
 # Enforce QWERTZ. (Why twice?)
 setxkbmap de
 
+# Use CapsLock as Ctrl, against the Emacs pinky.
+setxkbmap -option caps:ctrl_modifier
+
 # Set up compose key.
 xmodmap ~/.Xmodmap
 
