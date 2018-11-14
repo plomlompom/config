@@ -1,0 +1,8 @@
+# connectivity
+ifupdown
+isc-dhcp-client
+# git
+ca-certificates
+git
+# to avoid constant warnings about no locale being found 
+locales
