@@ -6,6 +6,8 @@
 # CAUTION: This removes original files at the affected paths.
 set -e
 
+config_tree_prefix="${HOME}/config/all_new_2018/linkable_etc_files/"
+
 for target in "$@"; do
     cd "${config_tree_prefix}${target}"
     for path in $(find . -type f); do
