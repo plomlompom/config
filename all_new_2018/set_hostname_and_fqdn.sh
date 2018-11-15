@@ -18,7 +18,6 @@ if [ "${hostname}" = "" ]; then
     echo "Need hostname as argument."
     false
 fi
-
 echo "${hostname}" > /etc/hostname
 hostname "${hostname}"
 
@@ -39,8 +38,8 @@ for ip in $(hostname -I); do
             continue
         fi
     fi
-    echo 'SETTING' $ip
     final_ip="${ip}"
 done
+
 echo "127.0.0.1 localhost.localdomain localhost" > /etc/hosts
 echo "${final_ip} ${fqdn} ${hostname}" >> /etc/hosts

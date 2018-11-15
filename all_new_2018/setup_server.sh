@@ -19,7 +19,7 @@ apt update
 apt -y dist-upgrade
 
 # Set Berlin localtime.
-#ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 # If we have not yet set the shell for user plom, ensure it here. This
 # is mostly for convenience.
