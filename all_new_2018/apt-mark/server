@@ -2,3 +2,5 @@
 openssh-server
 # provides /etc/inputrc and understanding of ctrl+arrow key combos
 readline-common
+# provides letsencrypt
+certbot
