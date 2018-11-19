@@ -4,7 +4,7 @@
 set -e
 
 # Provide maximum input for set_hostname_and_fqdn.sh.
-if "$#" -ne 2 ]; then
+if [ "$#" -ne 2 ]; then
     echo "Need exactly two arguments (hostname, FQDN)."
     false
 fi
@@ -14,7 +14,7 @@ fqdn="$2"
 # Adapt /etc/ to our needs by symlinking into ./linkable_etc_files. This
 # will set basic configurations affecting following steps, such as setup
 # of APT and the locale selection, so needs to be right at the beginning.
-./symlink_etc.sh all server
+./hardlink_etc.sh all server
 
 # Set hostname and FQDN.
 ./set_hostname_and_fqdn.sh "${hostname}" "${fqdn}"

@@ -1,8 +1,11 @@
 #!/bin/sh
-# Symbolically link files to those in argument-selected subdirectories
-# of linkable_etc_files//, e.g. link /etc/foo/bar to
+# Hard link files to those in argument-selected subdirectories of
+# linkable_etc_files//, e.g. link /etc/foo/bar to
 # linkable_etc_files/$1/etc/foo/bar and so on. Create directories as
-# necessary.
+# necessary. We do the hard linking so files that should be readable to
+# non-root in /etc/ remain so despite having a path below /root/, as
+# symbolic links point into /root/ without making the targets readable
+# to non-root.
 # CAUTION: This removes original files at the affected paths.
 set -e
 
@@ -15,6 +18,6 @@ for target in "$@"; do
         linked=$(realpath "${path}")
         dir=$(dirname "${linking}")
         mkdir -p "${dir}"
-        ln -fs "${linked}" "${linking}"
+        ln -f "${linked}" "${linking}"
     done
 done
