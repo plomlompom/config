@@ -11,7 +11,7 @@ fi
 hostname="$1"
 fqdn="$2"
 
-# Adapt /etc/ to our needs by symlinking into ./linkable_etc_files. This
+# Adapt /etc/ to our needs by hardlinking into ./linkable_etc_files. This
 # will set basic configurations affecting following steps, such as setup
 # of APT and the locale selection, so needs to be right at the beginning.
 ./hardlink_etc.sh all server
