@@ -9,3 +9,4 @@
 -A INPUT -p tcp --dport 80 -j ACCEPT
 -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 COMMIT
+# iptables-restore seems to ignore COMMIT if no newline follows it

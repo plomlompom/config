@@ -5,7 +5,7 @@ set -e
 
 # Provide maximum input for set_hostname_and_fqdn.sh.
 if [ "$#" -ne 2 ]; then
-    echo "Need exactly two arguments (hostname, FQDN)."
+    echo 'Need exactly two arguments (hostname, FQDN).'
     false
 fi
 hostname="$1"
@@ -21,8 +21,8 @@ fqdn="$2"
 
 # Some debconf selections we don't want to get asked during coming
 # install actions.
-debconf-set-selections <<< "iptables-persistent iptables-persistent/autosave_v4 boolean false"
-debconf-set-selections <<< "iptables-persistent iptables-persistent/autosave_v6 boolean false"
+echo 'iptables-persistent iptables-persistent/autosave_v4 boolean false' | debconf-set-selections
+echo 'iptables-persistent iptables-persistent/autosave_v6 boolean false' | debconf-set-selections
 
 # Ensure package installation state as defined by what packages are
 # defined as required by Debian policy and by settings in ./apt-mark/.
