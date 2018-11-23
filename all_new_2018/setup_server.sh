@@ -19,6 +19,11 @@ fqdn="$2"
 # Set hostname and FQDN.
 ./set_hostname_and_fqdn.sh "${hostname}" "${fqdn}"
 
+# Some debconf selections we don't want to get asked during coming
+# install actions.
+debconf-set-selections <<< "iptables-persistent iptables-persistent/autosave_v4 boolean false"
+debconf-set-selections <<< "iptables-persistent iptables-persistent/autosave_v6 boolean false"
+
 # Ensure package installation state as defined by what packages are
 # defined as required by Debian policy and by settings in ./apt-mark/.
 apt update

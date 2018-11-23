@@ -4,3 +4,5 @@ openssh-server
 readline-common
 # provides letsencrypt
 certbot
+# provides systemd scripts that configure iptables via /etc/iptables/*
+iptables-persistent
