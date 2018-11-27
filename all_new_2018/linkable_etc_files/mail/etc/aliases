@@ -1,0 +1,23 @@
+# /etc/aliases
+
+# As per RFC 2142.
+mailer-daemon: plom
+postmaster: plom
+hostmaster: plom
+usenet: plom
+news: plom
+webmaster: plom
+www: plom
+ftp: plom
+abuse: plom
+noc: plom
+security: plom
+root: plom
+
+# Personal aliases.
+plomlompom: plom
+christian.heller: plom
+christian_heller: plom
+christianheller: plom
+c.heller: plom
+heller: plom

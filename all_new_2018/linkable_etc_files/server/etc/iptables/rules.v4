@@ -10,7 +10,6 @@
 -A INPUT -p tcp --dport 22 -j ACCEPT
 # HTTP; uncomment for creating LetsEncrypt certificates in standalone mode.
 #-A INPUT -p tcp --dport 80 -j ACCEPT
-# SMTP (allowing for STARTTLS); necessary for mail server to mail server banter
 # HTTPS in theory, in practice my second SSH port, see sshd_config
 -A INPUT -p tcp --dport 443 -j ACCEPT
 # SMTP (allowing for STARTTLS); necessary for mail server to mail server banter
