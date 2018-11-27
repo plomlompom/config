@@ -47,3 +47,7 @@ smtpd_tls_cert_file=/etc/letsencrypt/live/${myhostname}/fullchain.pem
 smtpd_tls_key_file=/etc/letsencrypt/live/${myhostname}/privkey.pem
 smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
+
+# connect to opendkim
+smtpd_milters = inet:localhost:12301
+non_smtpd_milters = inet:localhost:12301
