@@ -1,8 +1,8 @@
 #/bin/sh
 set -e
 
-selector=$1
-if [ ! -n "${selector}" ]; then
+dkim_selector=$1
+if [ ! -n "${dkim_selector}" ]; then
     echo "Give DKIM selector argument."
     false
 fi
@@ -12,14 +12,17 @@ mkdir -p /etc/dkimkeys/
 add_dkim_record=0
 if [ ! -f "/etc/dkimkeys/${dkim_selector}.private" ]; then
     add_dkim_record=1
+    set +e
     dpkg -s opendkim-tools &> /dev/null
     preinstalled="$?"
+    set -e
     if [ ! "${preinstalled}" -eq "0" ]; then
         apt install -y opendkim-tools
     fi
     opendkim-genkey -s "${dkim_selector}"
+    mv "${dkim_selector}.private" /etc/dkimkeys/
     if [ ! "${preinstalled}" -eq "0" ]; then
-        apt --purge autoremove opendkim-tools
+        apt -y --purge autoremove opendkim-tools
     fi
 fi
 
@@ -41,7 +44,8 @@ echo "$(hostname -f)" > /etc/mailname
 
 # Everything should now be ready for installations.
 apt install -y postfix dovecot-imapd opendkim
-echo "TODO: Ensure a proper SPF entry for this system in your DNS configuration."
+echo "TODO: Ensure MX entry for your system in your DNS configuration."
+echo "TODO: Ensure a proper SPF entry for this system in your DNS configuration; something like 'v=spf1 a mx -all' mapped to your subdomain."
 if [ "${add_dkim_record}" -eq "1" ]; then
     echo "TODO: Add the following DKIM entry to your DNS configuration (possibly with slightly changed host entry – if your mail domain includes a subdomain, append that with a dot):"
     cat "${dkim_selector}.txt"
