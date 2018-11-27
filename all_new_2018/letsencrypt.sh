@@ -35,7 +35,7 @@ if [ "${action}" = "set" ]; then
     fi
     mail="$3"
     domain="$4"
-    ssh -t plom@${server} "su -c 'apt -y install certbot && certbot certonly --standalone --agree-tos -m ${mail} -d ${server}'"
+    ssh -t plom@${server} "su -c 'apt update && apt -y install certbot && certbot certonly --standalone --agree-tos -m ${mail} -d ${server}'"
 elif [ "${action}" = "get" ]; then
     # Get /etc/letsencrypt/ as tar file.
     ssh -t plom@${server} 'su -c "cd /etc/ && tar cf letsencrypt.tar letsencrypt && chown plom:plom letsencrypt.tar && mv letsencrypt.tar /home/plom/"'

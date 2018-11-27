@@ -43,9 +43,9 @@ echo "postfix postfix/mailname string $(hostname -f)" | debconf-set-selections
 echo "$(hostname -f)" > /etc/mailname
 
 # Everything should now be ready for installations.
-apt install -y postfix dovecot-imapd opendkim
+apt install -y -o Dpkg::Options::=--force-confold postfix dovecot-imapd opendkim
 echo "TODO: Ensure MX entry for your system in your DNS configuration."
-echo "TODO: Ensure a proper SPF entry for this system in your DNS configuration; something like 'v=spf1 a mx -all' mapped to your subdomain."
+echo "TODO: Ensure a proper SPF entry for this system in your DNS configuration; something like 'v=spf1 a mx -all' mapped to your host."
 if [ "${add_dkim_record}" -eq "1" ]; then
     echo "TODO: Add the following DKIM entry to your DNS configuration (possibly with slightly changed host entry – if your mail domain includes a subdomain, append that with a dot):"
     cat "${dkim_selector}.txt"
