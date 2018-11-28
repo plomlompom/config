@@ -39,6 +39,8 @@ if [ "${domainwide}" = "domainwide" ]; then
 else
     sed -i 's/REPLACE_mydomain_if_domainwide_ECALPER//g' /etc/postfix/main.cf
 fi
+# Since we re-set the iptables rules, we need to reload them.
+iptables-restore /etc/iptables/rules.v4
 
 # Some useful debconf selections.
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
