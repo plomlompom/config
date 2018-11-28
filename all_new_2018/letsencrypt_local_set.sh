@@ -2,12 +2,11 @@
 set -e
 
 # Ensure we have a mail address as argument.
-if [ $# -lt 2 ]; then
-    echo "Need target domain and mail address as argument."
+if [ $# -lt 1 ]; then
+    echo "Need mail address as argument."
     false
 fi
 domain="$1"
-mail_address="$2"
 
 # If port 80 blocked by iptables, open it.
 set +e
@@ -19,7 +18,7 @@ if [ "${open_iptables}" -eq "1" ]; then
 fi
 
 # Create new certificate and copy it to /etc/letsencrypt.
-certbot certonly --standalone --agree-tos -m "${mail_address}" -d "${domain}"
+certbot certonly --standalone --agree-tos -m "${mail_address}" -d "$(hostname -f)"
 
 # Remove iptables rule to open port 80 if we added it.
 if [ "${open_iptables}" -eq "1" ]; then
