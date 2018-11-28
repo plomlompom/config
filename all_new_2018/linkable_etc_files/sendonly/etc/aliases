@@ -1,0 +1,3 @@
+# /etc/aliases
+postmaster: root
+root: plom@plomlompom.com
