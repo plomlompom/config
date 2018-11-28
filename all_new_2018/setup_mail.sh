@@ -61,3 +61,4 @@ if [ "${add_dkim_record}" -eq "1" ]; then
     echo "TODO: Add the following DKIM entry to your DNS configuration (possibly with slightly changed host entry – if your mail domain includes a subdomain, append that with a dot):"
     cat "${dkim_selector}.txt"
 fi
+echo "TODO: passwd plom"
