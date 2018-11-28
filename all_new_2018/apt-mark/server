@@ -2,10 +2,6 @@
 openssh-server
 # provides /etc/inputrc and understanding of ctrl+arrow key combos
 readline-common
-# provides letsencrypt
-certbot
-# for letsencrypt renewal
-cron
 # provides systemd scripts that configure iptables via /etc/iptables/*
 iptables-persistent
 # this line is here because the shell "read" in install_for_target.sh ignores lines without final newline

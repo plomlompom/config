@@ -8,6 +8,9 @@ if [ $# -lt 1 ]; then
 fi
 mail_address="$1"
 
+# We need certbot to get LetsEncrypt certificates.
+apt install -y certbot
+
 # If port 80 blocked by iptables, open it.
 set +e
 iptables -C INPUT -p tcp --dport 80 -j ACCEPT
