@@ -1,11 +1,14 @@
 #/bin/sh
 set -e
 
-dkim_selector=$1
-if [ ! -n "${dkim_selector}" ]; then
-    echo "Give DKIM selector argument."
+if [ $# -lt 2 ]; then
+    echo "Give arguments of mail domain and DKIM selector."
+    echo "Also, if hosting mail for entire domain, give third argument 'domainwide'."
     false
 fi
+mail_domain="$1"
+dkim_selector="$2"
+domainwide="$3"
 
 # Set up DKIM key if necessary.
 mkdir -p /etc/dkimkeys/
@@ -28,8 +31,14 @@ fi
 
 # Link and adapt mail-server-specific /etc/ files.
 ./hardlink_etc.sh mail
-sed -i "s/REPLACE_Domain_ECALPER/$(hostname -f)/g" /etc/opendkim.conf
+sed -i "s/REPLACE_Domain_ECALPER/${mail_domain}/g" /etc/opendkim.conf
 sed -i "s/REPLACE_Selector_ECALPER/${dkim_selector}/g" /etc/opendkim.conf
+sed -i "s/REPLACE_myhostname_ECALPER/$(hostname -f)/g" /etc/postfix/main.cf
+if [ "${domainwide}" = "domainwide" ]; then
+    sed -i 's/REPLACE_mydomain_if_domainwide_ECALPER/$mydomain/g' /etc/postfix/main.cf
+else
+    sed -i 's/REPLACE_mydomain_if_domainwide_ECALPER//g' /etc/postfix/main.cf
+fi
 
 # Some useful debconf selections.
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
@@ -39,13 +48,13 @@ echo "ssl_key = </etc/letsencrypt/live/$(hostname -f)/privkey.pem" >> /etc/dovec
 # The second line should not be necessary due to the first line, but for
 # some reason the installation forgets to set up /etc/mailname early
 # enough to not (when running newaliases) stumble over its absence.
-echo "postfix postfix/mailname string $(hostname -f)" | debconf-set-selections
-echo "$(hostname -f)" > /etc/mailname
+echo "postfix postfix/mailname string ${mail_domain}" | debconf-set-selections
+echo "${mail_domain}" > /etc/mailname
 
 # Everything should now be ready for installations.
 apt install -y -o Dpkg::Options::=--force-confold postfix dovecot-imapd opendkim
 echo "TODO: Ensure MX entry for your system in your DNS configuration."
-echo "TODO: Ensure a proper SPF entry for this system in your DNS configuration; something like 'v=spf1 a mx -all' mapped to your host."
+echo "TODO: Ensure a proper SPF entry for this system in your DNS configuration; something like 'v=spf1 mx -all' mapped to your host."
 if [ "${add_dkim_record}" -eq "1" ]; then
     echo "TODO: Add the following DKIM entry to your DNS configuration (possibly with slightly changed host entry – if your mail domain includes a subdomain, append that with a dot):"
     cat "${dkim_selector}.txt"
