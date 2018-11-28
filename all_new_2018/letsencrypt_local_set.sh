@@ -6,7 +6,7 @@ if [ $# -lt 1 ]; then
     echo "Need mail address as argument."
     false
 fi
-domain="$1"
+mail_address="$1"
 
 # If port 80 blocked by iptables, open it.
 set +e
