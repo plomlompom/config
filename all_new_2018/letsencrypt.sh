@@ -1,35 +1,29 @@
 #!/bin/sh
-# Install or copy LetsEncrypt certificates on/from server.
-#
-# First argument: server
-# Second argument: "get" or "put"
-#
-# "get" copies the server's /etc/letsencrypt to a local letsencrypt.tar.
-#
-# "set" copies a local letsencrypt.tar to the server's /etc/letsencrypt.
 set -e
 
-# Ensure we have a server name as argument.
-if [ $# -lt 2 ]; then
-    echo "Need server and action as arguments."
+# Ensure we have a mail address as argument.
+if [ $# -lt 1 ]; then
+    echo "Need mail address as argument."
     false
 fi
-server="$1"
-action="$2"
+mail_address="$1"
 
-# So we only get asked once for decrypting our key.
-eval $(ssh-agent)
-ssh-add ~/.ssh/id_rsa
+# We need certbot to get LetsEncrypt certificates.
+apt install -y certbot
 
-if [ "${action}" = "get" ]; then
-    # Get /etc/letsencrypt/ as tar file.
-    ssh -t plom@${server} 'su -c "cd /etc/ && tar cf letsencrypt.tar letsencrypt && chown plom:plom letsencrypt.tar && mv letsencrypt.tar /home/plom/"'
-    scp plom@${server}:~/letsencrypt.tar .
-elif [ "${action}" = "put" ]; then
-    # Expand letsencrypt.tar to /etc/letsencrypt/ on server.
-    scp letsencrypt.tar plom@${server}:~/
-    ssh -t plom@${server} 'su -c "rmdir /etc/letsencrypt && mv letsencrypt.tar /etc/ && cd /etc/ && tar xf letsencrypt.tar && rm letsencrypt.tar"'
-else
-    echo "Action must be 'get', or 'put'."
-    false
+# If port 80 blocked by iptables, open it.
+set +e
+iptables -C INPUT -p tcp --dport 80 -j ACCEPT
+open_iptables="$?"
+set -e
+if [ "${open_iptables}" -eq "1" ]; then
+    iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+fi
+
+# Create new certificate and copy it to /etc/letsencrypt.
+certbot certonly --standalone --agree-tos -m "${mail_address}" -d "$(hostname -f)"
+
+# Remove iptables rule to open port 80 if we added it.
+if [ "${open_iptables}" -eq "1" ]; then
+    iptables -D INPUT -p tcp --dport 80 -j ACCEPT
 fi
