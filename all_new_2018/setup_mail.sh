@@ -31,6 +31,7 @@ fi
 
 # Link and adapt mail-server-specific /etc/ files.
 ./hardlink_etc.sh mail
+sed -i "s/REPLACE_maildomain_ECALPER/${mail_domain}/g" /etc/mailutils.conf
 sed -i "s/REPLACE_Domain_ECALPER/${mail_domain}/g" /etc/opendkim.conf
 sed -i "s/REPLACE_Selector_ECALPER/${dkim_selector}/g" /etc/opendkim.conf
 sed -i "s/REPLACE_myhostname_ECALPER/$(hostname -f)/g" /etc/postfix/main.cf
