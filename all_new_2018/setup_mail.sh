@@ -53,8 +53,12 @@ echo "ssl_key = </etc/letsencrypt/live/$(hostname -f)/privkey.pem" >> /etc/dovec
 echo "postfix postfix/mailname string ${mail_domain}" | debconf-set-selections
 echo "${mail_domain}" > /etc/mailname
 
-# Everything should now be ready for installations.
-apt install -y -o Dpkg::Options::=--force-confold postfix dovecot-imapd opendkim
+# Everything should now be ready for installations. Note that we don't
+# strictly need dovecot-lmtpd, as postfix will deliver mail to /var/mail/USER
+# in any case, to be found by dovecot; we use it as a transport mechanism to
+# allow for sophisticated stuff like dovecot-side sieve filtering (installed
+# with dovecot-sieve).
+apt install -y -o Dpkg::Options::=--force-confold postfix dovecot-imapd dovecot-lmtpd dovecot-sieve opendkim
 echo "TODO: Ensure MX entry for your system in your DNS configuration."
 echo "TODO: Ensure a proper SPF entry for this system in your DNS configuration; something like 'v=spf1 mx -all' mapped to your host."
 if [ "${add_dkim_record}" -eq "1" ]; then

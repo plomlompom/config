@@ -51,3 +51,9 @@ smtpd_sasl_path = private/auth
 # connect to opendkim
 smtpd_milters = inet:localhost:12301
 non_smtpd_milters = inet:localhost:12301
+
+# transport mail to dovecot; not strictly needed, as even without this
+# postfix will throw mail to /var/mail/USER to be found by dovecot for
+# serving via IMAP etc.; but using dovecot's LMTP server for delivery
+# allows us to do stuff like dovecot-side sieve filtering.
+mailbox_transport = lmtp:inet:127.0.0.1:2424

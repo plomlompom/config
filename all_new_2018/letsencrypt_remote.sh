@@ -28,7 +28,7 @@ if [ "${action}" = "get" ]; then
 elif [ "${action}" = "put" ]; then
     # Expand letsencrypt.tar to /etc/letsencrypt/ on server.
     scp letsencrypt.tar plom@${server}:~/
-    ssh -t plom@${server} 'su -c "rmdir /etc/letsencrypt && mv letsencrypt.tar /etc/ && cd /etc/ && tar xf letsencrypt.tar && rm letsencrypt.tar"'
+    ssh -t plom@${server} 'su -c "apt -y install certbot && rmdir /etc/letsencrypt && mv letsencrypt.tar /etc/ && cd /etc/ && tar xf letsencrypt.tar && rm letsencrypt.tar"'
 else
     echo "Action must be 'get', or 'put'."
     false
