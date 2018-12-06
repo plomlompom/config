@@ -43,6 +43,7 @@ sshpass -e scp ~/.ssh/id_rsa.pub root@"${server}":/tmp/authorized_keys
 sshpass -e ssh root@"${server}" \
         'useradd -m plom && '\
         'mkdir /home/plom/.ssh && '\
+        'chown plom:plom /home/plom/.ssh && '\
         'chown plom:plom /tmp/authorized_keys && '\
         'chmod u=rw,go= /tmp/authorized_keys && '\
         'mv /tmp/authorized_keys /home/plom/.ssh/'
