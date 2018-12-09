@@ -3,6 +3,9 @@ Description=Certbot
 Documentation=file:///usr/share/doc/python-certbot-doc/html/index.html
 Documentation=https://letsencrypt.readthedocs.io/en/latest/
 [Service]
+# plomlompom added the --webroot -w /var/www/html/ so that renewal
+# works with nginx running, and the nginx reload post-hook so that
+# the new certificates are linked to by nginx.
 Type=oneshot
-ExecStart=/usr/bin/certbot -q renew --webroot -w /var/www/html/
+ExecStart=/usr/bin/certbot -q renew --webroot -w /var/www/html/ --post-hook "service nginx reload"
 PrivateTmp=true
