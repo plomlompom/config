@@ -8,5 +8,6 @@ apt -y -o Dpkg::Options::=--force-confold install nginx gitweb fcgiwrap
 cd /var/
 rm -rf www
 git clone plom@core.plomlompom.com:repos/website www
-su plom -c 'cd /var/ && mkdir public_repos'
+mkdir /var/public_repos
+chown plom:plom /var/public_repos
 iptables-restore /etc/iptables/rules.v4
