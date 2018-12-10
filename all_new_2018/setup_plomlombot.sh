@@ -5,7 +5,7 @@ config_tree_prefix="${HOME}/config/all_new_2018//"
 cp "${config_tree_prefix}"/user_scripts/start_plomlombot.sh /home/plom/
 chown plom:plom /home/plom/start_plomlombot.sh
 apt -y install screen python3-venv
-su plom -c "cd && git clone http://github.com/plomlompom/plomlombot-irc"
+su plom -c "cd && git clone /var/public_repos/plomlombot-irc"
 systemctl enable /etc/systemd/system/plomlombot.service
 service plomlombot start
 mkdir -p /var/www/html/irclogs
