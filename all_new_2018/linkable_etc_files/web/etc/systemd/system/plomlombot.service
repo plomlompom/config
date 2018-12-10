@@ -1,0 +1,10 @@
+[Unit]
+Description=plomlombot screen
+
+[Service]
+Type=forking
+User=plom
+ExecStart=/bin/sh -c 'screen -d -m ~/start.sh plomlombob "#plomlompomtest"'
+
+[Install]
+WantedBy=multi-user.target
