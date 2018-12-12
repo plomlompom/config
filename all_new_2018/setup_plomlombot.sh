@@ -1,14 +1,14 @@
 #!/bin/sh
 set -e
 
-config_tree_prefix="${HOME}/config/all_new_2018//"
-cp "${config_tree_prefix}"/user_scripts/start_plomlombot.sh /home/plom/
-chown plom:plom /home/plom/start_plomlombot.sh
+config_tree_prefix="${HOME}/config/all_new_2018/"
+irclogs_dir=/var/www/html/irclogs
+cp "${config_tree_prefix}"/user_scripts/plomlombot_daemon.sh /home/plom/
+chown plom:plom /home/plom/plomlombot_daemon.sh
 apt -y install screen python3-venv
 su plom -c "cd && git clone /var/public_repos/plomlombot-irc"
 systemctl enable /etc/systemd/system/plomlombot.service
 service plomlombot start
-mkdir -p /var/www/html/irclogs
-plomlompomtest_dir=/home/plom/plomlombot_db/6f322d574618816aa2d6d1ceb4fd2551/789a38c5af11bb71833d89cd74387fcb/logs
-su plom -c "cd && mkdir -p ${plomlompomtest_dir}"
-ln -s "${plomlompomtest_dir}" /var/www/html/irclogs/plomlompomtest
+mkdir -p "${irclogs_dir}"
+chown -r plom:plom "${irclogs_dir}"
+echo "Don't forget to add an encryption key to plom's key chain and to his ~/.plomlombot."

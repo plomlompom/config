@@ -4,7 +4,8 @@ Description=plomlombot screen
 [Service]
 Type=forking
 User=plom
-ExecStart=/bin/sh -c 'screen -d -m -S plomlombot ~/start_plomlombot.sh plomlombob "#plomlompomtest"'
+ExecStart=/bin/sh -c '~/start_plomlombot.sh'
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
