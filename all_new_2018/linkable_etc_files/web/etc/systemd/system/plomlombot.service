@@ -2,9 +2,9 @@
 Description=plomlombot screen
 
 [Service]
-Type=forking
+Type=simple
 User=plom
-ExecStart=/bin/sh -c '~/start_plomlombot.sh'
+ExecStart=/bin/sh -c '~/plomlombot_daemon.sh'
 Restart=always
 
 [Install]
