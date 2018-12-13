@@ -35,7 +35,7 @@ while true; do
                 if [ "${first_char}" = "#" ]; then
                     shortened_channel_name=$(echo -n "${channel_name}" | cut -c2-)
                 fi
-    	        ln -sf "${logs_dir}" "${irclogs_dir}/${shortened_channel_name}"
+                ln -sfn "${logs_dir}" "${irclogs_dir}/${shortened_channel_name}"
 
     	    # If "key:" line, encrypt old raw logs to that GPG key.
     	    elif [ "${first_word}" = "gpg_key": ]; then
