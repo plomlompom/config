@@ -39,7 +39,7 @@ while true; do
     	        # FIXME: Note the trouble we will have if we have the same channel
     	        # name on different servers …
                 ln -sfn "${logs_dir}" "${irclogs_dir}/${shortened_channel_name}"
-                htpasswd -c "${irclogs_pw_dir}/${shortened_channel_name}" "${login_user}" "${login_pw}"
+                echo "${login_user}":'{PLAIN}'"${login_pw}" > "${irclogs_pw_dir}/${shortened_channel_name}"
 
     	    # If "key:" line, encrypt old raw logs to that GPG key.
     	    elif [ "${first_word}" = "gpg_key": ]; then
