@@ -10,9 +10,10 @@ gpg_key="$1"
 
 config_tree_prefix="${HOME}/config/all_new_2018/"
 irclogs_dir=/var/www/html/irclogs
+irclogs_pw_dir=/var/www/irclogs_pw
 cp "${config_tree_prefix}"/user_scripts/plomlombot_daemon.sh /home/plom/
 chown plom:plom /home/plom/plomlombot_daemon.sh
-apt -y install screen python3-venv gpg dirmngr
+apt -y install screen python3-venv gpg dirmngr apache2-utils
 su plom -c "gpg --recv-key ${gpg_key}"
 # TODO: After this, we could in theory remove dirmngr if we only installed it just now.
 su plom -c "cd && git clone /var/public_repos/plomlombot-irc"
@@ -20,7 +21,9 @@ systemctl enable /etc/systemd/system/plomlombot.service
 service plomlombot start
 mkdir -p "${irclogs_dir}"
 chown -R plom:plom "${irclogs_dir}"
+mkdir -p "${irclogs_pw_dir}"
+chown -R plom:plom "${irclogs_pw_dir}"
 echo "Don't forget to add a file ~/.plomlombot with content such as:"
 echo "gpg_key ${gpg_key}"
-echo "bot: SCREEN_SESSION_NAME BOT_NAME #CHANNEL_NAME IRC_SERVER_NAME"
+echo "bot: SCREEN_SESSION_NAME BOT_NAME #CHANNEL_NAME IRC_SERVER_NAME LOGS_USER LOGS_PW"
 echo "# file should end in newline or non-interpreted line such as this"

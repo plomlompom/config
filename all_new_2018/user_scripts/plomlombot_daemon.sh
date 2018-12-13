@@ -5,6 +5,7 @@ set -e
 path=~/.plomlombot
 db_dir="${HOME}/plomlombot_db"
 irclogs_dir=/var/www/html/irclogs
+irclogs_pw_dir=/var/www/irclogs_pw
 while true; do
     if [ -f "${path}" ]; then
         cat "${path}" | while read line; do
@@ -16,7 +17,14 @@ while true; do
     	        session_name=$(echo -n "${line}" | cut -d' ' -f2)
     	        bot_name=$(echo -n "${line}" | cut -d' ' -f3)
     	        channel_name=$(echo -n "${line}" | cut -d' ' -f4)
+                shortened_channel_name="${channel_name}"
+                first_char=$(echo -n "${channel_name}" | cut -c1)
+                if [ "${first_char}" = "#" ]; then
+                    shortened_channel_name=$(echo -n "${channel_name}" | cut -c2-)
+                fi
     	        server_name=$(echo -n "${line}" | cut -d' ' -f5)
+                login_user=$(echo -n "${line}" | cut -d' ' -f6)
+                login_pw=$(echo -n "${line}" | cut -d' ' -f7)
     	        set +e
     	        screen -S "${session_name}" -Q select . > /dev/null
     	        start_screen=$?
@@ -30,12 +38,8 @@ while true; do
     	        logs_dir="${db_dir}/${md5_server}/${md5_channel}/logs"
     	        # FIXME: Note the trouble we will have if we have the same channel
     	        # name on different servers …
-                shortened_channel_name="${channel_name}"
-                first_char=$(echo -n "${channel_name}" | cut -c1)
-                if [ "${first_char}" = "#" ]; then
-                    shortened_channel_name=$(echo -n "${channel_name}" | cut -c2-)
-                fi
                 ln -sfn "${logs_dir}" "${irclogs_dir}/${shortened_channel_name}"
+                htpasswd -c "${irclogs_pw_dir}/${shortened_channel_name}" "${login_user}" "${login_pw}"
 
     	    # If "key:" line, encrypt old raw logs to that GPG key.
     	    elif [ "${first_word}" = "gpg_key": ]; then
