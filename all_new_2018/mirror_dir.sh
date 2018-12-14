@@ -13,7 +13,7 @@ eval `ssh-agent`
 ssh-add
 cd
 ssh plom@"${server}" "cd \"${dir}\" && tar cf ${path_package} ."
-scp plom@"${server}":"${path_package}" .
+scp plom@"${server}":"${path_package}" "${path_package}"
 mkdir -p "${dir}"
 cd "${dir}"
 tar xf "${path_package}"
