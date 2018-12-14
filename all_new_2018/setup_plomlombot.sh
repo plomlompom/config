@@ -13,9 +13,23 @@ irclogs_dir=/var/www/html/irclogs
 irclogs_pw_dir=/var/www/irclogs_pw
 cp "${config_tree_prefix}"/user_scripts/plomlombot_daemon.sh /home/plom/
 chown plom:plom /home/plom/plomlombot_daemon.sh
-apt -y install screen python3-venv gnupg dirmngr
-su plom -c "gpg --no-tty --recv-key ${gpg_key}"
-# TODO: After this, we could in theory remove dirmngr if we only installed it just now.
+apt -y install screen python3-venv gnupg
+keyservers='sks-keyservers.net/ keys.gnupg.net'
+set +e
+while true; do
+    do_break=0
+    for keyserver in $(echo "${keyservers}"; do
+        su plom -c "gpg --no-tty --keyserver $keyserver --recv-key ${gpg_key}"
+        if [ $? -eq "0" ]; then
+            do_break=1
+            break
+        fi
+        echo "Attempt with keyserver ${keyserver} unsuccessful, trying other."
+    if [ "${do_break}" -eq "1" ]; then
+        break
+    fi
+done
+set -e
 su plom -c "cd && git clone /var/public_repos/plomlombot-irc"
 systemctl enable /etc/systemd/system/plomlombot.service
 service plomlombot start
