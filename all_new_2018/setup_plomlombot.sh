@@ -13,8 +13,8 @@ irclogs_dir=/var/www/html/irclogs
 irclogs_pw_dir=/var/www/irclogs_pw
 cp "${config_tree_prefix}"/user_scripts/plomlombot_daemon.sh /home/plom/
 chown plom:plom /home/plom/plomlombot_daemon.sh
-apt -y install screen python3-venv gpg dirmngr
-su plom -c "gpg --recv-key ${gpg_key}"
+apt -y install screen python3-venv gnupg dirmngr
+su plom -c "gpg --no-tty --recv-key ${gpg_key}"
 # TODO: After this, we could in theory remove dirmngr if we only installed it just now.
 su plom -c "cd && git clone /var/public_repos/plomlombot-irc"
 systemctl enable /etc/systemd/system/plomlombot.service
