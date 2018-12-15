@@ -1,0 +1,8 @@
+[Unit]
+Description=Pull website repo every minute
+
+[Timer]
+OnCalendar=*-*-* *:*:00,15,30,45
+
+[Install]
+WantedBy=timers.target

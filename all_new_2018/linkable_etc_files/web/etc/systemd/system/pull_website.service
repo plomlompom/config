@@ -1,0 +1,5 @@
+[Unit]
+Description=Pull website repo
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'cd /var/www && git pull'
