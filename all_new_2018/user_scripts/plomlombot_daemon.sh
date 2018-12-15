@@ -31,7 +31,7 @@ while true; do
                 set -e
                 if [ "${start_screen}" -eq "1" ]; then
                 cd ~/plomlombot-irc
-                screen -d -m -S "${session_name}" ./run.sh -r 604800 -n "${bot_name}" -s "${server_name}" "${channel_name}"
+                LANG="en_US.UTF-8" screen -d -m -S "${session_name}" ./run.sh -r 604800 -n "${bot_name}" -s "${server_name}" "${channel_name}"
                 fi
                 md5_server=$(echo -n "${server_name}" | md5sum | cut -d' ' -f1)
                 md5_channel=$(echo -n "${channel_name}" | md5sum | cut -d' ' -f1)
