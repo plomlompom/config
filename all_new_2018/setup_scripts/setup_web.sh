@@ -7,6 +7,7 @@ setup_scripts_dir="${config_tree_prefix}/setup_scripts"
 cd "${setup_scripts_dir}"
 
 ./hardlink_etc.sh web
+./setup_sendonly.sh
 sed -i "s/REPLACE_fqdn_ECALPER/$(hostname -f)/g" /etc/nginx/nginx.conf
 sed -i "s/REPLACE_fqdn_ECALPER/$(hostname -f)/g" /etc/gitweb.conf
 cd /var/
