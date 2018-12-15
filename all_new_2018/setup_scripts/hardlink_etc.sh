@@ -9,7 +9,7 @@
 # CAUTION: This removes original files at the affected paths.
 set -e
 
-config_tree_prefix="${HOME}/config/all_new_2018/linkable_etc_files"
+config_tree_prefix="${HOME}/config/all_new_2018"
 linkable_files_dir="${config_tree_prefix}/linkable_etc_files"
 
 for target in "$@"; do
