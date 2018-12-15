@@ -1,5 +1,10 @@
 #!/bin/sh
+# Set up plomlompom.com web server.
 set -e
+
+config_tree_prefix="${HOME}/config/all_new_2018"
+setup_scripts_dir="${config_tree_prefix}/setup_scripts"
+cd "${setup_scripts_dir}"
 
 ./hardlink_etc.sh web
 sed -i "s/REPLACE_fqdn_ECALPER/$(hostname -f)/g" /etc/nginx/nginx.conf

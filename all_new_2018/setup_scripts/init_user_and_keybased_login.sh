@@ -13,9 +13,10 @@ set -e
 
 # Location auf a sshd_config with "PermitRootLogin no" and
 # "PasswordAuthentication no".
+config_tree_prefix="${HOME}/config/all_new_2018"
+linkable_files_dir="${config_tree_prefix}/linkable_etc_files/server"
 system_path_sshd_config='/etc/ssh/sshd_config'
-config_tree_prefix="${HOME}/config/all_new_2018/linkable_etc_files/server/"
-local_path_sshd_config="${config_tree_prefix}""${system_path_sshd_config}"
+local_path_sshd_config="${linkable_files_dir}/${system_path_sshd_config}"
 
 # Ensure we have a server name as argument.
 if [ $# -eq 0 ]; then

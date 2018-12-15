@@ -9,10 +9,11 @@
 # CAUTION: This removes original files at the affected paths.
 set -e
 
-config_tree_prefix="${HOME}/config/all_new_2018/linkable_etc_files/"
+config_tree_prefix="${HOME}/config/all_new_2018/linkable_etc_files"
+linkable_files_dir="${config_tree_prefix}/linkable_etc_files"
 
 for target in "$@"; do
-    cd "${config_tree_prefix}${target}"
+    cd "${linkable_files_dir}/${target}"
     for path in $(find . -type f); do
         linking=$(echo "${path}" | cut -c2-)
         linked=$(realpath "${path}")

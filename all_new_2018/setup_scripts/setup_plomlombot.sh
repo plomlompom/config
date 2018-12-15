@@ -8,7 +8,7 @@ if [ $# -lt 1 ]; then
 fi
 gpg_key="$1"
 
-config_tree_prefix="${HOME}/config/all_new_2018/"
+config_tree_prefix="${HOME}/config/all_new_2018"
 irclogs_dir=/var/www/html/irclogs
 irclogs_pw_dir=/var/www/irclogs_pw
 cp "${config_tree_prefix}"/user_files/plomlombot_daemon.sh /home/plom/

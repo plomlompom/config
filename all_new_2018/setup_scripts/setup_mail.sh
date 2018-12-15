@@ -10,6 +10,10 @@ mail_domain="$1"
 dkim_selector="$2"
 domainwide="$3"
 
+config_tree_prefix="${HOME}/config/all_new_2018"
+setup_scripts_dir="${config_tree_prefix}/setup_scripts"
+cd "${setup_scripts_dir}"
+
 # Set up DKIM key if necessary.
 mkdir -p /etc/dkimkeys/
 add_dkim_record=0

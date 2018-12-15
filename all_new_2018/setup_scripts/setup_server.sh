@@ -11,6 +11,10 @@ fi
 hostname="$1"
 fqdn="$2"
 
+config_tree_prefix="${HOME}/config/all_new_2018"
+setup_scripts_dir="${config_tree_prefix}/setup_scripts"
+cd "${setup_scripts_dir}"
+
 # Adapt /etc/ to our needs by hardlinking into ./linkable_etc_files. This
 # will set basic configurations affecting following steps, such as setup
 # of APT and the locale selection, so needs to be right at the beginning.

@@ -1,4 +1,6 @@
 #!/bin/sh
+# Certify current server with LetsEncrypt.
+# Uses hostname -f for the domain we want to certify.
 set -e
 
 # Ensure we have a mail address as argument.

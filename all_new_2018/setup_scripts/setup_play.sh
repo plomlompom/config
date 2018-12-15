@@ -8,8 +8,12 @@ if [ $# -lt 1 ]; then
 fi
 gpg_key="$1"
 
-./hardlink_etc.sh play
+config_tree_prefix="${HOME}/config/all_new_2018"
+setup_scripts_dir="${config_tree_prefix}/setup_scripts"
+cd "${setup_scripts_dir}"
+
 config_tree_prefix="${HOME}/config/all_new_2018/"
+./hardlink_etc.sh play
 apt -y install weechat screen vim
 cp "${config_tree_prefix}user_files/encrypter.sh" /home/plom/
 chown plom:plom /home/plom/encrypter.sh

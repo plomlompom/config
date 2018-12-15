@@ -1,4 +1,5 @@
 #!/bin/sh
+# Mirror directory tree from remote to local server, keeping the path.
 set -e
 
 if [ $# -lt 2 ]; then
