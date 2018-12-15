@@ -12,6 +12,7 @@ config_tree_prefix="${HOME}/config/all_new_2018"
 setup_scripts_dir="${config_tree_prefix}/setup_scripts"
 cd "${setup_scripts_dir}"
 
+./add_encryption_key.sh "${gpg_key}"
 config_tree_prefix="${HOME}/config/all_new_2018/"
 ./hardlink_etc.sh play
 apt -y install weechat screen vim
