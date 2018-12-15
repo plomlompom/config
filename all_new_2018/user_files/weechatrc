@@ -1,0 +1,7 @@
+/set logger.file.path ~/weechatlogs
+/set logger.file.flush_delay 0
+/set logger.mask.irc "irc/$server/$channel.%Y-%m-%d.weechatlog"
+/set weechat.bar.status.items "[time],[buffer_last_number],[buffer_plugin],buffer_number+:+buffer_name+(buffer_modes)+{buffer_nicklist_count}+buffer_zoom+buffer_filter,[lag],[hotlist],completion,scroll,[otr]"
+/set weechat.color.chat_nick_colors "lightcyan"
+/server add freenode irc.freenode.net -nicks=plimlompom,plimlomp0m,pliml0mp0m -realname="foo bar" -autojoin=#plomlompomtest
+/connect freenode

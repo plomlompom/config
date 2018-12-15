@@ -1,0 +1,6 @@
+[Unit]
+Description=Pull website repo
+[Service]
+Type=oneshot
+User=plom
+ExecStart=/bin/sh -c '~/encrypter.sh'

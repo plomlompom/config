@@ -1,0 +1,8 @@
+[Unit]
+Description=Attempt encryption of old chatlogs once every minute.
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+
+[Install]
+WantedBy=timers.target
