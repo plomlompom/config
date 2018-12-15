@@ -8,13 +8,14 @@ if [ $# -lt 1 ]; then
 fi
 gpg_key="$1"
 
+./hardlink_etc.sh play
 config_tree_prefix="${HOME}/config/all_new_2018/"
 apt -y install weechat screen vim
-cp "${config_tree_prefix}user_files/encrypter.sh /home/plom/"
+cp "${config_tree_prefix}user_files/encrypter.sh" /home/plom/
 chown plom:plom /home/plom/encrypter.sh
-cp "${config_tree_prefix}user_files/weechat-wrapper.sh /home/plom/"
+cp "${config_tree_prefix}user_files/weechat-wrapper.sh" /home/plom/
 chown plom:plom /home/plom/weechat-wrapper.sh
-cp "${config_tree_prefix}user_files/weechatrc /home/plom/.weechatrc"
+cp "${config_tree_prefix}user_files/weechatrc" /home/plom/.weechatrc
 chown plom:plom /home/plom/.weechatrc
 apt -y install screen gnupg dirmngr
 keyservers='sks-keyservers.net/ keys.gnupg.net'
@@ -37,4 +38,5 @@ set -e
 echo "$gpg_key" > /home/plom/.encrypt_target
 chown plom:plom /home/plom/.encrypt_target
 # TODO: We may remove dirmngr here if only this script installed it.
-service encrypt_chatlogs.timer start
+systemctl daemon-reload
+systemctl start encrypt_chatlogs.timer
