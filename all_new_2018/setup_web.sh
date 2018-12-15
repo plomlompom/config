@@ -11,4 +11,3 @@ apt -y -o Dpkg::Options::=--force-confold install nginx gitweb fcgiwrap
 mkdir /var/public_repos
 chown plom:plom /var/public_repos
 iptables-restore /etc/iptables/rules.v4
-systemctl start pull_website.timer
