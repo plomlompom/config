@@ -64,6 +64,20 @@ echo "${mail_domain}" > /etc/mailname
 # allow for sophisticated stuff like dovecot-side sieve filtering (installed
 # with dovecot-sieve).
 apt install -y -o Dpkg::Options::=--force-confold postfix dovecot-imapd dovecot-lmtpd dovecot-sieve opendkim
+cp "${config_tree_prefix}/user_files/dovecot.sieve" /home/plom/.dovecot.sieve
+chown plom:plom /home/plom/.dovecot.sieve
+
+# In addition to our postfix server receiving mails, we funnel mails from a
+# POP3 account into dovecot via fetchmail. It might make sense to adapt the
+# ~/.dovecot.sieve to move mails targeted to the fetched mail account to their
+# own mbox.
+apt install -y fetchmail
+cp "${config_tree_prefix}/user_files/fetchmailrc" /home/plom/.fetchmailrc
+chown plom:plom /home/plom/.fetchmailrc
+systemctl daemon-reload
+systemctl start fetchmail.timer
+
+# Final advice to user.
 echo "TODO: Ensure MX entry for your system in your DNS configuration."
 echo "TODO: Ensure a proper SPF entry for this system in your DNS configuration; something like 'v=spf1 mx -all' mapped to your host."
 if [ "${add_dkim_record}" -eq "1" ]; then
@@ -71,3 +85,4 @@ if [ "${add_dkim_record}" -eq "1" ]; then
     cat "${dkim_selector}.txt"
 fi
 echo "TODO: passwd plom"
+echo "TODO: adapt /home/plom/.dovecot.sieve and /home/plom/.fetchmailrc"

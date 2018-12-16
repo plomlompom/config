@@ -1,0 +1,7 @@
+[Unit]
+Description=Run plom's fetchmail
+
+[Service]
+Type=oneshot
+User=plom
+ExecStart=/bin/sh -c 'fetchmail'
