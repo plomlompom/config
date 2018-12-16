@@ -86,6 +86,7 @@ systemctl daemon-reload
 echo "TODO: Ensure MX entry for your system in your DNS configuration."
 echo "TODO: Ensure a proper SPF entry for this system in your DNS configuration; something like 'v=spf1 mx -all' mapped to your host."
 echo "TODO: passwd plom for IMAPS login"
-echo "TODO: adapt /home/plom/.dovecot.sieve /home/plom/.fetchmailrc /home/plom/.pingmailrc, then run: systemctl start pingmail.timer && systemctl start fetchmail.timer"
+echo "TODO: adapt /home/plom/.fetchmailrc and then do: systemctl start fetchmail.timer"
+echo "TODO: adapt /home/plom/.dovecot.sieve and /home/plom/.pingmailrc (sieve mail by pingmail target person into mbox defined in .pingmailrc), then run: systemctl start pingmail.timer"
 echo "TODO: Add the following DKIM entry to your DNS configuration (possibly with slightly changed host entry – if your mail domain includes a subdomain, append that with a dot):"
 cat "${dkim_selector}.txt"
