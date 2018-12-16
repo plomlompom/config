@@ -66,16 +66,21 @@ echo "${mail_domain}" > /etc/mailname
 apt install -y -o Dpkg::Options::=--force-confold postfix dovecot-imapd dovecot-lmtpd dovecot-sieve opendkim
 cp "${config_tree_prefix}/user_files/dovecot.sieve" /home/plom/.dovecot.sieve
 chown plom:plom /home/plom/.dovecot.sieve
+cp "${config_tree_prefix}/user_files/pingmailrc" /home/plom/.pingmailrc
+chown plom:plom /home/plom/.pingmailrc
 
 # In addition to our postfix server receiving mails, we funnel mails from a
 # POP3 account into dovecot via fetchmail. It might make sense to adapt the
 # ~/.dovecot.sieve to move mails targeted to the fetched mail account to their
 # own mbox.
-apt install -y fetchmail
 cp "${config_tree_prefix}/user_files/fetchmailrc" /home/plom/.fetchmailrc
 chown plom:plom /home/plom/.fetchmailrc
+chmod 0700 /home/plom/.fetchmailrc
+set +e
+apt install -y fetchmail
 systemctl daemon-reload
 systemctl start fetchmail.timer
+set -e
 
 # Final advice to user.
 echo "TODO: Ensure MX entry for your system in your DNS configuration."
@@ -85,4 +90,4 @@ if [ "${add_dkim_record}" -eq "1" ]; then
     cat "${dkim_selector}.txt"
 fi
 echo "TODO: passwd plom"
-echo "TODO: adapt /home/plom/.dovecot.sieve and /home/plom/.fetchmailrc"
+echo "TODO: adapt /home/plom/.dovecot.sieve /home/plom/.fetchmailrc /home/plom/.pingmailrc"
