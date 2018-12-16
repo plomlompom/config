@@ -44,3 +44,6 @@ ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 # If we have not yet set the shell for user plom, ensure it here. This
 # is mostly for convenience.
 usermod -s /bin/bash plom
+
+# We want to be able to use ALL our servers as borg backup destinations.
+apt -y install borgbackup
