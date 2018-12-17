@@ -1,6 +1,5 @@
 #!/bin/sh
 set -e
-set -x
 
 standard_repo="borg"
 config_file="${HOME}/.borgrepos"
@@ -44,8 +43,8 @@ if [ "${first_arg}" = "init" ]; then
     cat "${config_file}" >> "${tmp_file}"
     cp "${tmp_file}" "${config_file}"
 elif [ "${first_arg}" = "store" ]; then
-    if [ "$#" -lt 2 ]; then
-        echo "Need archive name and paths to archive."
+    if [ ! "$#" -eq 2 ]; then
+        echo "Need precisely two arguments: archive name and path to archive."
         false
     fi
     archive_name=$1
@@ -58,9 +57,9 @@ elif [ "${first_arg}" = "store" ]; then
             continue
         fi
         repo="${line}:${standard_repo}"
-        archive="${repo}::${archive_name}"
+        archive="${repo}::${archive_name}-{utcnow:%Y-%m-%dT%H:%M}"
         echo "Creating archive: ${archive}"
-        borg create --verbose --list "${archive}" ${to_backup}
+        borg create --verbose --list "${archive}" "${to_backup}"
     done
 elif [ "${first_arg}" = "check" ]; then
     if [ ! "$#" -eq 0 ]; then
