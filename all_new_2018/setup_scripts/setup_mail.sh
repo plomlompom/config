@@ -74,6 +74,7 @@ su plom -c "cd && git clone https://plomlompom.com/repos/clone/pingmail.git"
 # POP3 account into dovecot via fetchmail. It might make sense to adapt the
 # ~/.dovecot.sieve to move mails targeted to the fetched mail account to their
 # own mbox.
+apt -y install fetchmail
 cp "${config_tree_prefix}/user_files/fetchmailrc" /home/plom/.fetchmailrc
 chown plom:plom /home/plom/.fetchmailrc
 chmod 0700 /home/plom/.fetchmailrc
