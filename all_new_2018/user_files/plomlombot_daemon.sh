@@ -41,8 +41,8 @@ while true; do
                 ln -sfn "${logs_dir}" "${irclogs_dir}/${shortened_channel_name}"
                 echo "${login_user}":'{PLAIN}'"${login_pw}" > "${irclogs_pw_dir}/${shortened_channel_name}"
 
-            # If "key:" line, encrypt old raw logs to that GPG key.
-            elif [ "${first_word}" = "gpg_key": ]; then
+            # If "gpg" line, encrypt old raw logs to that GPG key.
+            elif [ "${first_word}" = "gpg_key" ]; then
                 key=$(echo -n "${line}" | cut -d' ' -f2)
                 mkdir -p ~/plomlombot_db
                 cd ~/plomlombot_db
