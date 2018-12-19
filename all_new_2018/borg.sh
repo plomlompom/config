@@ -14,6 +14,8 @@ usage() {
 }
 
 read_pw() {
+    eval $(ssh-agent)
+    ssh-add
     stty -echo
     printf "Passphrase: "
     read password
