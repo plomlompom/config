@@ -34,6 +34,9 @@ apt update
 ./install_for_target.sh all server
 ./purge_nonrequireds.sh all server
 
+# Ensure our desired locale is available.
+locale-gen
+
 # Only upgrade after reducing the system to the desired minimum, so that
 # we don't need to get more data than necessary.
 apt -y dist-upgrade
