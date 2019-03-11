@@ -1,0 +1,9 @@
+# connectivity: ifupdown seems necessary everyhwere, isc-dhcp-client
+# unpredictably so
+ifupdown
+isc-dhcp-client
+# git for the setup directory; cloning works with ca-certificates
+ca-certificates
+git
+# to avoid constant warnings about no locale being found
+locales
