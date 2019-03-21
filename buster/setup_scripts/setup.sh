@@ -16,7 +16,7 @@ cd "${setup_scripts_dir}"
 # Adapt /etc/ to our needs by hardlinking into ./linkable_etc_files. This
 # will set basic configurations affecting following steps, such as setup
 # of APT and the locale selection, so needs to be right at the beginning.
-./copy_etc.sh all server
+./copy_etc.sh all
 
 # Set hostname and FQDN.
 ./set_hostname_and_fqdn.sh "${hostname}" "${fqdn}"
