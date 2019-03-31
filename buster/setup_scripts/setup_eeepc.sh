@@ -11,4 +11,5 @@ config_tree_prefix="${HOME}/config/buster"
 setup_scripts_dir="${config_tree_prefix}/setup_scripts"
 cd "${setup_scripts_dir}"
 ./setup.sh "${hostname}" ""
+./copy_etc.sh eeepc
 ./install_for_target.sh eeepc
