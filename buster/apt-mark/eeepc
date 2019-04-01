@@ -14,4 +14,14 @@ xserver-xorg-input-synaptics
 xinit
 # for startx to run for non-root user
 libpam-systemd
+# window environment
+i3
+i3status
+suckless-tools
+# to get sleepy at night
+redshift
+# for alsamixer
+alsa-utils
+# browser
+firefox-esr
 
