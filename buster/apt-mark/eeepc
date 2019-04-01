@@ -2,4 +2,7 @@
 console-setup
 # without this, systemd-logind won't run, and so not detect lid close for hibernation
 dbus
+# for wifi
+firmware-ralink
+wicd-curses
 
