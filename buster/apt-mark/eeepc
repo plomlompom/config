@@ -5,4 +5,13 @@ dbus
 # for wifi
 firmware-ralink
 wicd-curses
+# for X to start at all
+xserver-xorg-video-intel
+# X input: keyboard and touchpad
+xserver-xorg-input-evdev
+xserver-xorg-input-synaptics
+# for startx
+xinit
+# for startx to run for non-root user
+libpam-systemd
 
