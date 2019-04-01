@@ -1,1 +1,5 @@
+# this provides setupcon which reads /etc/default/console-setup
 console-setup
+# without this, systemd-logind won't run, and so not detect lid close for hibernation
+dbus
+
