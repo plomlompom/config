@@ -24,4 +24,8 @@ redshift
 alsa-utils
 # browser
 firefox-esr
+# also useful
+less
+man-db
+manpages
 

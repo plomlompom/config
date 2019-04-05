@@ -13,10 +13,10 @@ config_tree_prefix="${HOME}/config/buster"
 setup_scripts_dir="${config_tree_prefix}/setup_scripts"
 cd "${setup_scripts_dir}"
 
-# Adapt /etc/ to our needs by hardlinking into ./linkable_etc_files. This
-# will set basic configurations affecting following steps, such as setup
-# of APT and the locale selection, so needs to be right at the beginning.
-./copy_etc.sh all
+# Adapt /etc/ to our needs by copying from ./etc_files. This will set
+# basic configurations affecting following steps, such as setup of APT
+# and the locale selection, so needs to be right at the beginning.
+./copy_dirtree.sh "${config_tree_prefix}/etc_files" "" all
 
 # Set hostname and FQDN.
 ./set_hostname_and_fqdn.sh "${hostname}" "${fqdn}"
