@@ -1,0 +1,83 @@
+# plomlompom's i3 status bar configuration
+
+# Activate colors; set update interval of one second.
+general {
+  colors = true
+  interval = 1
+}
+
+# Selection / order of status elements.
+order += "disk /"
+order += "disk /home"
+order += "wireless wlp2s0"
+order += "ethernet enp1s0"
+order += "battery 0"
+order += "cpu_usage"
+order += "load"
+order += "cpu_temperature 0"
+order += "time"
+order += "volume master"
+
+# How much space is left in / ?
+disk "/" {
+  format = "/: %avail available of %total"
+  separator_block_width = 10
+}
+
+# How much space is left in /home ?
+disk "/home" {
+  format = "/home: %avail available of %total"
+  separator_block_width = 40
+}
+
+
+# WLAN status: show IP and connection quality or "down".
+wireless wlp2s0 {
+  format_up = "w: (%quality at %essid) %ip"
+  format_down = "w: down"
+  separator_block_width = 10
+}
+
+# Ethernet status: show IP or "down".
+ethernet enp1s0 {
+  format_up = "e: %ip"
+  format_down = "e: down"
+  separator_block_width = 40
+}
+
+# Battery status: show FULL/CHARGING/BATTERY, storage, time left.
+battery 0 {
+  format = "b: %status %percentage %remaining"
+  separator_block_width = 40
+}
+
+# Show CPU usage.
+cpu_usage {
+  format = "cpu: %usage"
+  separator_block_width = 10
+}
+
+# Show system load during last 1/5/15 minutes.
+load {
+  format = "%1min %5min %15min"
+  separator_block_width = 40
+}
+
+# Show CPU temperature in degrees of celsius.
+cpu_temperature 0 {
+  format = "%degrees °C"
+  separator_block_width = 40
+}
+
+# Show date/time/timezone as "year-month-day hour:minute:second
+# timezone_numeric/timezone_alphabetic".
+time {
+  format = "%Y-%m-%d %H:%M:%S %z/%Z"
+  separator_block_width = 40
+}
+
+volume master {
+  format = "♪: %volume"
+  format_muted = "♪: muted (%volume)"
+  separator_block_width = 40
+}
