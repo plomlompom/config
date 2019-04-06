@@ -34,7 +34,7 @@ wireless wlp2s0 {
 ethernet enp1s0 {
   format_up = "e: %ip"
   format_down = "e: down"
-  separator_block_width = 10
+  separator_block_width = 25
 }
 
 # Battery status: show FULL/CHARGING/BATTERY, storage, time left.
