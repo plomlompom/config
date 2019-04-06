@@ -11,7 +11,7 @@ set                           $mod Mod4
 floating_modifier             $mod
 
 # Launch xterm.
-bindsym $mod+Return           exec xterm -r
+bindsym $mod+Return           exec xterm
 
 # Launch programs via dmenu.
 bindsym $mod+d                exec dmenu_run
