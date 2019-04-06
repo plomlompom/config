@@ -8,7 +8,6 @@ general {
 
 # Selection / order of status elements.
 order += "disk /"
-order += "disk /home"
 order += "wireless wlp2s0"
 order += "ethernet enp1s0"
 order += "battery 0"
@@ -21,15 +20,8 @@ order += "volume master"
 # How much space is left in / ?
 disk "/" {
   format = "/: %avail available of %total"
-  separator_block_width = 10
+  separator_block_width = 25
 }
-
-# How much space is left in /home ?
-disk "/home" {
-  format = "/home: %avail available of %total"
-  separator_block_width = 40
-}
-
 
 # WLAN status: show IP and connection quality or "down".
 wireless wlp2s0 {
@@ -42,13 +34,13 @@ wireless wlp2s0 {
 ethernet enp1s0 {
   format_up = "e: %ip"
   format_down = "e: down"
-  separator_block_width = 40
+  separator_block_width = 10
 }
 
 # Battery status: show FULL/CHARGING/BATTERY, storage, time left.
 battery 0 {
   format = "b: %status %percentage %remaining"
-  separator_block_width = 40
+  separator_block_width = 25
 }
 
 # Show CPU usage.
@@ -60,24 +52,24 @@ cpu_usage {
 # Show system load during last 1/5/15 minutes.
 load {
   format = "%1min %5min %15min"
-  separator_block_width = 40
+  separator_block_width = 25
 }
 
 # Show CPU temperature in degrees of celsius.
 cpu_temperature 0 {
   format = "%degrees °C"
-  separator_block_width = 40
+  separator_block_width = 25
 }
 
 # Show date/time/timezone as "year-month-day hour:minute:second
 # timezone_numeric/timezone_alphabetic".
 time {
   format = "%Y-%m-%d %H:%M:%S %z/%Z"
-  separator_block_width = 40
+  separator_block_width = 25
 }
 
 volume master {
   format = "♪: %volume"
   format_muted = "♪: muted (%volume)"
-  separator_block_width = 40
+  separator_block_width = 25
 }
