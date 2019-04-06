@@ -1,0 +1,15 @@
+! otherwise various applications will assume merely 8 colors
+XTerm.termName: xterm-256color
+
+! font
+XTerm*faceName: -gnu-unifont-*-*-*-*-*-*-*-*-*-*-*
+XTerm*faceSize: 8
+
+! white on black
+XTerm*reverseVideo: on
+
+! blink screen instead of sound
+XTerm*visualBell: on
+
+! proper ALT as META key treatment
+XTerm*eightBitInput:  false

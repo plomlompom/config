@@ -3,6 +3,9 @@
 # Set keymap.
 setxkbmap de
 
+# Load xterm settings
+xrdb -merge ~/.Xresources
+
 # Redshift to Berlin, Germany.
 redshift -rl 53:13 &
 

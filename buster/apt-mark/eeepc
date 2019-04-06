@@ -12,6 +12,8 @@ xserver-xorg-input-evdev
 xserver-xorg-input-synaptics
 # for startx
 xinit
+# for xrdb
+x11-xserver-utils
 # for startx to run for non-root user
 libpam-systemd
 # window environment
@@ -28,4 +30,6 @@ firefox-esr
 less
 man-db
 manpages
+# for xterm and browser unicode display
+ttf-unifont
 
