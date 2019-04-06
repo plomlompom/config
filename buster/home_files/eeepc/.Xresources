@@ -2,7 +2,14 @@
 XTerm.termName: xterm-256color
 
 ! font
-XTerm*faceName: -gnu-unifont-*-*-*-*-*-*-*-*-*-*-*
+! actually, "mono" is already the default for faceName (it will
+! pick whatever fc-match mono delivers), but we need to set _some_
+! faceName to trigger XTerm activating TrueType fonts
+! (XTerm*fontRender by itself won't do the trick), and we want
+! TrueType fonts because, well, they scale better, and XTerm lets them
+! fall back on alternatives (hi there ttf-unifont) when a Unicode
+! glyph is not found
+XTerm*faceName: mono
 XTerm*faceSize: 8
 
 ! white on black
@@ -12,4 +19,4 @@ XTerm*reverseVideo: on
 XTerm*visualBell: on
 
 ! proper ALT as META key treatment
-XTerm*eightBitInput:  false
+XTerm*eightBitInput: false
