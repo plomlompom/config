@@ -20,7 +20,7 @@ if [ ! "$BASH" = "" ]; then
     tput_color="\[$tput_color\]"
     tput_reset="\[$tput_reset\]"
 fi
-PS1="${tput_color}["\$\(date\ +%Y-%m-%d/%H:%M:%S/%Z\)" $USER@$(hostname):"\$\(pwd\)"]$ $tput_reset"
+PS1="${tput_color}["\$\(date\ +%Y-%m-%d/%H:%M:%S/%Z\)" $(whoami)@$(hostname):"\$\(pwd\)"]$ $tput_reset"
 PS2="${tput_color}> $tput_reset"
 PS3="${tput_color}select: $tput_reset"
 PS4="${tput_color}+ $tput_reset"

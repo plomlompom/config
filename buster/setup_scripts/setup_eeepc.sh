@@ -14,10 +14,11 @@ cd "${setup_scripts_dir}"
 ./copy_dirtree.sh "${config_tree_prefix}/etc_files" "" eeepc
 ./install_for_target.sh eeepc
 
+./copy_dirtree.sh "${config_tree_prefix}/home_files" "/root" minimal root
 if [ ! -d "/home/plom" ]; then
     adduser --disabled-password --gecos "" plom
     usermod -a -G sudo plom
     su -c "cd && git clone https://plomlompom.com/repos/clone/config" plom
-    su -c "~/config/buster/setup_scripts/copy_dirtree.sh ~/config/buster/home_files ~ eeepc" plom
-    su -c "echo 2 > ~/.shell_prompt_color" plom
+    su -c "~/config/buster/setup_scripts/copy_dirtree.sh ~/config/buster/home_files ~ minimal user_eeepc" plom
+    passwd plom
 fi
