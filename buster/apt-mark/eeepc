@@ -20,16 +20,18 @@ libpam-systemd
 i3
 i3status
 suckless-tools
+xterm
 # to get sleepy at night
 redshift
 # for alsamixer
 alsa-utils
 # browser
 firefox-esr
+# for xterm and browser unicode display
+ttf-unifont
 # also useful
+sudo
 less
 man-db
 manpages
-# for xterm and browser unicode display
-ttf-unifont
 

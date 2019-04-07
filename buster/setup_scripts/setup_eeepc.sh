@@ -16,6 +16,7 @@ cd "${setup_scripts_dir}"
 
 if [ ! -d "/home/plom" ]; then
     adduser --disabled-password --gecos "" plom
+    usermod -a -G sudo plom
     su -c "cd && git clone https://plomlompom.com/repos/clone/config" plom
     su -c "~/config/buster/setup_scripts/copy_dirtree.sh ~/config/buster/home_files ~ eeepc" plom
 fi
