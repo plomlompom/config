@@ -25,8 +25,6 @@ xterm
 redshift
 # for alsamixer
 alsa-utils
-# browser
-firefox-esr
 # for xterm and browser unicode display
 ttf-unifont
 # also useful
@@ -35,4 +33,9 @@ sudo
 less
 man-db
 manpages
-
+# firefox dependencies
+libdbus-glib-1-2
+libgtk-3-0
+# firefox installation dependencies (remove later?)
+bzip2
+wget
