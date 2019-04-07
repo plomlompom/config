@@ -30,6 +30,7 @@ firefox-esr
 # for xterm and browser unicode display
 ttf-unifont
 # also useful
+vim
 sudo
 less
 man-db

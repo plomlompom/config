@@ -19,4 +19,5 @@ if [ ! -d "/home/plom" ]; then
     usermod -a -G sudo plom
     su -c "cd && git clone https://plomlompom.com/repos/clone/config" plom
     su -c "~/config/buster/setup_scripts/copy_dirtree.sh ~/config/buster/home_files ~ eeepc" plom
+    su -c "echo 2 > ~/.shell_prompt_color"
 fi

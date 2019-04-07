@@ -1,0 +1,26 @@
+# Settings for interactive shells.
+
+# Fancy colors for ls.
+alias ls="ls --color=auto"
+
+# Use vim as default editor for anything.
+export VISUAL=vim
+export EDITOR=$VISUAL
+
+# Colored prompt with username, hostname, date/time, directory.
+colornumber=7 # Default to white if no color set via colornumber dotfile.
+colornumber_file=~/.shell_prompt_color
+if [ -f $colornumber_file ]; then
+    colornumber=`cat $colornumber_file`
+fi
+tput_color="$(tput setaf $colornumber)$(tput bold)"
+tput_reset="$(tput sgr0)"
+# Bash confuses the line length when not told to not count escape sequences.
+if [ ! "$BASH" = "" ]; then
+    tput_color="\[$tput_color\]"
+    tput_reset="\[$tput_reset\]"
+fi
+PS1="${tput_color}["\$\(date\ +%Y-%m-%d/%H:%M:%S/%Z\)" $USER@$(hostname):"\$\(pwd\)"]$ $tput_reset"
+PS2="${tput_color}> $tput_reset"
+PS3="${tput_color}select: $tput_reset"
+PS4="${tput_color}+ $tput_reset"
