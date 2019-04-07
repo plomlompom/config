@@ -23,11 +23,11 @@ XTerm*eightBitInput: false
 ! font sizes
 XTerm*faceSize: 8
 XTerm*faceSize1: 4
-XTerm*faceSize1: 5
-XTerm*faceSize1: 6
-XTerm*faceSize1: 8
-XTerm*faceSize1: 14
-XTerm*faceSize1: 25
+XTerm*faceSize2: 5
+XTerm*faceSize3: 6
+XTerm*faceSize4: 8
+XTerm*faceSize5: 14
+XTerm*faceSize6: 25
 
 ! colors
 ! black
