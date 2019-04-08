@@ -39,3 +39,5 @@ libgtk-3-0
 # firefox installation dependencies (remove later?)
 bzip2
 wget
+jq
+#
