@@ -35,6 +35,7 @@ url_noscript="https://secure.informaction.com/download/releases/${noscript_xpi}"
 wget "${url_noscript}"
 name=$(unzip -p "${noscript_xpi}" manifest.json | jq -r .applications.gecko.id)
 mv "${noscript_xpi}" "${name}.xpi"
+wget "${url_tridactyl}"
 tridactyl_xpi="tridactyl-1.14.9pre2457-an+fx.xpi"
 url_tridactyl="https://tridactyl.cmcaine.co.uk/betas/${tridactyl_xpi}"
 name=$(unzip -p "${tridactyl_xpi}" manifest.json | jq -r .applications.gecko.id)
