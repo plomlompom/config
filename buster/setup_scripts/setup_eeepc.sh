@@ -29,6 +29,7 @@ update-alternatives --set x-www-browser /opt/firefox/firefox
 # Install Firefox plugins.
 # See <https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Distribution_options/Sideloading_add-ons>
 extensions_dir="/usr/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/"
+mkdir -p "${extensions_dir}"
 noscript_xpi="noscript-10.6.xpi"
 url_noscript="https://secure.informaction.com/download/releases/${noscript_xpi}"
 wget "${url_noscript}"
