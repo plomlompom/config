@@ -50,5 +50,6 @@ if [ ! -d "/home/plom" ]; then
     usermod -a -G sudo plom
     su -c "cd && git clone https://plomlompom.com/repos/clone/config" plom
     su -c "~/config/buster/setup_scripts/copy_dirtree.sh ~/config/buster/home_files ~ minimal user_eeepc" plom
+    su -c "curl -fsSl https://raw.githubusercontent.com/tridactyl/tridactyl/78e662efefd1f4af2bdb2a53edecf03b535b997b/native/install.sh | bash" plom
     passwd plom
 fi
