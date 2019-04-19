@@ -38,6 +38,7 @@ libdbus-glib-1-2
 libgtk-3-0
 # firefox installation dependencies (remove later?)
 curl
+python3
 bzip2
 wget
 jq

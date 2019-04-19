@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/w
 set -e
 
 if [ "$#" -ne 1 ]; then
@@ -52,4 +52,5 @@ if [ ! -d "/home/plom" ]; then
     su -c "~/config/buster/setup_scripts/copy_dirtree.sh ~/config/buster/home_files ~ minimal user_eeepc" plom
     su -c "curl -fsSl https://raw.githubusercontent.com/tridactyl/tridactyl/78e662efefd1f4af2bdb2a53edecf03b535b997b/native/install.sh | bash" plom
     passwd plom
+    echo "As tridactyl user, don't forget to do :source on the first Firefox run and then re-start."
 fi
