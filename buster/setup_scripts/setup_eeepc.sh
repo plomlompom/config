@@ -1,4 +1,4 @@
-#!/usr/bin/w
+#!/usr/bin/sh
 set -e
 
 if [ "$#" -ne 1 ]; then
