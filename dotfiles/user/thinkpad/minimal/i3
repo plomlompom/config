@@ -16,6 +16,7 @@ bindsym $mod+Return           exec xterm -r
 
 # Launch programs via dmenu.
 bindsym $mod+d                exec dmenu_run
+bindsym $mod+x                exec dmenu_run
 
 # Kill window.
 bindsym $mod+Shift+Q          kill

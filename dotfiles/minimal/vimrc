@@ -5,8 +5,8 @@ filetype plugin on
 " Number lines.
 set number
 
-" Don't add unsolicited final newline.
-set binary
+"" Don't add unsolicited final newline.
+"set binary
 
 " Indentation rules (tabs to 4 spaces).
 set expandtab
