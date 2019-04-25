@@ -10,6 +10,8 @@ usage() {
     echo "store"
     echo "check"
     echo "export_keyfiles"
+    echo "orgpush"
+    echo "orgpull"
     false
 }
 
@@ -102,6 +104,35 @@ elif [ "${first_arg}" = "export_keyfiles" ]; then
     mv "${tar_target}" "${cur_dir}"
     cd
     rm -rf "${tmp_dir}"
+elif [ "${first_arg}" = "orgpush" ]; then
+    archive_name="orgdir"
+    to_backup=~/org
+    read_pw
+    cat "${config_file}" | while read line; do
+        first_char=$(echo "${line}" | cut -c1)
+        if [ "${first_char}" = "#" ]; then
+            continue
+        fi
+        repo="${line}:${standard_repo}"
+        archive="${repo}::${archive_name}-{utcnow:%Y-%m-%dT%H:%M}"
+        echo "Creating archive: ${archive}"
+        borg create --verbose --list "${archive}" "${to_backup}" --exclude ~/org/.git
+    done
+elif [ "${first_arg}" = "orgpull" ]; then
+    archive_name="orgdir"
+    read_pw
+    cd /
+    cat "${config_file}" | while read line; do
+        first_char=$(echo "${line}" | cut -c1)
+        if [ "${first_char}" = "#" ]; then
+            continue
+        fi
+        repo="${line}:${standard_repo}"
+        archive=$(borg list "${repo}" | grep "${orgdir}" | tail -1 | cut -f1 -d' ')
+        echo "Pulling archive: ${archive}"
+        borg extract --verbose "${repo}::${archive}"
+        break
+    done
 else
     usage
 fi
