@@ -45,12 +45,12 @@ mv *.xpi "${extensions_dir}"
 # Set up user environments.
 cd "${setup_scripts_dir}"
 ./copy_dirtree.sh "${config_tree_prefix}/home_files" "/root" minimal root
+adduser --disabled-password --gecos "" plom
+usermod -a -G sudo plom
 if [ ! -d "/home/plom" ]; then
-    adduser --disabled-password --gecos "" plom
-    usermod -a -G sudo plom
     su -c "cd && git clone https://plomlompom.com/repos/clone/config" plom
     su -c "~/config/buster/setup_scripts/copy_dirtree.sh ~/config/buster/home_files ~ minimal user_eeepc" plom
     su -c "curl -fsSl https://raw.githubusercontent.com/tridactyl/tridactyl/78e662efefd1f4af2bdb2a53edecf03b535b997b/native/install.sh | bash" plom
-    passwd plom
     echo "As tridactyl user, don't forget to do :source on the first Firefox run and then re-start."
 fi
+passwd plom
