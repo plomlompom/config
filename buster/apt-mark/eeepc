@@ -1,3 +1,6 @@
+# to avoid booting problems with encrypted LVM, see <https://askubuntu.com/a/1105848>
+cryptsetup-initramfs
+lvm2
 # this provides setupcon which reads /etc/default/console-setup
 console-setup
 # without this, systemd-logind won't run, and so not detect lid close for hibernation
@@ -43,4 +46,8 @@ bzip2
 wget
 jq
 unzip
+# to mount encrypted USB stick and use its contents
+pmount
+cryptsetup
+openssh-client
 #
