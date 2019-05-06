@@ -8,7 +8,7 @@ repos_list_file="${public_repos_dir}/repos"
 
 ensure_repo() {
     repo_name="${1}"
-    if [ ! -d "${HOME}/${public_repos_dir}/${repo_name}" ]; then
+    if [ ! -d "${public_repos_dir}/${repo_name}" ]; then
         cd "${public_repos_dir}"
         git clone https://plomlompom.com/repos/clone/${repo_name}
     fi
