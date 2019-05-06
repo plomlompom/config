@@ -51,6 +51,7 @@ cd "${setup_scripts_dir}"
 HOME_DIR_EXISTS=$([ ! -d "/home/plom" ]; echo $?)
 adduser --disabled-password --gecos "" plom
 usermod -a -G sudo plom
+passwd plom
 if [ "${HOME_DIR_EXISTS}" -eq 0 ]; then
     while [ ! -e /dev/"${secrets_dev}" ]; do
         echo "Put secrets drive into slot for /dev/${secrets_dev}, then hit Return."
@@ -65,4 +66,3 @@ if [ "${HOME_DIR_EXISTS}" -eq 0 ]; then
     chown plom:plom /home/plom/setup_home_eeepc.sh
     su -c "cd && ./setup_home_eeepc.sh" plom
 fi
-passwd plom
