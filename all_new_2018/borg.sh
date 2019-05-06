@@ -17,9 +17,10 @@ usage() {
 
 read_pw() {
     eval $(ssh-agent)
+    echo "ssh-add"
     ssh-add
     stty -echo
-    printf "Passphrase: "
+    printf "Borg passphrase: "
     read password
     stty echo
     printf "\n"
