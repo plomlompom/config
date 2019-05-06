@@ -50,6 +50,8 @@ unzip
 pmount
 cryptsetup
 openssh-client
+# for syncing
+borgbackup
 # emacs
 emacs25
 elpa-ledger
