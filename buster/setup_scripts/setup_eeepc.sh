@@ -45,11 +45,13 @@ mv *.xpi "${extensions_dir}"
 # Set up user environments.
 cd "${setup_scripts_dir}"
 ./copy_dirtree.sh "${config_tree_prefix}/home_files" "/root" minimal root
+HOME_DIR_EXISTS=$([ ! -d "/home/plom" ]; echo $?)
+if [ ! -d "/home/plom" ]; then
 adduser --disabled-password --gecos "" plom
 usermod -a -G sudo plom
-if [ ! -d "/home/plom" ]; then
+if [ ! "${HOME_DIR_EXISTS}" -eq 0 ]; then
     cp setup_home_eeepc.sh /home/plom
     chown plom:plom /home/plom/setup_home_eeepc.sh
-    su -c "cd && ./setup_home_eeepc.sh"
+    su -c "cd && ./setup_home_eeepc.sh" plom
 fi
 passwd plom
