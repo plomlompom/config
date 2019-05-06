@@ -32,6 +32,7 @@ alsa-utils
 ttf-unifont
 # also useful
 vim
+emacs25
 sudo
 less
 man-db
