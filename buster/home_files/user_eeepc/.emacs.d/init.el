@@ -96,9 +96,12 @@
                          ("melpa-unstable" . "https://melpa.org/packages/")
                          ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
-;; by default, packages are only loaded after the init file; by loading them
-;; earlier, the call to evil-mode below is made possible
-(package-initialize)
+;; ensure certain packages are installed (actually, we use Debian repos here)
+;(setq package-list '(elfeed ledger-mode))
+;(package-initialize)
+;(dolist (package package-list)
+;  (unless (package-installed-p package)
+;    (package-install package)))
 
 
 
@@ -258,15 +261,3 @@
 (setq conf-mode-map (make-sparse-keymap))
 (setq sh-mode-map (make-sparse-keymap))
 (setq python-mode-map (make-sparse-keymap))
-
-
-;;; evil mode
-;;; =========
-;
-;;; start in normal mode everywhere
-;(setq evil-emacs-state-modes nil)
-;(setq evil-insert-state-modes nil)
-;(setq evil-motion-state-modes nil)
-;
-;;; enable evil at end so it can overlay its keybindings over any other packages
-;(evil-mode t)

@@ -32,7 +32,6 @@ alsa-utils
 ttf-unifont
 # also useful
 vim
-emacs25
 sudo
 less
 man-db
@@ -51,4 +50,8 @@ unzip
 pmount
 cryptsetup
 openssh-client
+# emacs
+emacs25
+elpa-ledger
+elpa-elfeed
 #
