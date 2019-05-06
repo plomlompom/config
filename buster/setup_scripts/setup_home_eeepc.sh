@@ -1,9 +1,9 @@
 #!/bin/sh
 set -e
 
-config_tree_prefix="${HOME}/config/buster"
+public_repos_dir="${HOME}/public_repos"
+config_tree_prefix="${public_repos_dir}/config/buster"
 setup_scripts_dir="${config_tree_prefix}/setup_scripts"
-public_repos_dir=~/public_repos
 
 cd
 mkdir -p "${public_repos_dir}"
