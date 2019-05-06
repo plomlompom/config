@@ -97,6 +97,7 @@
                          ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
 ;; ensure certain packages are installed (actually, we use Debian repos here)
+;; credit to <https://stackoverflow.com/a/10093312>
 ;(setq package-list '(elfeed ledger-mode))
 ;(package-initialize)
 ;(dolist (package package-list)
