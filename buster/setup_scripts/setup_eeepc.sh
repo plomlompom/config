@@ -48,9 +48,8 @@ cd "${setup_scripts_dir}"
 adduser --disabled-password --gecos "" plom
 usermod -a -G sudo plom
 if [ ! -d "/home/plom" ]; then
-    su -c "cd && git clone https://plomlompom.com/repos/clone/config" plom
-    su -c "~/config/buster/setup_scripts/copy_dirtree.sh ~/config/buster/home_files ~ minimal user_eeepc" plom
-    su -c "curl -fsSl https://raw.githubusercontent.com/tridactyl/tridactyl/78e662efefd1f4af2bdb2a53edecf03b535b997b/native/install.sh | bash" plom
-    echo "As tridactyl user, don't forget to do :source on the first Firefox run and then re-start."
+    cp setup_home_eeepc.sh /home/plom
+    chown plom:plom /home/plom/setup_home_eeepc.sh
+    su -c "cd && ./setup_home_eeepc.sh"
 fi
 passwd plom
