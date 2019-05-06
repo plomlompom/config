@@ -39,7 +39,7 @@ mv borg_keyfiles/* "${borgkeys_dir}"
 cd
 rm -rf "${dir_secrets}"
 
-"${path_borgscript}"
+"${path_borgscript}" orgpull
 cat "${repos_list_file}" | while read line; do
     ensure_repo "${line}"
 done
