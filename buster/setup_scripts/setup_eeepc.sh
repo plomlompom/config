@@ -43,12 +43,24 @@ mv "${tridactyl_xpi}" "${name}.xpi"
 mv *.xpi "${extensions_dir}"
 
 # Set up user environments.
+secrets_dev="sdb"
+source_dir_secrets="/media/${secrets_dev}/to_usb"
+target_dir_secrets="/home/plom/tmp_secrets"
 cd "${setup_scripts_dir}"
 ./copy_dirtree.sh "${config_tree_prefix}/home_files" "/root" minimal root
 HOME_DIR_EXISTS=$([ ! -d "/home/plom" ]; echo $?)
 adduser --disabled-password --gecos "" plom
 usermod -a -G sudo plom
 if [ "${HOME_DIR_EXISTS}" -eq 0 ]; then
+    while [ ! -e /dev/"${secrets_dev}" ]; do
+        echo "Put secrets drive into slot for /dev/${secrets_dev}, then hit Return."
+        read ignore
+    done
+    pmount /dev/"${secrets_dev}"
+    cp -a "${source_dir_secrets}" "${target_dir_secrets}"
+    chown -R plom:plom "${target_dir_secrets}"
+    pumount "${secrets_dev}"
+    echo "You can remove /dev/${secrets_dev} now."
     cp setup_home_eeepc.sh /home/plom
     chown plom:plom /home/plom/setup_home_eeepc.sh
     su -c "cd && ./setup_home_eeepc.sh" plom
