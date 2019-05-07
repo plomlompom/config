@@ -53,7 +53,7 @@ cat "${borgrepos_file}" | while read line; do
     fi
     ssh-keyscan "${line}" >> "${ssh_dir}"/known_hosts
 done
-"${path_borgscript}" orgpull
+BORG_PASSPHRASE="${SECRETS_PASS}" "${path_borgscript}" orgpull
 
 # Fill ~/public_repos.
 cat "${repos_list_file}" | while read line; do

@@ -53,16 +53,20 @@ adduser --disabled-password --gecos "" plom
 usermod -a -G sudo plom
 passwd plom
 if [ "${HOME_DIR_EXISTS}" -eq 0 ]; then
+    echo "Put secrets drive into slot for /dev/${secrets_dev}."
     while [ ! -e /dev/"${secrets_dev}" ]; do
-        echo "Put secrets drive into slot for /dev/${secrets_dev}, then hit Return."
-        read ignore
+        sleep 1
     done
-    pmount /dev/"${secrets_dev}"
+    stty -echo
+    printf "Secrets passphrase: "
+    read secrets_pass
+    stty echo
+    echo "${secrets_pass}" | pmount /dev/"${secrets_dev}"
     cp -a "${source_dir_secrets}" "${target_dir_secrets}"
     chown -R plom:plom "${target_dir_secrets}"
     pumount "${secrets_dev}"
     echo "You can remove /dev/${secrets_dev} now."
     cp setup_home_eeepc.sh /home/plom
     chown plom:plom /home/plom/setup_home_eeepc.sh
-    su -c "cd && ./setup_home_eeepc.sh" plom
+    SECRETS_PASS="${secrets_pass}" su -c "cd && ./setup_home_eeepc.sh" plom
 fi

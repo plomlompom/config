@@ -19,12 +19,14 @@ read_pw() {
     eval $(ssh-agent)
     echo "ssh-add"
     ssh-add
-    stty -echo
-    printf "Borg passphrase: "
-    read password
-    stty echo
-    printf "\n"
-    export BORG_PASSPHRASE="${password}"
+    if [ "${#BORG_PASSPHRASE}" -eq 0 ]; then
+        stty -echo
+        printf "Borg passphrase: "
+        read password
+        stty echo
+        printf "\n"
+        export BORG_PASSPHRASE="${password}"
+    fi
 }
 
 if [ ! -f "${config_file}" ]; then
