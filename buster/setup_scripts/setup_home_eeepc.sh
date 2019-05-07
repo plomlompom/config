@@ -9,6 +9,7 @@ setup_scripts_dir="${config_tree_buster}/setup_scripts"
 repos_list_file="${public_repos_dir}/repos"
 dir_secrets="${HOME}/tmp_secrets"
 borgkeys_dir=~/.config/borg/keys
+borgrepos_file=~/.borgrepos
 ssh_dir=~/.ssh
 
 ensure_repo() {
@@ -45,7 +46,7 @@ rm -rf "${dir_secrets}"
 
 # Sync org dir via borgbackup. For this we need the borgbackup servers
 # in our .ssh/known_hosts file.
-cat "${borgconfig_file}" | while read line; do
+cat "${borgrepos_file}" | while read line; do
     first_char=$(echo "${line}" | cut -c1)
     if [ "${first_char}" = "#" ]; then
         continue
