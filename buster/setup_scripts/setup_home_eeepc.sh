@@ -19,13 +19,17 @@ ensure_repo() {
     fi
 }
 
+# Clone config to copy dotfiles etc. from it.
 cd
 mkdir -p "${public_repos_dir}"
 ensure_repo config
 cd "${setup_scripts_dir}"
 ./copy_dirtree.sh "${config_tree_buster}/home_files" "${HOME}" minimal user_eeepc
+
+# Set up native messenger for tridactyl.
 curl -fsSl https://raw.githubusercontent.com/tridactyl/tridactyl/78e662efefd1f4af2bdb2a53edecf03b535b997b/native/install.sh | bash
 
+# Set up non-public parts of infrastructure.
 cd "${dir_secrets}"
 mkdir -p "${ssh_dir}"
 echo "Setting up .ssh"
@@ -39,8 +43,25 @@ mv borg_keyfiles/* "${borgkeys_dir}"
 cd
 rm -rf "${dir_secrets}"
 
+# Sync org dir via borgbackup. For this we need the borgbackup servers
+# in our .ssh/known_hosts file.
+cat "${borgconfig_file}" | while read line; do
+    first_char=$(echo "${line}" | cut -c1)
+    if [ "${first_char}" = "#" ]; then
+        continue
+    fi
+    ssh-keyscan "${line}" >> "${ssh_dir}"/known_hosts
+done
 "${path_borgscript}" orgpull
+
+# Fill ~/public_repos.
 cat "${repos_list_file}" | while read line; do
+    first_char=$(echo "${line}" | cut -c1)
+    if [ "${first_char}" = "#" ]; then
+        continue
+    fi
     ensure_repo "${line}"
 done
+
+# Final note on how to integrate tridactyl.
 echo "TODO: As tridactyl user, don't forget to do :source on the first Firefox run and then re-start."

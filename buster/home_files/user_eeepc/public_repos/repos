@@ -1,3 +1,4 @@
+# List of repos we want cloned in ~/public_repos
 config
 pingmail.git
 plomlombot-irc.git
