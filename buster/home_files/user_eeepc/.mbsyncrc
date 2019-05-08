@@ -1,0 +1,26 @@
+IMAPAccount plom
+# Address to connect to
+Host core.plomlompom.com
+User plom
+# For some reason, mbsync doesn't accept a PassCmd output beyond 79 chars,
+# therefore ~/.imap_pass should not be longer than that.
+PassCmd "cat ~/.imap_pass"
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore core-remote
+Account plom
+
+MaildirStore core-local
+# The trailing "/" is important
+Path ~/mail/maildir/
+Inbox ~/mail/inbox/
+
+Channel core
+Master :core-remote:
+Slave :core-local:
+Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Save the synchronization state files in the relevant directory
+SyncState *

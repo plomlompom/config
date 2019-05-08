@@ -11,6 +11,7 @@ dir_secrets="${HOME}/tmp_secrets"
 borgkeys_dir=~/.config/borg/keys
 borgrepos_file=~/.borgrepos
 ssh_dir=~/.ssh
+imap_pass_file=.imap_pass
 
 ensure_repo() {
     repo_name="${1}"
@@ -41,6 +42,9 @@ stty echo
 tar xf borg_keyfiles.tar
 mkdir -p "${borgkeys_dir}"
 mv borg_keyfiles/* "${borgkeys_dir}"
+if [ -f "${imap_pass_file}" ]; then
+    cp "${imap_pass_file}" ~
+fi
 cd
 rm -rf "${dir_secrets}"
 
@@ -64,6 +68,14 @@ cat "${repos_list_file}" | while read line; do
     fi
     ensure_repo "${line}"
 done
+
+# Set up e-mail system. Note that we only do mbsync if the imap pass file
+# is found. It may not be present on every secrets drive yet, so we have to
+# deal with the possibility of it being absent at this point.
+mkdir -p ~/Mail/maildir  # expected by mbsync/isync
+if [ -f "~/${imap_pass_file}" ]; then
+    mbsync -a
+fi
 
 # Final note on how to integrate tridactyl.
 echo "TODO: As tridactyl user, don't forget to do :source on the first Firefox run and then re-start."
