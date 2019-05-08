@@ -56,4 +56,6 @@ borgbackup
 emacs25
 elpa-ledger
 elpa-elfeed
+# mail setup
+isync
 #
