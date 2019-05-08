@@ -19,7 +19,9 @@ read_pw() {
     if [ "${#SSH_AGENT_PID}" -eq 0 ]; then
         eval $(ssh-agent)
         echo "ssh-add"
+        stty -echo
         ssh-add
+        stty echo
     fi
     if [ "${#BORG_PASSPHRASE}" -eq 0 ]; then
         stty -echo

@@ -51,7 +51,8 @@ cat "${borgrepos_file}" | while read line; do
     if [ "${first_char}" = "#" ]; then
         continue
     fi
-    ssh-keyscan "${line}" >> "${ssh_dir}"/known_hosts
+    server=$(echo "${line}" | sed 's/.*@//')
+    ssh-keyscan "${server}" >> "${ssh_dir}"/known_hosts
 done
 BORG_PASSPHRASE="${SECRETS_PASS}" "${path_borgscript}" orgpull
 
