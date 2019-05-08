@@ -12,6 +12,7 @@ borgkeys_dir=~/.config/borg/keys
 borgrepos_file=~/.borgrepos
 ssh_dir=~/.ssh
 imap_pass_file=.imap_pass
+maildir=~/mail/maildir
 
 ensure_repo() {
     repo_name="${1}"
@@ -72,8 +73,8 @@ done
 # Set up e-mail system. Note that we only do mbsync if the imap pass file
 # is found. It may not be present on every secrets drive yet, so we have to
 # deal with the possibility of it being absent at this point.
-mkdir -p ~/Mail/maildir  # expected by mbsync/isync
-if [ -f "~/${imap_pass_file}" ]; then
+mkdir -p "${maildir}"  # expected by mbsync/isync
+if [ -f "${HOME}/${imap_pass_file}" ]; then
     mbsync -a
 fi
 
