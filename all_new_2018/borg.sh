@@ -16,9 +16,11 @@ usage() {
 }
 
 read_pw() {
-    eval $(ssh-agent)
-    echo "ssh-add"
-    ssh-add
+    if [ "${#SSH_AGENT_PID}" -eq 0 ]; then
+        eval $(ssh-agent)
+        echo "ssh-add"
+        ssh-add
+    fi
     if [ "${#BORG_PASSPHRASE}" -eq 0 ]; then
         stty -echo
         printf "Borg passphrase: "

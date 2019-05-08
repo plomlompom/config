@@ -61,6 +61,7 @@ if [ "${HOME_DIR_EXISTS}" -eq 0 ]; then
     printf "Secrets passphrase: "
     read secrets_pass
     stty echo
+    echo "" # newline so user knows their input return was accepted
     echo "${secrets_pass}" | pmount /dev/"${secrets_dev}"
     cp -a "${source_dir_secrets}" "${target_dir_secrets}"
     chown -R plom:plom "${target_dir_secrets}"
