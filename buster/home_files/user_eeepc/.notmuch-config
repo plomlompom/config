@@ -1,0 +1,4 @@
+[database]
+path=/home/plom/mail
+[search]
+exclude_tags=deleted;spam;

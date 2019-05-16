@@ -24,3 +24,5 @@ Patterns *
 Create Both
 # Save the synchronization state files in the relevant directory
 SyncState *
+# If a mail is marked T ("Trashed") or deleted, remove it for real everywhere
+Expunge Both
