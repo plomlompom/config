@@ -58,4 +58,6 @@ elpa-ledger
 elpa-elfeed
 # mail setup
 isync
+notmuch
+elpa-notmuch
 #
