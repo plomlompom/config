@@ -114,6 +114,20 @@
 
 
 
+;; mail setup
+;; ==========
+
+(setq send-mail-function 'smtpmail-send-it)
+(setq smtpmail-smtp-server "core.plomlompom.com")
+(setq smtpmail-smtp-service 465)
+(setq smtpmail-stream-type 'ssl)
+(setq smtpmail-smtp-user "plom")
+(setq mail-host-address "plomlompom.com")
+
+;; otherwise notmuch becomes extremely slow in some cases
+(setq-default notmuch-show-indent-content nil)
+
+
 ;; org mode
 ;; ========
 

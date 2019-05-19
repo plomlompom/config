@@ -4,7 +4,7 @@ Host core.plomlompom.com
 User plom
 # For some reason, mbsync doesn't accept a PassCmd output beyond 79 chars,
 # therefore ~/.imap_pass should not be longer than that.
-PassCmd "cat ~/.imap_pass"
+PassCmd "cat ~/.auth_info | cut -d' ' -f8-"
 SSLType IMAPS
 AuthMechs LOGIN
 
