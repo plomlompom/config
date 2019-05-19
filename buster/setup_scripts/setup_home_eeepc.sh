@@ -40,6 +40,7 @@ cp id_rsa ~/.ssh
 stty -echo
 ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
 stty echo
+gpg --import secret_keys.asc
 tar xf borg_keyfiles.tar
 mkdir -p "${borgkeys_dir}"
 mv borg_keyfiles/* "${borgkeys_dir}"
@@ -77,6 +78,7 @@ done
 mkdir -p "${maildir}"  # expected by mbsync/isync
 if [ -f "${HOME}/${authinfo_file}" ]; then
     mbsync -a
+    notmuch new
 fi
 
 # Final note on how to integrate tridactyl.
