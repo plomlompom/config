@@ -6,4 +6,4 @@ exclude_tags=deleted;spam;
 # within notmuch
 [user]
 name=Christian Heller
-primary_email=plom@plomlompo.com
+primary_email=plom@plomlompom.com

@@ -123,6 +123,7 @@
 (setq smtpmail-stream-type 'ssl)
 (setq smtpmail-smtp-user "plom")
 (setq mml-secure-openpgp-encrypt-to-self t)
+(add-hook 'message-setup-hook 'mml-secure-sign-pgpmime)
 
 ;; constructs From: domain if mail composer directly called (from without
 ;; notmuch), but we don't actually intend to do that
