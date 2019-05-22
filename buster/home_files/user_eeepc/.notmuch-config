@@ -2,3 +2,8 @@
 path=/home/plom/mail
 [search]
 exclude_tags=deleted;spam;
+# the fields below set the From: if the mail composer is called from
+# within notmuch
+[user]
+name=Christian Heller
+primary_email=plom@plomlompo.com

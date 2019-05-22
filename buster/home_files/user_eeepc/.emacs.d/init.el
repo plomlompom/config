@@ -122,10 +122,17 @@
 (setq smtpmail-smtp-service 465)
 (setq smtpmail-stream-type 'ssl)
 (setq smtpmail-smtp-user "plom")
-(setq mail-host-address "plomlompom.com")
+(setq mml-secure-openpgp-encrypt-to-self t)
+
+;; constructs From: domain if mail composer directly called (from without
+;; notmuch), but we don't actually intend to do that
+;(setq mail-host-address "plomlompom.com")
 
 ;; otherwise notmuch becomes extremely slow in some cases
 (setq-default notmuch-show-indent-content nil)
+
+;; this only works if we use notmuch-mua-send instead of message-send
+(setq notmuch-fcc-dirs '(("plom@plomlompom.com" . "maildir/Sent")))
 
 
 ;; org mode
