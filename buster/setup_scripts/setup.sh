@@ -21,10 +21,6 @@ cd "${setup_scripts_dir}"
 # Set hostname and FQDN.
 ./set_hostname_and_fqdn.sh "${hostname}" "${fqdn}"
 
-# Some debconf selections we don't want to get asked during coming
-# install actions.
-echo 'libc6:amd64 libraries/restart-without-asking boolean true' | debconf-set-selections
-
 # Ensure package installation state as defined by what packages are
 # defined as required by Debian policy and by settings in ./apt-mark/.
 apt update
