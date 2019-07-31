@@ -16,12 +16,14 @@ cd "${setup_scripts_dir}"
 ./install_for_target.sh eeepc
 
 # Install Firefox directly from Mozilla.
-url_firefox="https://ftp.mozilla.org/pub/firefox/releases/66.0/linux-x86_64/en-US/firefox-66.0.tar.bz2"
+firefox_release="68.0esr"
+firefox_filename="firefox-${firefox_release}.tar.bz2"
+url_firefox="https://ftp.mozilla.org/pub/firefox/releases/${firefox_release}/linux-x86_64/en-US/${firefox_filename}"
 wget "${url_firefox}"
-mv firefox-66.0.tar.bz2 /opt/
+mv "${firefox_filename}" /opt/
 cd /opt/
-tar xf firefox-66.0.tar.bz2
-rm firefox-66.0.tar.bz2
+tar xf "${firefox_filename}"
+rm "${firefox_filename}"
 ln -s /opt/firefox/firefox /usr/local/bin/
 update-alternatives --install /usr/bin/x-www-browser x-www-browser /opt/firefox/firefox 200
 update-alternatives --set x-www-browser /opt/firefox/firefox
@@ -30,12 +32,12 @@ update-alternatives --set x-www-browser /opt/firefox/firefox
 # See <https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Distribution_options/Sideloading_add-ons>
 extensions_dir="/usr/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/"
 mkdir -p "${extensions_dir}"
-noscript_xpi="noscript-10.6.xpi"
+noscript_xpi="noscript-11.0.2.xpi"
 url_noscript="https://secure.informaction.com/download/releases/${noscript_xpi}"
 wget "${url_noscript}"
 name=$(unzip -p "${noscript_xpi}" manifest.json | jq -r .applications.gecko.id)
 mv "${noscript_xpi}" "${name}.xpi"
-tridactyl_xpi="tridactyl-1.14.9pre2457-an+fx.xpi"
+tridactyl_xpi="tridactyl-latest.xpi"
 url_tridactyl="https://tridactyl.cmcaine.co.uk/betas/${tridactyl_xpi}"
 wget "${url_tridactyl}"
 name=$(unzip -p "${tridactyl_xpi}" manifest.json | jq -r .applications.gecko.id)
