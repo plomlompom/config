@@ -3,7 +3,7 @@ IMAPAccount plom
 Host core.plomlompom.com
 User plom
 # For some reason, mbsync doesn't accept a PassCmd output beyond 79 chars,
-# therefore ~/.imap_pass should not be longer than that.
+# therefore the pw in ~/.authinfo should not be longer than that.
 PassCmd "cat ~/.authinfo | cut -d' ' -f8-"
 SSLType IMAPS
 AuthMechs LOGIN

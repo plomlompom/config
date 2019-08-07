@@ -1,8 +1,9 @@
 #!/bin/sh
 set -e
 
-# Ensure all "dir:*"-tagged mails are in proper directories.
-basedir="/home/plom/test_mbsync/maildir/"
+# Ensure all "dir:*"-tagged mails are in proper directories,
+# remove all "dir:*" tags.
+basedir="/home/plom/mail/maildir/"
 for tag in $(notmuch search --output=tags '*'); do
     if [ ! $(echo "${tag}" | cut -c-4) = "dir:" ]; then
         continue
@@ -16,6 +17,7 @@ for tag in $(notmuch search --output=tags '*'); do
              mv "${f}" "${target_path}"
          fi
     done
+    notmuch tag -"${tag}" tag:"${tag}"
 done
 
 # Remove all "deleted"-tagged files from maildirs.

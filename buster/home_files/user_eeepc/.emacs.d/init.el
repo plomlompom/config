@@ -135,6 +135,9 @@
 ;; this only works if we use notmuch-mua-send instead of message-send
 (setq notmuch-fcc-dirs '(("plom@plomlompom.com" . "maildir/Sent")))
 
+;; this gets rid of "i-did-not-set--mail-host-address--so-tickle-me"
+;; in the message ID
+(setq mail-host-address "plomlompom.com")
 
 ;; org mode
 ;; ========
