@@ -36,6 +36,7 @@ sudo
 less
 man-db
 manpages
+procps
 # firefox dependencies
 libdbus-glib-1-2
 libgtk-3-0
