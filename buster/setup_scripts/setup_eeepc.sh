@@ -36,7 +36,7 @@ umatrix_xpi="uMatrix.firefox.signed.xpi"
 url_umatrix="https://github.com/gorhill/uMatrix/releases/download/1.3.17rc4/${umatrix_xpi}"
 wget "${url_umatrix}"
 name=$(unzip -p "${umatrix_xpi}" manifest.json | jq -r .applications.gecko.id)
-mv "${umatrix_xpi}" "${name}"
+mv "${umatrix_xpi}" "${name}".xpi
 #noscript_xpi="noscript-11.0.2.xpi"
 #url_noscript="https://secure.informaction.com/download/releases/${noscript_xpi}"
 #wget "${url_noscript}"
